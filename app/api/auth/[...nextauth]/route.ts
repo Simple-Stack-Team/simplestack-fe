@@ -52,7 +52,7 @@ export const authOption: NextAuthOptions = {
         session.user = token;
         return session;
       },
-    }
+    },
       
 }
 
