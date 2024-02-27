@@ -1,26 +1,38 @@
 "use client";
-import React from "react";
+
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const AppBar = () => {
-  const { data: session } = useSession();
-  console.log({ session });
+    const { data: session, status } = useSession();
 
-  return (
-    <div>
-      <div>
-        {session?.user ? (
-          <>
-            <p>{session.user.name}</p>
-            <button onClick={() => signOut()}>Sign Out</button>
-          </>
-        ) : (
-          <button onClick={() => signIn()}>Sign In</button>
-        )}
-      </div>
-    </div>
-  );
+    return (
+        <nav className="flex justify-between p-4">
+            <div className="flex gap-2">
+                <h1>Logo</h1>
+                <p>Simple Team</p>
+            </div>
+            <div className="space-x-2">
+                {status === "loading" && <div>Loading...</div>}
+                {session?.user ? (
+                    <>
+                        <p>{session.user.user.name}</p>
+                        <button onClick={() => signOut()}>Sign Out</button>
+                    </>
+                ) : (
+                    <>
+                        <Button onClick={() => signIn()} variant="outline">
+                            Sign In
+                        </Button>
+                        <Link href="/signup">
+                            <Button>Sign Up</Button>
+                        </Link>
+                    </>
+                )}
+            </div>
+        </nav>
+    );
 };
 
 export default AppBar;
