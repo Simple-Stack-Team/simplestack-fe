@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 interface Props {
-    params: string;
+  params: string;
 }
 
 export default function RootLayout({
