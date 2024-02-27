@@ -13,12 +13,12 @@ const AppBar = () => {
                 <h1>Logo</h1>
                 <p>Simple Team</p>
             </div>
-            <div className="space-x-2">
+            <div className="flex gap-2">
                 {status === "loading" && <div>Loading...</div>}
                 {session?.user ? (
                     <>
-                        <p>{session.user.user.name}</p>
-                        <button onClick={() => signOut()}>Sign Out</button>
+                        <p>{session?.user.user.name}</p>
+                        <Button onClick={() => signOut()}>Sign Out</Button>
                     </>
                 ) : (
                     <>

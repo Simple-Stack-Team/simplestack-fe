@@ -10,17 +10,17 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { formSchema } from "@/app/signup/page";
+import { formSchemaLogin } from "@/app/auth/signin/page";
 
 interface Props {
-    control: UseFormReturn<z.infer<typeof formSchema>>["control"];
-    name: keyof z.infer<typeof formSchema>;
+    control: UseFormReturn<z.infer<typeof formSchemaLogin>>["control"];
+    name: keyof z.infer<typeof formSchemaLogin>;
     label: string;
     placeholder: string;
     type: string;
 }
 
-const InputField: React.FC<Props> = ({
+const InputFieldLogin: React.FC<Props> = ({
     name,
     label,
     placeholder,
@@ -48,4 +48,4 @@ const InputField: React.FC<Props> = ({
     );
 };
 
-export default InputField;
+export default InputFieldLogin;
