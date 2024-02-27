@@ -1,41 +1,48 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import { useForm } from "react-hook-form";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import InputField from "@/components/InputField";
-import { useRouter } from "next/navigation";
+import InputFieldLogin from "@/components/InputFieldLogin";
 
-export const formSchema = z.object({
-    name: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-    }),
+export const formSchemaLogin = z.object({
     email: z.string().email(),
     password: z.string().min(1),
-    organizationName: z.string().min(1),
-    headquarterAddress: z.string().min(1),
 });
 
 const SignupPage = () => {
-    const router = useRouter();
+    const [error, setError] = useState({});
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof formSchemaLogin>>({
+        resolver: zodResolver(formSchemaLogin),
     });
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await fetch(process.env.NEXT_PUBLIC_SIGNUP_ADMIN_URL!, {
+    async function onSubmit(values: z.infer<typeof formSchemaLogin>) {
+        const res = await fetch(process.env.NEXT_PUBLIC_SIGNIN_URL!, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(values),
         });
 
-        if (!res.ok) return null;
+        console.log(res)
+        if (!res.ok) {
+            setError(res);
 
-        router.push("/api/auth/signin");
+            return null;
+        }
+
+        await signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            redirect: true,
+            callbackUrl: "/",
+        });
     }
 
     return (
@@ -44,41 +51,21 @@ const SignupPage = () => {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-2 flex-1"
+                    className="space-y-2 flex-1 p-8"
                 >
-                    <InputField
-                        name="name"
-                        label="Name"
-                        placeholder="Name"
-                        type="text"
-                        control={form.control}
-                    />
-                    <InputField
+                    {error.status === 401 && <div>Auth failed</div>}
+                    <InputFieldLogin
                         name="email"
                         label="Email"
                         placeholder="Email"
                         type="email"
                         control={form.control}
                     />
-                    <InputField
+                    <InputFieldLogin
                         name="password"
                         label="Password"
                         placeholder="Password"
                         type="password"
-                        control={form.control}
-                    />
-                    <InputField
-                        name="organizationName"
-                        label="Organization"
-                        placeholder="Organization"
-                        type="text"
-                        control={form.control}
-                    />
-                    <InputField
-                        name="headquarterAddress"
-                        label="Address"
-                        placeholder="Address"
-                        type="text"
                         control={form.control}
                     />
                     <div className="flex justify-center">
