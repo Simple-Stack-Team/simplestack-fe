@@ -4,10 +4,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { ErrorResponse } from "@/types/ErrorResponse";
+import AlertMessage from "@/components/AlertMessage";
+import InputField from "@/components/InputField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import InputField from "@/components/InputField";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const formSchema = z.object({
     name: z.string().min(2, {
@@ -20,6 +23,7 @@ export const formSchema = z.object({
 });
 
 const SignupPage = () => {
+    const [error, setError] = useState<ErrorResponse>({ status: 0 });
     const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -33,7 +37,12 @@ const SignupPage = () => {
             body: JSON.stringify(values),
         });
 
-        if (!res.ok) return null;
+        console.log(res);
+        if (!res.ok) {
+            setError(res);
+
+            return null;
+        }
 
         router.push("/api/auth/signin");
     }
@@ -46,6 +55,11 @@ const SignupPage = () => {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="space-y-2 flex-1"
                 >
+                    {error.status === 409 && (
+                        <AlertMessage>
+                            Register Failed
+                        </AlertMessage>
+                    )}
                     <InputField
                         name="name"
                         label="Name"
