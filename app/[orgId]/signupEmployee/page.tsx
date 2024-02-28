@@ -38,7 +38,7 @@ const SignupEmployee = () => {
 
     if (!res.ok) return null;
 
-    router.push("/");
+    router.push("/[orgId]/dashboard");
   }
 
   return (
