@@ -2,8 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { z } from "zod";
 
@@ -13,6 +14,7 @@ import { Form } from "@/components/ui/form";
 import InputFieldLogin from "@/components/InputFieldLogin";
 import AlertMessage from "@/components/AlertMessage";
 import InfoSectionAuth from "@/components/InfoSectionAuth";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export const formSchemaLogin = z.object({
   email: z.string().email(),
@@ -21,30 +23,47 @@ export const formSchemaLogin = z.object({
 
 const SignupPage = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
+  const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchemaLogin>>({
     resolver: zodResolver(formSchemaLogin),
   });
 
   async function onSubmit(values: z.infer<typeof formSchemaLogin>) {
-    const res = await fetch(process.env.NEXT_PUBLIC_SIGNIN_URL!, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(values),
-    });
+    setLoading(true);
 
-    if (!res.ok) {
-      setError(res);
+    try {
+      const res = await fetch(process.env.NEXT_PUBLIC_SIGNIN_URL!, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
 
-      return null;
+      if (!res.ok) {
+        setError(res);
+        return null;
+      }
+
+      const signInResult = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+
+      if (signInResult?.error) {
+        setError({ status: 401 });
+      } else {
+        const orgId = session?.user!.user.orgId;
+
+        if (orgId) {
+          router.push(`/${orgId}/dashboard`);
+        }
+      }
+    } finally {
+      setLoading(false);
     }
-
-    await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: true,
-      callbackUrl: "/",
-    });
   }
 
   return (
@@ -80,8 +99,19 @@ const SignupPage = () => {
             control={form.control}
           />
           <div className="flex justify-center">
-            <Button type="submit" className="max-w-[400px] w-full mt-4">
-              Submit
+            <Button
+              type="submit"
+              disabled={loading}
+              className="max-w-[400px] w-full mt-4"
+            >
+              {loading ? (
+                <>
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait
+                </>
+              ) : (
+                "Submit"
+              )}
             </Button>
           </div>
         </form>

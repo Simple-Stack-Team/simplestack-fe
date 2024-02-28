@@ -2,10 +2,12 @@
 
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 
 const AppBar = () => {
   const { data: session, status } = useSession();
+  const orgId = session?.user!.user.orgId;
 
   return (
     <nav className="flex justify-between p-4">
@@ -19,7 +21,7 @@ const AppBar = () => {
           <>
             <p>{session?.user.user.name}</p>
             <Button onClick={() => signOut()}>Sign Out</Button>
-            <Link href="/signupEmployee">
+            <Link href={`/${orgId}/signup`}>
               <Button>Register Employee</Button>
             </Link>
           </>

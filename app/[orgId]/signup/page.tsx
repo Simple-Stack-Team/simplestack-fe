@@ -25,7 +25,7 @@ const SignupEmployee = () => {
     const router = useRouter();
     const params = useParams<{ orgId: string }>();
     const orgId = params.orgId;
-    console.log(orgId);
+    
     const form = useForm<z.infer<typeof formSchemaSignUp>>({
         resolver: zodResolver(formSchemaSignUp),
     });
@@ -46,7 +46,7 @@ const SignupEmployee = () => {
             return null;
         }
 
-        router.push("/");
+        router.push("/api/auth/signin");
     }
 
     return (
