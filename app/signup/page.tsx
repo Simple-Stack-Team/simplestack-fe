@@ -3,14 +3,14 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { ErrorResponse } from "@/types/ErrorResponse";
 import AlertMessage from "@/components/AlertMessage";
 import InputField from "@/components/InputField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export const formSchema = z.object({
     name: z.string().min(2, {
