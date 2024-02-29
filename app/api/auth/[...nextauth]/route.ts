@@ -1,6 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { AccessTokenResponse, User } from "next-auth";
 
 export const authOption: NextAuthOptions = {
     providers: [
@@ -42,6 +43,11 @@ export const authOption: NextAuthOptions = {
             },
         }),
     ],
+    pages: {
+        signIn: "/auth/signin",
+        // signOut: "/auth/signout",
+        // error: "/auth/error",
+    }, 
     callbacks: {
         async jwt({ token, user }) {
             return { ...token, ...user };
@@ -51,11 +57,7 @@ export const authOption: NextAuthOptions = {
             return session;
         },
     },
-    pages: {
-        signIn: "/auth/signin",
-        // signOut: "/auth/signout",
-        // error: "/auth/error",
-    }, 
+    
 }
 
 const handler = NextAuth(authOption);
