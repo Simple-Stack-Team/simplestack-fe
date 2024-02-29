@@ -41,6 +41,8 @@ const SignupPage = () => {
         body: JSON.stringify(values),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
         setError(res);
         return null;
@@ -55,7 +57,7 @@ const SignupPage = () => {
       if (signInResult?.error) {
         setError({ status: 401 });
       } else {
-        const orgId = session?.user!.user.orgId;
+        const orgId = data.user.orgId;
 
         if (orgId) {
           router.push(`/${orgId}/dashboard`);
