@@ -11,6 +11,7 @@ const useHasAccess = (roles: string[]) => {
 
   const hasAccess =
     Array.isArray(roles) &&
+    // @ts-ignore
     roles.some((role: string) => session.user?.user.roles.includes(role));
 
   return hasAccess;
