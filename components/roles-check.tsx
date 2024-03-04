@@ -5,7 +5,7 @@ const RoleCheck = ({
   roles,
   children,
 }: {
-  roles: string;
+  roles: string[];
   children: React.ReactNode;
 }) => {
   const hasAccess = useHasAccess(roles);
