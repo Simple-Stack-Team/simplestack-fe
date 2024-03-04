@@ -24,8 +24,18 @@ const Profile = () => {
             <div className="flex items-center justify-between relative m-3">
               <CgProfile />
               <div className="flex flex-col items-center pl-2 gap-1">
-                <p className="">{session?.user!.user.name}</p>
-                <p>{session?.user!.user.email}</p>
+                <p>
+                  {
+                    //@ts-ignore
+                    session?.user!.user.name
+                  }
+                </p>
+                <p>
+                  {
+                    //@ts-ignore
+                    session?.user!.user.email
+                  }
+                </p>
               </div>
               <div className="relative">
                 <div className="cursor-pointer" onClick={toggleOptions}>

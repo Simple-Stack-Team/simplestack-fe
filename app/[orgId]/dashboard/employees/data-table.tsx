@@ -36,8 +36,11 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
-      <div className="rounded-md border">
+    <div className="text-black">
+      <div className="mb-4">
+        <DataTableViewOptions table={table} />
+      </div>
+      <div className="rounded-md">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -90,7 +93,6 @@ export function DataTable<TData, TValue>({
       <div className="mt-4">
         <DataTablePagination table={table} />
       </div>
-      {/* <DataTableViewOptions table={table} /> */}
     </div>
   );
 }

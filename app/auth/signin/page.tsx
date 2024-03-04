@@ -15,11 +15,7 @@ import InputFieldLogin from "@/components/InputFieldLogin";
 import AlertMessage from "@/components/AlertMessage";
 import InfoSectionAuth from "@/components/InfoSectionAuth";
 import { ReloadIcon } from "@radix-ui/react-icons";
-
-export const formSchemaLogin = z.object({
-  email: z.string().email(),
-  password: z.string().min(1),
-});
+import { formSchemaLogin } from "@/app/auth/signin/constants/signin-constants";
 
 const SignupPage = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
@@ -35,7 +31,9 @@ const SignupPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_SIGNIN_URL!, {
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
+
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

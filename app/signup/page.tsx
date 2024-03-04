@@ -11,16 +11,7 @@ import AlertMessage from "@/components/AlertMessage";
 import InputField from "@/components/InputField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-
-export const formSchema = z.object({
-    name: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-    }),
-    email: z.string().email(),
-    password: z.string().min(1),
-    organizationName: z.string().min(1),
-    headquarterAddress: z.string().min(1),
-});
+import { formSchema } from "@/app/signup/constants/signup-admin-constants";
 
 const SignupPage = () => {
     const [error, setError] = useState<ErrorResponse>({ status: 0 });
@@ -31,13 +22,14 @@ const SignupPage = () => {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await fetch(process.env.NEXT_PUBLIC_SIGNUP_ADMIN_URL!, {
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`;
+
+        const res = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(values),
         });
 
-        console.log(res);
         if (!res.ok) {
             setError(res);
 

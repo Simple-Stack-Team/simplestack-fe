@@ -1,7 +1,7 @@
-import AppBar from "./AppBar";
+import AppBar from "@/app/AppBar";
 
-export async function get() {
-    const response = await fetch("http://localhost:3200/");
+async function get() {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_URL!);
     const data = response.json();
 
     return data;
