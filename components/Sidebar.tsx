@@ -1,10 +1,12 @@
 "use client";
+
 import React from "react";
-import { sidebarLinks } from "@/lib/constants/sidebar-link";
-import Link from "next/link";
-import Profile from "./Profile";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import classNames from "classnames";
+
+import { sidebarLinks } from "@/lib/constants/sidebar-link";
+import Profile from "./Profile";
 import RoleCheck from "./roles-check";
 import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
