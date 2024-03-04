@@ -2,22 +2,18 @@
 
 import { useSession } from "next-auth/react";
 
-const useHasAccess = (roles: string) => {
+const useHasAccess = (roles: string[]) => {
   const { data: session, status } = useSession();
 
-  if (status === "loading") {
+  if (status === "loading" || !session) {
     return false;
   }
 
-  if (!session) {
-    return false;
-  }
-  // @ts-ignore
-  if (session.user?.user.roles.includes(roles)) {
-    return true;
-  }
+  const hasAccess =
+    Array.isArray(roles) &&
+    roles.some((role: string) => session.user?.user.roles.includes(role));
 
-  return false;
+  return hasAccess;
 };
 
 export default useHasAccess;
