@@ -1,4 +1,4 @@
-import RoleCheck from "@/components/roles-check";
+import RoleCheck from "@/components/RoleCheck";
 import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
 export default function Page() {

@@ -6,9 +6,8 @@ import Link from "next/link";
 import classNames from "classnames";
 
 import { sidebarLinks } from "@/lib/constants/sidebar-link";
-import Profile from "./Profile";
-import RoleCheck from "./roles-check";
-import { EMPLOYEE_ROLES } from "@/types/employee-types";
+import Profile from "@/components/Profile";
+import RoleCheck from "@/components/RoleCheck";
 
 const Sidebar = () => {
   const currentPath = usePathname();
@@ -16,7 +15,7 @@ const Sidebar = () => {
     <div className="flex flex-col items-start mt-24">
       <div>
         {sidebarLinks.map((link) => (
-          <RoleCheck roles={link.roles}>
+          <RoleCheck roles={link.roles} key={link.label}>
             <div className="m-2" key={link.label}>
               <Link
                 href={link.href}
