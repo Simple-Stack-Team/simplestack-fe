@@ -11,14 +11,7 @@ import { ErrorResponse } from "@/types/ErrorResponse";
 import AlertMessage from "@/components/AlertMessage";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-
-export const formSchemaSignUp = z.object({
-  name: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  email: z.string().email(),
-  password: z.string().min(3),
-});
+import { formSchemaSignUp } from "@/app/[orgId]/signup/constants/signup-constants";
 
 const SignupEmployee = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });

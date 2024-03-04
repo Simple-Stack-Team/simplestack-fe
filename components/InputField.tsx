@@ -10,7 +10,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { formSchema } from "@/app/signup/page";
+import { formSchema } from "@/app/signup/constants/signup-admin-constants";
 
 interface Props {
     control: UseFormReturn<z.infer<typeof formSchema>>["control"];

@@ -15,11 +15,7 @@ import InputFieldLogin from "@/components/InputFieldLogin";
 import AlertMessage from "@/components/AlertMessage";
 import InfoSectionAuth from "@/components/InfoSectionAuth";
 import { ReloadIcon } from "@radix-ui/react-icons";
-
-export const formSchemaLogin = z.object({
-  email: z.string().email(),
-  password: z.string().min(1),
-});
+import { formSchemaLogin } from "@/app/auth/signin/constants/signin-constants";
 
 const SignupPage = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const AppBar = () => {
   const { data: session, status } = useSession();
+  //@ts-ignore
   const orgId = session?.user!.user.orgId;
 
   return (
@@ -19,7 +20,12 @@ const AppBar = () => {
         {status === "loading" && <div>Loading...</div>}
         {session?.user ? (
           <>
-            <p>{session?.user.user.name}</p>
+            <p>
+              {
+                // @ts-ignore
+                session?.user.user.name
+              }
+            </p>
             <Button onClick={() => signOut()}>Sign Out</Button>
             <Link href={`/${orgId}/signup`}>
               <Button>Register Employee</Button>
