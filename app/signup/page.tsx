@@ -31,13 +31,14 @@ const SignupPage = () => {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await fetch(process.env.NEXT_PUBLIC_SIGNUP_ADMIN_URL!, {
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`;
+
+        const res = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(values),
         });
 
-        console.log(res);
         if (!res.ok) {
             setError(res);
 

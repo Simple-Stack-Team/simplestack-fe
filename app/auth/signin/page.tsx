@@ -35,7 +35,9 @@ const SignupPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_SIGNIN_URL!, {
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
+
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

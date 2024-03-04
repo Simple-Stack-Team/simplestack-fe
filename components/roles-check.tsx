@@ -1,5 +1,5 @@
 "use client";
-import useHasAccess from "@/lib/hooks/useHasAccess";
+import useHasAccess from "@/hooks/useHasAccess";
 
 const RoleCheck = ({
   roles,

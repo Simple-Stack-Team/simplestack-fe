@@ -12,7 +12,9 @@ export const authOption: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const res = await fetch("http://localhost:3200/auth/login/", {
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
+
+        const res = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

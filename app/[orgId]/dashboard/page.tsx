@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <>
       <h1>Dashboard</h1>
-      <RoleCheck roles={"PROJECT_MANAGER"}>ACCEPTED</RoleCheck>
+      <RoleCheck roles="ORGANIZATION_ADMIN">ACCEPTED</RoleCheck>
     </>
   );
 }

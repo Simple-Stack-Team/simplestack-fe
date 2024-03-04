@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, UserRoundPlus, UserRound, Pencil } from "lucide-react";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,23 +17,16 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { SelectEmployeeRoles } from "@/components/SelectEmployeeRoles";
+import { SelectEmployeeRoles } from "./SelectEmployeeRoles";
+import { Employee } from "@/types/Employee";
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Employee>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "name",
+    header: "Name",
     // header: () => {}
     // cell: () => {}
   },
@@ -41,13 +35,44 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Email",
   },
   {
-    accessorKey: "amount",
-    header: "Amount",
+    accessorKey: "roles",
+    header: "Role",
+    cell: ({ row }) => {
+      const employee = row.original.roles;
+
+      return (
+        <div className="flex gap-2">
+          {employee.map((role, index) => (
+            <div
+              key={index}
+              className={`
+                rounded-full
+                border-[1.5px]
+                px-2
+                py-[1px]
+                text-xs
+                font-medium
+              ${
+                role === "ORGANIZATION_ADMIN"
+                  ? "bg-green-100 border-green-400 text-green-700"
+                  : role === "PROJECT_MANAGER"
+                  ? "bg-red-100 border-red-400 text-red-700"
+                  : role === "DEPARTMENT_MANAGER"
+                  ? "bg-yellow-100 border-yellow-400 text-yellow-700"
+                  : "bg-blue-100 border-blue-400 text-blue-700"
+              }`}
+            >
+              {role.toLowerCase()}
+            </div>
+          ))}
+        </div>
+      );
+    },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
+      const employee = row.original;
 
       return (
         <DropdownMenu>
@@ -74,7 +99,7 @@ export const columns: ColumnDef<Payment>[] = [
             </DropdownMenuItem>
             <DropdownMenuItem
               onSelect={(e) => e.preventDefault()}
-              onClick={() => console.log(payment.id)}
+              // onClick={() => }
             >
               <Dialog>
                 <DialogTrigger asChild>
@@ -91,11 +116,8 @@ export const columns: ColumnDef<Payment>[] = [
                     </DialogDescription>
                   </DialogHeader>
                   <div className="grid gap-4 py-4">
-                    <SelectEmployeeRoles />
+                    <SelectEmployeeRoles employeeId={employee.id} employeeRoles={employee.roles} />
                   </div>
-                  <DialogFooter>
-                    <Button type="submit">Assign</Button>
-                  </DialogFooter>
                 </DialogContent>
               </Dialog>
             </DropdownMenuItem>

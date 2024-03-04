@@ -1,3 +1,6 @@
+'use client';
+
+import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 
 interface ErrorData {
@@ -6,7 +9,7 @@ interface ErrorData {
 
 interface Props {
   apiKey: string;
-  path?: string;
+  url?: string;
 }
 
 interface DataResult {
@@ -15,16 +18,37 @@ interface DataResult {
   error: ErrorData | null;
 }
 
-const useFetch = ({ apiKey, path }: Props): DataResult => {
+const useFetch = ({ apiKey, url }: Props): DataResult => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ErrorData | null>(null);
+  
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     const fetchData = async () => {
+      if (status === "loading") {
+        return;
+      }
+
       try {
         setLoading(true);
-        const response = await fetch(`${apiKey}${path}`);
+        //@ts-ignore
+        const token = session?.user?.access_token;
+
+        if (!token) {
+          setError({
+            message: "Access token is undefined. Please log in.",
+          });
+          return;
+        }
+
+        const response = await fetch(`${apiKey}${url}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
 
         if (response.ok) {
           const responseData = await response.json();
@@ -44,7 +68,7 @@ const useFetch = ({ apiKey, path }: Props): DataResult => {
     };
 
     fetchData();
-  }, [apiKey, path]);
+  }, [apiKey, url, session, status]);
 
   return { data, loading, error };
 };
