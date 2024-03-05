@@ -1,8 +1,10 @@
 "use client";
 
+import { useEmployeeStore } from "@/lib/store";
 import { columns } from "./columns";
-import { DataTable } from "./data-table";
+import { DataTable } from "@/components/data-table";
 import useFetch from "@/hooks/useFetch";
+import { useEffect } from "react";
 
 interface Props {
   params: { orgId: string };
@@ -12,8 +14,16 @@ const Employees = ({ params: { orgId } }: Props) => {
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
   const url = `/organizations/${orgId}/employees`;
 
-  const { data, loading, error } = useFetch({ apiKey, url });
-  console.log(data);
+  const { data, error } = useFetch({ apiKey, url });
+  const setEmployees = useEmployeeStore((state) => state.setEmployees);
+  const employee = useEmployeeStore((state) => state.employees);
+  console.log(employee);
+
+  useEffect(() => {
+    if (data) {
+      setEmployees(data);
+    }
+  }, [data, setEmployees]);
 
   return (
     <div className="border-[1.5px] border-gray-300 p-4 rounded-lg">
@@ -22,7 +32,7 @@ const Employees = ({ params: { orgId } }: Props) => {
         <div>{error.message}</div>
       ) : (
         <div>
-          <DataTable columns={columns} data={data} />
+          <DataTable columns={columns} data={employee} />
         </div>
       )}
     </div>

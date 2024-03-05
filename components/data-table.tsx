@@ -16,8 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DataTablePagination } from "./data-table-pagination";
-import { DataTableViewOptions } from "./data-table-view-options";
+import { DataTablePagination } from "@/components/data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -37,9 +36,6 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="text-black">
-      <div className="mb-4">
-        <DataTableViewOptions table={table} />
-      </div>
       <div className="rounded-md">
         <Table>
           <TableHeader>
