@@ -6,7 +6,7 @@ export const authOption: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "jsmith" },
+        email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
@@ -33,6 +33,7 @@ export const authOption: NextAuthOptions = {
       },
     }),
   ],
+  session: { strategy: "jwt" },
   secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/auth/signin",

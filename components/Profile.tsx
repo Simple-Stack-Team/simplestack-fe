@@ -13,7 +13,10 @@ const Profile = () => {
   };
   const logOut = (event: any) => {
     event.preventDefault();
-    signOut();
+    signOut({
+      redirect: true,
+      callbackUrl: "/auth/signin"
+    });
   };
   const { data: session } = useSession();
   return (
