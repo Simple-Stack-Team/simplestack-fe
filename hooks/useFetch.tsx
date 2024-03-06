@@ -2,7 +2,6 @@
 
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 interface ErrorData {
   message: string;
@@ -23,7 +22,6 @@ const useFetch = ({ apiKey, url }: Props): DataResult => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ErrorData | null>(null);
-  const router = useRouter();
 
   const { data: session, status } = useSession();
 
@@ -56,7 +54,6 @@ const useFetch = ({ apiKey, url }: Props): DataResult => {
           const responseData = await response.json();
           setData(responseData);
           setError(null);
-          router.refresh();
         } else {
           const errorData: ErrorData = await response.json();
           setError(errorData);

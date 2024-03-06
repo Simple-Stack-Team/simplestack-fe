@@ -29,6 +29,7 @@ type Department = {
   managerId: string;
 };
 
+
 type DepartmentStore = {
   departments: Department[];
   setDepartments: (departments: Department[]) => void;
@@ -42,6 +43,30 @@ export const useDepartmentStore = create<DepartmentStore>((set) => ({
     set((state) => ({
       departments: state.departments.filter(
         (department) => department.id !== departmentId
+      ),
+    })),
+}));
+
+
+type TeamRoles = {
+  id: string;
+  name: string;
+  organizationId: string;
+}
+
+type TeamRoleStore = {
+  teamRoles: TeamRoles[];
+  setTeamRoles: (teamRoles: TeamRoles[]) => void;
+  deleteTeamRoles: (teamRoleId: string) => void;
+};
+
+export const useTeamRoleStore = create<TeamRoleStore>((set) => ({
+  teamRoles: [],
+  setTeamRoles: (newTeamRoles) => set({ teamRoles: newTeamRoles }),
+  deleteTeamRoles: (teamRoleId) =>
+    set((state) => ({
+      teamRoles: state.teamRoles.filter(
+        (teamRole) => teamRole.id !== teamRoleId
       ),
     })),
 }));
