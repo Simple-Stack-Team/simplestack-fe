@@ -1,18 +1,18 @@
 import AppBar from "@/app/AppBar";
-
-async function get() {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_URL!);
-    const data = response.json();
-
-    return data;
-}
+import { getServerSession } from "next-auth";
+import { authOption } from "./api/auth/[...nextauth]/constants/next-auth-config";
+import { redirect } from "next/navigation";
 
 export default async function HelloWorld() {
-    const data = await get();
-    return (
-        <div>
-            <AppBar />
-            <h1>{data.msg}</h1>
-        </div>
-    );
+  const session = await getServerSession(authOption);
+
+  //@ts-ignore
+  const orgId = session?.user.user.orgId;
+  if (session) redirect(`/${orgId}/dashboard`);
+
+  return (
+    <div>
+      <AppBar />
+    </div>
+  );
 }
