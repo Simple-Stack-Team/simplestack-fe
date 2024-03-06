@@ -33,6 +33,7 @@ export const authOption: NextAuthOptions = {
       },
     }),
   ],
+  secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/auth/signin",
     // signOut: "/auth/signout",
