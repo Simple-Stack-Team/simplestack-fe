@@ -3,7 +3,7 @@ import { signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
 import { CgProfile } from "react-icons/cg";
-import { RiExpandUpDownLine } from "react-icons/ri";
+import { CiLogout } from "react-icons/ci";
 import Link from "next/link";
 
 const Profile = () => {
@@ -22,7 +22,7 @@ const Profile = () => {
         {session?.user ? (
           <div className="flex flex-col">
             <div className="flex items-center justify-between relative m-3">
-              <CgProfile />
+              <CgProfile className="size-12 mr-2" />
               <div className="flex flex-col items-center pl-2 gap-1">
                 <p>
                   {
@@ -39,10 +39,10 @@ const Profile = () => {
               </div>
               <div className="relative">
                 <div className="cursor-pointer" onClick={toggleOptions}>
-                  <RiExpandUpDownLine />
+                  <CiLogout className="size-5 ml-1" />
                 </div>
                 {showOptions && (
-                  <div className="absolute top-0  left-1 mt-4 bg-white p-2 rounded shadow">
+                  <div className="absolute  bg-white p-2 rounded shadow">
                     <Link href="/">
                       <Button onClick={logOut}>Sign Out</Button>
                     </Link>
