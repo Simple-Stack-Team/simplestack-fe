@@ -37,7 +37,7 @@ export const sidebarLinks: Sidebar[] = [
     ],
   },
   {
-    href: "/dashboard",
+    href: "/dashboard/teamroles",
     label: "Team Roles ",
     icon: <HiOutlineUserGroup className={style} style={{ fontSize: "19px" }} />,
     roles: [
