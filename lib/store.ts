@@ -20,3 +20,28 @@ export const useEmployeeStore = create<EmployeeStore>((set) => ({
       }),
     })),
 }));
+
+type Department = {
+  id: string;
+  name: string;
+  createdAt: string;
+  orgnizationId: string;
+  managerId: string;
+};
+
+type DepartmentStore = {
+  departments: Department[];
+  setDepartments: (departments: Department[]) => void;
+  deleteDepartment: (departmentId: string) => void;
+};
+
+export const useDepartmentStore = create<DepartmentStore>((set) => ({
+  departments: [],
+  setDepartments: (newDepartments) => set({ departments: newDepartments }),
+  deleteDepartment: (departmentId) =>
+    set((state) => ({
+      departments: state.departments.filter(
+        (department) => department.id !== departmentId
+      ),
+    })),
+}));

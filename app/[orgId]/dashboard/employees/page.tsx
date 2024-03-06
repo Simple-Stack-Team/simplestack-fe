@@ -17,7 +17,6 @@ const Employees = ({ params: { orgId } }: Props) => {
   const { data, error } = useFetch({ apiKey, url });
   const setEmployees = useEmployeeStore((state) => state.setEmployees);
   const employee = useEmployeeStore((state) => state.employees);
-  console.log(employee);
 
   useEffect(() => {
     if (data) {

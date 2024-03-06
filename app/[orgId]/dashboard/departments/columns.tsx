@@ -45,7 +45,7 @@ export const columns: ColumnDef<Departments>[] = [
 
       return (
         <div>
-          <ActionsTable departmentId={department.id} />
+          <ActionsTable departmentId={department.id} name={department.name} />
         </div>
       );
     },
