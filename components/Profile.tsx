@@ -21,43 +21,39 @@ const Profile = () => {
   const { data: session } = useSession();
   return (
     <div>
-      <div className="">
-        {session?.user ? (
-          <div className="flex flex-col">
-            <div className="flex items-center justify-between relative m-3">
-              <CgProfile className="size-12 mr-2" />
-              <div className="flex flex-col items-center pl-2 gap-1">
-                <p>
-                  {
-                    //@ts-ignore
-                    session?.user!.user.name
-                  }
-                </p>
-                <p>
-                  {
-                    //@ts-ignore
-                    session?.user!.user.email
-                  }
-                </p>
-              </div>
-              <div className="relative">
-                <div className="cursor-pointer" onClick={toggleOptions}>
-                  <CiLogout className="size-5 ml-1" />
-                </div>
-                {showOptions && (
-                  <div className="absolute  bg-white p-2 rounded shadow">
-                    <Link href="/">
-                      <Button onClick={logOut}>Sign Out</Button>
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </div>
+      {session?.user ? (
+        <div className="flex items-center justify-between relative m-3">
+          <CgProfile className="size-8 mr-2 text-gray-500" />
+          <div className="flex flex-col items-start">
+            <p className="text-xl">
+              {
+                //@ts-ignore
+                session?.user!.user.name
+              }
+            </p>
+            <p className="text-gray-400">
+              {
+                //@ts-ignore
+                session?.user!.user.email
+              }
+            </p>
           </div>
-        ) : (
-          <div></div>
-        )}
-      </div>
+          <div className="relative">
+            <div className="cursor-pointer" onClick={toggleOptions}>
+              <CiLogout className="size-5 ml-4 text-gray-500 size-19" />
+            </div>
+            {showOptions && (
+              <div className="absolute  bg-white p-1 rounded shadow">
+                <Link href="/">
+                  <Button onClick={logOut}>Sign Out</Button>
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };

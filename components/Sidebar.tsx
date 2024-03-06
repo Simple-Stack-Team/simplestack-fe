@@ -18,38 +18,44 @@ const Sidebar = () => {
   const [activeLink, setActiveLink] = useState("");
 
   return (
-    <div className="flex flex-col items-start   text-black min-w-[240px]">
-      <div className="flex items-center ml-4 mt-10">
-        <TbWorldCode className="size-10 mr-2" />
-        <span className="text-xl">TeamFinder</span>
-      </div>
-      <div className="ml-4 mt-24">Menu</div>
-      <div className="mt-4">
-        {sidebarLinks.map((link) => (
-          <RoleCheck roles={link.roles} key={link.label}>
-            <div className="m-4" key={link.label}>
-              <Link href={`/${orgId}${link.href}`}>
-                <div
-                  className={classNames({
-                    "flex items-center  rounded relative cursor-pointer": true,
-                    "hover:bg-gray-200": true,
-                    "bg-gray-200": activeLink === link.href,
-                  })}
-                  onClick={() => setActiveLink(link.href)}
-                >
+    <div className="flex flex-col justify-between fixed inset-0 w-[240px] p-4">
+      <div>
+        <div className="flex gap-2 items-center w-full">
+          <TbWorldCode className="mr-2" size={35} />
+          <span className="text-xl">TeamFinder</span>
+        </div>
+        <div className="mt-4 w-full flex flex-col gap-2 ">
+          {sidebarLinks.map((link) => (
+            <RoleCheck roles={link.roles} key={link.label}>
+              <div className="w-full" key={link.label}>
+                <Link href={`/${orgId}${link.href}`}>
                   <div
-                    className={`flex items-center p-3 rounded relative hover:bg-gray-200 cursor-pointer `}
+                    className={classNames({
+                      "flex items-center cursor-pointer rounded-lg": true,
+                      "hover:bg-gray-200": true,
+                      "bg-gray-200": activeLink === link.href,
+                    })}
+                    onClick={() => setActiveLink(link.href)}
                   >
-                    <div className="mr-2">{link.icon}</div>
-                    <div className=" w-40">{link.label}</div>
+                    <div
+                      className={classNames(
+                        "flex gap-2 items-center p-2 rounded relative hover:bg-gray-200 cursor-pointer ",
+                        {
+                          "font-bold-black": activeLink === link.href,
+                        }
+                      )}
+                    >
+                      <div>{link.icon}</div>
+                      <div>{link.label}</div>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-          </RoleCheck>
-        ))}
+                </Link>
+              </div>
+            </RoleCheck>
+          ))}
+        </div>
       </div>
-      <div className="mt-auto mb-6">
+      <div>
         <Profile />
       </div>
     </div>
