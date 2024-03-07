@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -36,6 +36,7 @@ const formSchema = z.object({
 
 const CreateTeamRoles = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,7 +65,7 @@ const CreateTeamRoles = () => {
 
     if (!res.ok) {
       return null;
-    }
+    } else router.refresh();
   }
 
   return (

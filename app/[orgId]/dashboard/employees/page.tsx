@@ -25,7 +25,7 @@ const Employees = ({ params: { orgId } }: Props) => {
   }, [data, setEmployees]);
 
   return (
-    <div className="border-[1.5px] border-gray-300 p-4 rounded-lg">
+    <div>
       <h1 className="mb-4 text-xl font-semibold">Employees</h1>
       {error ? (
         <div>{error.message}</div>

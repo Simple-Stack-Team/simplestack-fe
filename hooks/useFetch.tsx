@@ -13,7 +13,7 @@ interface Props {
 }
 
 interface DataResult {
-  data: any[];
+  data: any;
   loading: boolean;
   error: ErrorData | null;
 }
@@ -44,6 +44,7 @@ const useFetch = ({ apiKey, url }: Props): DataResult => {
         }
 
         const response = await fetch(`${apiKey}${url}`, {
+          cache: "no-store",
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + token,

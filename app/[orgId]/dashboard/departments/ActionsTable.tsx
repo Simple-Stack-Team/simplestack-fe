@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useDepartmentStore } from "@/lib/store";
 import UpdateDepartment from "./UpdateDepartment";
+import { Dialog } from "@/components/ui/dialog";
 
 interface Props {
   departmentId: string;
@@ -42,7 +43,7 @@ const ActionsTable = ({ departmentId, name }: Props) => {
   const token = session?.user?.access_token;
 
   const deleteDepartment = useDepartmentStore(
-    (state) => state.deleteDepartment
+    (state) => state.deleteDepartment,
   );
 
   const onDelete = async () => {
@@ -75,9 +76,11 @@ const ActionsTable = ({ departmentId, name }: Props) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <UpdateDepartment name={name} departmentId={departmentId} />
-        </DropdownMenuItem>
+        <Dialog>
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
+            <UpdateDepartment name={name} departmentId={departmentId} />
+          </DropdownMenuItem>
+        </Dialog>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <AlertDialog>
             <AlertDialogTrigger>

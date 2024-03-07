@@ -49,6 +49,4 @@ const TeamRolesTable = () => {
   );
 };
 
-export const dynamin = "force-dynamic";
-
 export default TeamRolesTable;
