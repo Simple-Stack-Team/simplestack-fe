@@ -66,18 +66,20 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex items-center">
-      <InfoSectionAuth />
+    <div className="flex items-center sm:flex-row">
+      <div className="hidden sm:block sm:w-[300px]  md:w-[300px] lg:w-[500px] ">
+        <InfoSectionAuth />
+      </div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-2 flex-1 p-8"
+          className="flex-1 space-y-2 p-8"
         >
-          <div className="max-w-[400px] mx-auto mb-16">
-            <h1 className="text-2xl font-semibold mb-2">Login</h1>
+          <div className="mx-auto mb-16 max-w-[400px]">
+            <h1 className="mb-2 text-2xl font-semibold">Login</h1>
             <p>
               <span>Don&apos;t have an account? </span>
-              <Link href="/" className="text-primary font-semibold">
+              <Link href="/" className="font-semibold text-primary">
                 Register
               </Link>
             </p>
@@ -101,7 +103,7 @@ const LoginPage = () => {
             <Button
               type="submit"
               disabled={loading}
-              className="max-w-[400px] w-full mt-4"
+              className="mt-4 w-full max-w-[400px]"
             >
               {loading ? (
                 <>

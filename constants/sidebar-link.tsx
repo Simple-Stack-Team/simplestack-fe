@@ -1,35 +1,52 @@
-import { MdSpaceDashboard } from "react-icons/md";
-import { FaUser } from "react-icons/fa";
-import { RiTeamFill } from "react-icons/ri";
 import classNames from "classnames";
-
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { EMPLOYEE_ROLES } from "@/types/employee-types";
-
+import { HiOutlineUserGroup } from "react-icons/hi";
+import { GrProjects } from "react-icons/gr";
+import { FaRegUser } from "react-icons/fa";
 interface Sidebar {
   href: string;
   label: string;
   icon: React.ReactElement;
   roles: string[];
 }
-const style = classNames("flex items-center pl-1 gap-4 mt-1");
-
+const style = classNames("flex items-center  text-gray-500");
 export const sidebarLinks: Sidebar[] = [
   {
-    href: "/orgId/",
+    href: "/dashboard",
     label: "Dashboard",
-    icon: <MdSpaceDashboard className={style} style={{ fontSize: "20px" }} />,
+    icon: (
+      <AiOutlineFundProjectionScreen
+        className={style}
+        style={{ fontSize: "20px" }}
+      />
+    ),
     roles: [EMPLOYEE_ROLES.ORGANIZATION_ADMIN],
   },
   {
-    href: "/orgId/",
+    href: "/dashboard/employees",
     label: "Employee",
-    icon: <FaUser className={style} style={{ fontSize: "20px" }} />,
-    roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
+    icon: <FaRegUser className={style} style={{ fontSize: "20px" }} />,
+    roles: [
+      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
+      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
+    ],
   },
   {
-    href: "/orgId/",
+    href: "/dashboard/teamroles",
     label: "Team Roles ",
-    icon: <RiTeamFill className={style} style={{ fontSize: "19px" }} />,
+    icon: <HiOutlineUserGroup className={style} style={{ fontSize: "19px" }} />,
+    roles: [
+      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
+      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
+      EMPLOYEE_ROLES.PROJECT_MANAGER,
+      EMPLOYEE_ROLES.EMPLOYEE,
+    ],
+  },
+  {
+    href: "/dashboard/departments",
+    label: "Department ",
+    icon: <GrProjects className={style} style={{ fontSize: "19px" }} />,
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
