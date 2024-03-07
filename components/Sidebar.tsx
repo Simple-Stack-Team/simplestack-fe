@@ -1,14 +1,13 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import { useParams, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import classNames from "classnames";
 
-import { sidebarLinks } from "@/constants/sidebar-link";
 import Profile from "@/components/Profile";
 import RoleCheck from "@/components/RoleCheck";
-import { useSession } from "next-auth/react";
+import { sidebarLinks } from "@/constants/sidebar-link";
 import { TbWorldCode } from "react-icons/tb";
 
 const Sidebar = () => {
@@ -18,20 +17,20 @@ const Sidebar = () => {
   const [activeLink, setActiveLink] = useState("");
 
   return (
-    <div className="flex flex-col justify-between fixed inset-0 w-[240px] p-4">
+    <div className="fixed inset-0 flex w-[240px] flex-col justify-between p-4">
       <div>
-        <div className="flex gap-2 items-center w-full">
+        <div className="flex w-full items-center gap-2">
           <TbWorldCode className="mr-2" size={35} />
           <span className="text-xl">TeamFinder</span>
         </div>
-        <div className="mt-4 w-full flex flex-col gap-2 ">
+        <div className="mt-4 flex w-full flex-col gap-2 ">
           {sidebarLinks.map((link) => (
             <RoleCheck roles={link.roles} key={link.label}>
               <div className="w-full" key={link.label}>
                 <Link href={`/${orgId}${link.href}`}>
                   <div
                     className={classNames({
-                      "flex items-center cursor-pointer rounded-lg": true,
+                      "flex cursor-pointer items-center rounded-lg": true,
                       "hover:bg-gray-200": true,
                       "bg-gray-200": activeLink === link.href,
                     })}
@@ -39,10 +38,10 @@ const Sidebar = () => {
                   >
                     <div
                       className={classNames(
-                        "flex gap-2 items-center p-2 rounded relative hover:bg-gray-200 cursor-pointer ",
+                        "relative flex cursor-pointer items-center gap-2 rounded p-2 hover:bg-gray-200 ",
                         {
                           "font-bold-black": activeLink === link.href,
-                        }
+                        },
                       )}
                     >
                       <div>{link.icon}</div>

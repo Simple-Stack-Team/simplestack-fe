@@ -39,14 +39,16 @@ const Register = () => {
   }
 
   return (
-    <div className="flex items-center">
-      <div className="bg-slate-300 h-screen flex-1"></div>
+    <div className="flex h-screen items-center justify-center">
+      <div className="hidden h-screen flex-1 bg-slate-300 lg:block"></div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-2 flex-1"
+          className="flex-1 space-y-2"
         >
-          {error.status === 409 && <AlertMessage>Register Failed</AlertMessage>}
+          {error.status === 409 && (
+            <AlertMessage>The email already exist</AlertMessage>
+          )}
           <InputField
             name="name"
             label="Name"
@@ -83,7 +85,7 @@ const Register = () => {
             control={form.control}
           />
           <div className="flex justify-center">
-            <Button type="submit" className="max-w-[400px] w-full mt-4">
+            <Button type="submit" className="mt-4 w-full max-w-[400px]">
               Submit
             </Button>
           </div>
