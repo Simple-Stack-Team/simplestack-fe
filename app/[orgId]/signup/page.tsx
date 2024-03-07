@@ -43,13 +43,15 @@ const SignupEmployee = () => {
 
   return (
     <div className="flex items-center">
-      <div className="bg-slate-300 h-screen flex-1"></div>
+      <div className="h-screen flex-1 bg-slate-300"></div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-2 flex-1 p-8"
+          className="flex-1 space-y-2 p-8"
         >
-          {error.status === 409 && <AlertMessage>Register Failed</AlertMessage>}
+          {error.status === 409 && (
+            <AlertMessage>The name already exist</AlertMessage>
+          )}
           <SignUpEmployee
             name="name"
             label="Name"
@@ -73,7 +75,7 @@ const SignupEmployee = () => {
           />
 
           <div className="flex justify-center">
-            <Button type="submit" className="max-w-[400px] w-full mt-4">
+            <Button type="submit" className="mt-4 w-full max-w-[400px]">
               Register
             </Button>
           </div>

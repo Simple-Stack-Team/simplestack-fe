@@ -84,7 +84,12 @@ const LoginPage = () => {
               </Link>
             </p>
           </div>
-          {error.status === 401 && <AlertMessage>Auth failed</AlertMessage>}
+          {error.status === 401 && (
+            <AlertMessage>The name or the passwor are inccorect</AlertMessage>
+          )}
+          {error.status === 404 && (
+            <AlertMessage>The account not exist</AlertMessage>
+          )}
           <InputFieldLogin
             name="email"
             label="Email"
