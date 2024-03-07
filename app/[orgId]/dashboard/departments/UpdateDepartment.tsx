@@ -71,7 +71,7 @@ const UpdateDepartment = ({ name, departmentId }: Props) => {
   };
 
   return (
-    <Dialog>
+    <div className="cursor-pointer px-2 py-1 text-sm hover:bg-slate-100">
       <DialogTrigger asChild>
         <div className="flex items-center gap-2">
           <Pencil size={16} />
@@ -111,7 +111,7 @@ const UpdateDepartment = ({ name, departmentId }: Props) => {
         </Form>
         <DialogFooter></DialogFooter>
       </DialogContent>
-    </Dialog>
+    </div>
   );
 };
 

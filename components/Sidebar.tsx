@@ -5,7 +5,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import classNames from "classnames";
 
-import { sidebarLinks } from "@/lib/constants/sidebar-link";
+import { sidebarLinks } from "@/constants/sidebar-link";
 import Profile from "@/components/Profile";
 import RoleCheck from "@/components/RoleCheck";
 import { useSession } from "next-auth/react";

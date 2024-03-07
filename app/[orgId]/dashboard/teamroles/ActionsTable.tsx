@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useTeamRoleStore } from "@/lib/store";
 import UpdateTeamRoles from "./UpdateTeamRoles";
+import { Dialog } from "@/components/ui/dialog";
 
 interface Props {
   teamRoleId: string;
@@ -65,15 +66,16 @@ const ActionsTable = ({ teamRoleId, name }: Props) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-8 w-8 p-0">
-          <span className="sr-only">Open menu</span>
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <UpdateTeamRoles name={name} teamRoleId={teamRoleId} />
-        </DropdownMenuItem>
+        <Dialog>
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
+            <UpdateTeamRoles name={name} teamRoleId={teamRoleId} />
+          </DropdownMenuItem>
+        </Dialog>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <AlertDialog>
             <AlertDialogTrigger>

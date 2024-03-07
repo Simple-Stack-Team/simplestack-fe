@@ -8,10 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import {
-  Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -19,7 +17,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -33,8 +30,8 @@ const formSchema = z.object({
 });
 
 interface Props {
-  teamRoleId: string;
   name: string;
+  teamRoleId: string;
 }
 
 const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
@@ -69,7 +66,7 @@ const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
   };
 
   return (
-    <Dialog>
+    <div className="cursor-pointer px-2 py-1 text-sm hover:bg-slate-100">
       <DialogTrigger asChild>
         <div className="flex items-center gap-2">
           <Pencil size={16} />
@@ -78,9 +75,9 @@ const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Update Department</DialogTitle>
+          <DialogTitle>Update Team Roles</DialogTitle>
           <DialogDescription>
-            Make changes to your department here. Click save when you&apos;re
+            Make changes to your team role here. Click save when you&apos;re
             done.
           </DialogDescription>
         </DialogHeader>
@@ -91,7 +88,7 @@ const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>New name</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -99,13 +96,13 @@ const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
                 </FormItem>
               )}
             />
-            <DialogTrigger>
+            <DialogTrigger asChild>
               <Button type="submit">Save changes</Button>
             </DialogTrigger>
           </form>
         </Form>
       </DialogContent>
-    </Dialog>
+    </div>
   );
 };
 

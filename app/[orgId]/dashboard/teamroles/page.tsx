@@ -3,7 +3,7 @@ import CreateTeamRoles from "./CreateTeamRoles";
 
 const TeamRolesPage = () => {
   return (
-    <div className="border-[1.5px] border-gray-300 p-4 rounded-lg min-h-screen">
+    <div>
       <CreateTeamRoles />
       <div className="mt-8">
         <TeamRolesTable />
