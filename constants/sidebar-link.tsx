@@ -4,6 +4,8 @@ import { EMPLOYEE_ROLES } from "@/types/employee-types";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { GrProjects } from "react-icons/gr";
 import { FaRegUser } from "react-icons/fa";
+import { MdOutlineAssignmentTurnedIn } from "react-icons/md";
+
 interface Sidebar {
   href: string;
   label: string;
@@ -47,6 +49,22 @@ export const sidebarLinks: Sidebar[] = [
     href: "/dashboard/departments",
     label: "Department ",
     icon: <GrProjects className={style} style={{ fontSize: "19px" }} />,
+    roles: [
+      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
+      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
+      EMPLOYEE_ROLES.PROJECT_MANAGER,
+      EMPLOYEE_ROLES.EMPLOYEE,
+    ],
+  },
+  {
+    href: "/dashboard/skill",
+    label: "Skill Assignment",
+    icon: (
+      <MdOutlineAssignmentTurnedIn
+        className={style}
+        style={{ fontSize: "20px" }}
+      />
+    ),
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
