@@ -1,11 +1,12 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
+
 import { columns } from "@/app/[orgId]/dashboard/departments/columns";
 import { DataTable } from "@/components/data-table";
 import useFetch from "@/hooks/useFetch";
 import { useDepartmentStore } from "@/lib/store";
-import { useParams } from "next/navigation";
-import { useEffect } from "react";
 
 const DepartmentsTable = () => {
   const { orgId } = useParams();

@@ -1,10 +1,10 @@
 "use client";
 
-import { MoreHorizontal, Trash2 } from "lucide-react";
-
+import { MoreHorizontal } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 import {
   DropdownMenu,
@@ -13,21 +13,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { useDepartmentStore } from "@/lib/store";
-import UpdateDepartment from "./UpdateDepartment";
 import { Dialog } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { useDepartmentStore } from "@/lib/store";
+import UpdateDepartment from "./UpdateDepartments";
+import DeleteDepartments from "./DeleteDepartments";
 
 interface Props {
   departmentId: string;
@@ -35,9 +25,9 @@ interface Props {
 }
 
 const ActionsTable = ({ departmentId, name }: Props) => {
-  const router = useRouter();
-  const { orgId } = useParams();
   const { data: session } = useSession();
+  const { orgId } = useParams();
+  const path = usePathname();
 
   // @ts-ignore
   const token = session?.user?.access_token;
@@ -82,27 +72,12 @@ const ActionsTable = ({ departmentId, name }: Props) => {
           </DropdownMenuItem>
         </Dialog>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <AlertDialog>
-            <AlertDialogTrigger>
-              <div className="flex items-center gap-2 text-red-500">
-                <Trash2 size={16} />
-                Delete
-              </div>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={onDelete}>Delete</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <Link href={`${path}/assignmanager?depId=${departmentId}`}>
+            Assign
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+          <DeleteDepartments onDelete={onDelete} />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
