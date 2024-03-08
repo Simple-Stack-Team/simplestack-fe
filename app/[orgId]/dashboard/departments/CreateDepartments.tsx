@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 import {
