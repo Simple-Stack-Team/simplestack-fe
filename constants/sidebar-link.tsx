@@ -5,6 +5,7 @@ import { HiOutlineUserGroup } from "react-icons/hi";
 import { GrProjects } from "react-icons/gr";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineAssignmentTurnedIn } from "react-icons/md";
+import { GoProject } from "react-icons/go";
 
 interface Sidebar {
   href: string;
@@ -65,6 +66,17 @@ export const sidebarLinks: Sidebar[] = [
         style={{ fontSize: "20px" }}
       />
     ),
+    roles: [
+      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
+      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
+      EMPLOYEE_ROLES.PROJECT_MANAGER,
+      EMPLOYEE_ROLES.EMPLOYEE,
+    ],
+  },
+  {
+    href: "/dashboard/project",
+    label: "Project ",
+    icon: <GoProject className={style} style={{ fontSize: "19px" }} />,
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
