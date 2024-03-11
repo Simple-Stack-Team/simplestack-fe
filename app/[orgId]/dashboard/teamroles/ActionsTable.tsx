@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreHorizontal, Trash2 } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
@@ -13,20 +13,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+
 import { useTeamRoleStore } from "@/lib/store";
 import UpdateTeamRoles from "./UpdateTeamRoles";
 import { Dialog } from "@/components/ui/dialog";
+import { onDelete } from "@/lib/onDelete";
+import DeleteModal from "@/components/DeleteModal";
 
 interface Props {
   teamRoleId: string;
@@ -42,23 +34,15 @@ const ActionsTable = ({ teamRoleId, name }: Props) => {
 
   const deleteTeamRoles = useTeamRoleStore((state) => state.deleteTeamRoles);
 
-  const onDelete = async () => {
+  const handleDelete = async () => {
     const apiKey = process.env.NEXT_PUBLIC_API_URL;
     const url = `${apiKey}/organizations/${orgId}/teamroles/${teamRoleId}`;
 
-    const res = await fetch(url, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-      body: JSON.stringify({
-        id: teamRoleId,
-      }),
-    });
-
-    if (res.ok) {
+    try {
+      const response = await onDelete(url, token, teamRoleId);
       deleteTeamRoles(teamRoleId);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -77,27 +61,7 @@ const ActionsTable = ({ teamRoleId, name }: Props) => {
           </DropdownMenuItem>
         </Dialog>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <AlertDialog>
-            <AlertDialogTrigger>
-              <div className="flex items-center gap-2 text-red-500">
-                <Trash2 size={16} />
-                Delete
-              </div>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={onDelete}>Delete</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <DeleteModal handleDelete={handleDelete}/>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

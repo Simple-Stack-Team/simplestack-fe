@@ -72,4 +72,20 @@ export const sidebarLinks: Sidebar[] = [
       EMPLOYEE_ROLES.EMPLOYEE,
     ],
   },
+  {
+    href: "/dashboard/skills",
+    label: "Skills",
+    icon: (
+      <MdOutlineAssignmentTurnedIn
+        className={style}
+        style={{ fontSize: "20px" }}
+      />
+    ),
+    roles: [
+      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
+      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
+      EMPLOYEE_ROLES.PROJECT_MANAGER,
+      EMPLOYEE_ROLES.EMPLOYEE,
+    ],
+  },
 ];
