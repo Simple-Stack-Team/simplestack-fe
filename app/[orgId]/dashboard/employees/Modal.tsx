@@ -39,8 +39,11 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
   const { orgId } = useParams();
 
   const setEmployeeRoles = useEmployeeStore(
-    (state) => state.updateEmployeeRoles
+    (state) => state.updateEmployeeRoles,
   );
+
+  // @ts-ignore
+  const currentUser = session?.user?.user.sub;
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     try {
@@ -116,6 +119,7 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
                             >
                               <FormControl>
                                 <Checkbox
+                                  disabled={currentUser === employeeId && item.id === "admin"}
                                   checked={field.value?.includes(item.role)}
                                   onCheckedChange={(checked) => {
                                     return checked
@@ -125,8 +129,8 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
                                         ])
                                       : field.onChange(
                                           field.value?.filter(
-                                            (value) => value !== item.role
-                                          )
+                                            (value) => value !== item.role,
+                                          ),
                                         );
                                   }}
                                 />

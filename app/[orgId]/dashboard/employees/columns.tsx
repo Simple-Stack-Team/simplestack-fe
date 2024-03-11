@@ -1,15 +1,20 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Employee } from "@/types/Employee";
 import DropdownMenuEmployee from "./DropdownMenuEmployee";
+import { DataTableColumnHeader } from "./ColumnHeader";
 
 export const columns: ColumnDef<Employee>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Name" />
+    ),
   },
   {
     accessorKey: "email",
-    header: "Email",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Email" />
+    ),
   },
   {
     accessorKey: "roles",
@@ -23,30 +28,30 @@ export const columns: ColumnDef<Employee>[] = [
             <div
               key={index}
               className={`
+                text-nowrap
                 rounded-full
                 border-[1.5px]
                 px-2
                 py-[1px]
                 text-xs
                 font-medium
-                text-nowrap
               ${
                 role === "ORGANIZATION_ADMIN"
-                  ? "bg-green-100 border-green-400 text-green-700"
+                  ? "border-green-400 bg-green-100 text-green-700"
                   : role === "PROJECT_MANAGER"
-                  ? "bg-red-100 border-red-400 text-red-700"
-                  : role === "DEPARTMENT_MANAGER"
-                  ? "bg-yellow-100 border-yellow-400 text-yellow-700"
-                  : "bg-blue-100 border-blue-400 text-blue-700"
+                    ? "border-red-400 bg-red-100 text-red-700"
+                    : role === "DEPARTMENT_MANAGER"
+                      ? "border-yellow-400 bg-yellow-100 text-yellow-700"
+                      : "border-blue-400 bg-blue-100 text-blue-700"
               }`}
             >
               {role === "ORGANIZATION_ADMIN"
                 ? "Admin"
                 : role === "PROJECT_MANAGER"
-                ? "Project Manager"
-                : role === "DEPARTMENT_MANAGER"
-                ? "Department Manager"
-                : "Employee"}
+                  ? "Project Manager"
+                  : role === "DEPARTMENT_MANAGER"
+                    ? "Department Manager"
+                    : "Employee"}
             </div>
           ))}
         </div>
@@ -58,9 +63,7 @@ export const columns: ColumnDef<Employee>[] = [
     cell: ({ row }) => {
       const employee = row.original;
 
-      return (
-        <DropdownMenuEmployee employee={employee} />
-      );
+      return <DropdownMenuEmployee employee={employee} />;
     },
   },
 ];

@@ -23,18 +23,17 @@ const useFetch = ({ apiKey, url }: Props): DataResult => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ErrorData | null>(null);
 
-  const { data: session, status } = useSession();
+  const { status, data: session } = useSession();
+
+  //@ts-ignore
+  const token = session?.user?.access_token;
 
   useEffect(() => {
     const fetchData = async () => {
-      if (status === "loading") {
-        return;
-      }
+      if (status === "loading") return;
 
       try {
         setLoading(true);
-        //@ts-ignore
-        const token = session?.user?.access_token;
 
         if (!token) {
           setError({
@@ -69,7 +68,7 @@ const useFetch = ({ apiKey, url }: Props): DataResult => {
     };
 
     fetchData();
-  }, [apiKey, url, session, status]);
+  }, [apiKey, url, status, token]);
 
   return { data, loading, error };
 };

@@ -74,6 +74,16 @@ export const sidebarLinks: Sidebar[] = [
     ],
   },
   {
+    href: "/dashboard/skills",
+    label: "Skills",
+    icon: (
+      <MdOutlineAssignmentTurnedIn
+        className={style}
+        style={{ fontSize: "20px" }}
+      />
+    ),
+  },
+  {
     href: "/dashboard/project",
     label: "Project ",
     icon: <GoProject className={style} style={{ fontSize: "19px" }} />,
