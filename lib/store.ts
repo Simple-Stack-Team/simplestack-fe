@@ -72,10 +72,10 @@ export const useTeamRoleStore = create<TeamRoleStore>((set) => ({
 }));
 
 
-type Project = {
+type Projects = {
   id: string;
   name: string;
-  projectPeriod: string;
+  period: string;
   startDate: string;
   deadlineDate: string;
   status: string;
@@ -83,12 +83,18 @@ type Project = {
 
 
 type ProjectStore = {
-  projects: Project[];
-  setProjects: (projects: Project[]) => void;
+  projects: Projects[];
+  setProjects: (projects: Projects[]) => void;
+  deleteProjects: (projectsId: string) => void;
 };
 
 export const useProjectStore = create<ProjectStore>((set) => ({
   projects: [],
   setProjects: (newProjects) => set({ projects: newProjects }),
- 
+  deleteProjects: (projectsId) =>
+  set((state) => ({
+    projects: state.projects.filter(
+      (projects) => projects.id !== projectsId
+    ),
+  })),
 }));
