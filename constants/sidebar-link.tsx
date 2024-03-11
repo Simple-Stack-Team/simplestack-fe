@@ -14,6 +14,7 @@ interface Sidebar {
   roles: string[];
 }
 const style = classNames("flex items-center  text-gray-500");
+
 export const sidebarLinks: Sidebar[] = [
   {
     href: "/dashboard",
@@ -82,6 +83,7 @@ export const sidebarLinks: Sidebar[] = [
         style={{ fontSize: "20px" }}
       />
     ),
+    roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
   },
   {
     href: "/dashboard/project",
@@ -93,5 +95,11 @@ export const sidebarLinks: Sidebar[] = [
       EMPLOYEE_ROLES.PROJECT_MANAGER,
       EMPLOYEE_ROLES.EMPLOYEE,
     ],
+  },
+  {
+    href: "/dashboard/departmentassign",
+    label: "Assign members",
+    icon: <GoProject className={style} style={{ fontSize: "19px" }} />,
+    roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
   },
 ];
