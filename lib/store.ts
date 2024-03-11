@@ -70,3 +70,25 @@ export const useTeamRoleStore = create<TeamRoleStore>((set) => ({
       ),
     })),
 }));
+
+
+type Project = {
+  id: string;
+  name: string;
+  projectPeriod: string;
+  startDate: string;
+  deadlineDate: string;
+  status: string;
+};
+
+
+type ProjectStore = {
+  projects: Project[];
+  setProjects: (projects: Project[]) => void;
+};
+
+export const useProjectStore = create<ProjectStore>((set) => ({
+  projects: [],
+  setProjects: (newProjects) => set({ projects: newProjects }),
+ 
+}));
