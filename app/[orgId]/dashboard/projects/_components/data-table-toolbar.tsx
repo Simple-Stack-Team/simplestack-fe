@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter";
-import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 export const period = [
@@ -50,7 +49,7 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  const { status, data: session } = useSession();
+  const { data: session } = useSession();
   const { projectId } = useParams();
 
   const isFiltered = table.getState().columnFilters.length > 0;

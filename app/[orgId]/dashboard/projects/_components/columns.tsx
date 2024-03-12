@@ -1,6 +1,35 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
 import ActionsTable from "./ActionsTable";
+import {
+  CheckCircledIcon,
+  CircleIcon,
+  QuestionMarkCircledIcon,
+  StopwatchIcon,
+} from "@radix-ui/react-icons";
+
+export const statuss = [
+  {
+    value: "Libraries",
+    label: "Libraries",
+    icon: QuestionMarkCircledIcon,
+  },
+  {
+    value: "PROJECT_MANAGER",
+    label: "Project Manager",
+    icon: CircleIcon,
+  },
+  {
+    value: "DEPARTMENT_MANAGER",
+    label: "Department Manager",
+    icon: StopwatchIcon,
+  },
+  {
+    value: "EMPLOYEE",
+    label: "Employee",
+    icon: CheckCircledIcon,
+  },
+];
 
 interface Projects {
   id: string;
@@ -25,7 +54,7 @@ export const columns: ColumnDef<Projects>[] = [
       return <div>{periodTable}</div>;
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
+      return value.includes(row.original.period);
     },
   },
   {

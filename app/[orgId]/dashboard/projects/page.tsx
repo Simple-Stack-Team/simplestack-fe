@@ -1,6 +1,6 @@
 "use client";
 
-import { DataTable } from "@/components/data-table";
+import { DataTable } from "./_components/data-table";
 import { columns } from "./_components/columns";
 import SkeletonTable from "@/components/SkeletonTable";
 import { Toaster } from "@/components/ui/sonner";
