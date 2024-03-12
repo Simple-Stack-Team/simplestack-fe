@@ -1,11 +1,11 @@
 import classNames from "classnames";
-import { AiOutlineFundProjectionScreen } from "react-icons/ai";
-import { EMPLOYEE_ROLES } from "@/types/employee-types";
 import { HiOutlineUserGroup } from "react-icons/hi";
-import { GrProjects } from "react-icons/gr";
+import { LuLayoutGrid, LuFileCheck, LuHome, LuFileBarChart2, LuSquareCode, LuUserPlus  } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineAssignmentTurnedIn } from "react-icons/md";
 import { GoProject } from "react-icons/go";
+
+import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
 interface Sidebar {
   href: string;
@@ -13,14 +13,14 @@ interface Sidebar {
   icon: React.ReactElement;
   roles: string[];
 }
-const style = classNames("flex items-center  text-gray-500");
+const style = classNames("flex items-center text-[#8b8a8d]");
 
 export const sidebarLinks: Sidebar[] = [
   {
     href: "/dashboard",
     label: "Dashboard",
     icon: (
-      <AiOutlineFundProjectionScreen
+      <LuHome
         className={style}
         style={{ fontSize: "20px" }}
       />
@@ -30,7 +30,7 @@ export const sidebarLinks: Sidebar[] = [
   {
     href: "/dashboard/employees",
     label: "Employee",
-    icon: <FaRegUser className={style} style={{ fontSize: "20px" }} />,
+    icon: <FaRegUser className={style} style={{ fontSize: "19px" }} />,
     roles: [
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
@@ -39,7 +39,7 @@ export const sidebarLinks: Sidebar[] = [
   {
     href: "/dashboard/teamroles",
     label: "Team Roles ",
-    icon: <HiOutlineUserGroup className={style} style={{ fontSize: "19px" }} />,
+    icon: <HiOutlineUserGroup className={style} style={{ fontSize: "20px" }} />,
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
@@ -50,7 +50,7 @@ export const sidebarLinks: Sidebar[] = [
   {
     href: "/dashboard/departments",
     label: "Department ",
-    icon: <GrProjects className={style} style={{ fontSize: "19px" }} />,
+    icon: <LuLayoutGrid className={style} style={{ fontSize: "20px" }} />,
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
@@ -62,7 +62,7 @@ export const sidebarLinks: Sidebar[] = [
     href: "/dashboard/skills",
     label: "Skill Assignment",
     icon: (
-      <MdOutlineAssignmentTurnedIn
+      <LuFileCheck
         className={style}
         style={{ fontSize: "20px" }}
       />
@@ -78,7 +78,7 @@ export const sidebarLinks: Sidebar[] = [
     href: "/dashboard/skills",
     label: "Skills",
     icon: (
-      <MdOutlineAssignmentTurnedIn
+      <LuFileBarChart2
         className={style}
         style={{ fontSize: "20px" }}
       />
@@ -87,8 +87,8 @@ export const sidebarLinks: Sidebar[] = [
   },
   {
     href: "/dashboard/projects",
-    label: "Project ",
-    icon: <GoProject className={style} style={{ fontSize: "19px" }} />,
+    label: "Projects",
+    icon: <LuSquareCode className={style} style={{ fontSize: "21px" }} />,
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
@@ -99,7 +99,7 @@ export const sidebarLinks: Sidebar[] = [
   {
     href: "/dashboard/departmentassign",
     label: "Assign members",
-    icon: <GoProject className={style} style={{ fontSize: "19px" }} />,
+    icon: <LuUserPlus className={style} style={{ fontSize: "20px" }} />,
     roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
   },
 ];

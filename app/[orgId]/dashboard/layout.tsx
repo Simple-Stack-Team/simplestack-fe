@@ -39,10 +39,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     };
   }, []);
 
-  const sidebarStyle = isMobile ? "ml-[0] w-[100%]" : "ml-[240px]";
+  const sidebarStyle = isMobile ? "ml-[0] w-[100%]" : "ml-[250px]";
 
   return (
-    <div className="relative flex bg-gray-100">
+    <div className="relative flex bg-[#fafafa]">
       <div className="relative flex-1 overflow-hidden">
         <Sidebar
           isOpen={isSidebarOpen}
@@ -50,7 +50,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         />
         <div className={`m-2 ${sidebarStyle}`}>
           {/* Navbar */}
-          <div className={`p-4 ${isMobile ? "flex justify-between" : ""}`}>
+          <div className={`p-2 ${isMobile ? "flex justify-between" : ""}`}>
             {isMobile && (
               <CiMenuBurger
                 className=":hidden h-6 w-6 cursor-pointer "
@@ -60,8 +60,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
           {/* Content */}
           <div
-            className={`relative z-10 min-h-screen rounded-lg border-2 border-gray-300 bg-white p-4 ${
-              isSidebarOpen ? "ml-0" : "ml-[20px]"
+            className={`relative z-10 min-h-screen rounded-xl border-2 border-[#eee] bg-white p-4 ${
+              isSidebarOpen ? "ml-0" : "m-2"
             } transition-all duration-300 ease-in-out`}
             style={{
               position: isSidebarOpen && isMobile ? "absolute" : "relative",

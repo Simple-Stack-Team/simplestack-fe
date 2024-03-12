@@ -1,10 +1,10 @@
 "use client";
+
 import { signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
-import { Button } from "./ui/button";
-import { CgProfile } from "react-icons/cg";
-import { CiLogout } from "react-icons/ci";
-import Link from "next/link";
+import { LuLogOut } from "react-icons/lu";
+
+import { Button } from "@/components/ui/button"
 
 const Profile = () => {
   const [showOptions, setShowOptions] = useState(false);
@@ -22,16 +22,16 @@ const Profile = () => {
   return (
     <div>
       {session?.user ? (
-        <div className="flex items-center justify-between relative m-3">
-          <CgProfile className="size-8 mr-2 text-gray-500" />
-          <div className="flex flex-col items-start">
-            <p className="text-xl">
+        <div className="flex items-center justify-between relative bg-white border-gray-200 border rounded-md px-4 py-2">
+          {/* <LuUserSquare2 className="size-16 mr-2 text-gray-400" /> */}
+          <div className="flex flex-col items-start gap-0">
+            <p className="text-md font-bold text-[#252525]">
               {
                 //@ts-ignore
                 session?.user!.user.name
               }
             </p>
-            <p className="text-gray-400">
+            <p className="text-[#7b7b7b]">
               {
                 //@ts-ignore
                 session?.user!.user.email
@@ -39,16 +39,9 @@ const Profile = () => {
             </p>
           </div>
           <div className="relative">
-            <div className="cursor-pointer" onClick={toggleOptions}>
-              <CiLogout className="size-5 ml-4 text-gray-500 size-19" />
-            </div>
-            {showOptions && (
-              <div className="absolute  bg-white p-1 rounded shadow">
-                <Link href="/">
-                  <Button onClick={logOut}>Sign Out</Button>
-                </Link>
-              </div>
-            )}
+            <Button variant="ghost" size="icon" onClick={logOut}>
+              <LuLogOut className="size-5 text-gray-500 size-19" />
+            </Button>
           </div>
         </div>
       ) : (
