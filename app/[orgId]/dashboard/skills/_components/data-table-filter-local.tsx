@@ -1,5 +1,6 @@
 import * as React from "react";
-import { CheckIcon, PlusCircledIcon } from "@radix-ui/react-icons";
+import { CheckIcon } from "@radix-ui/react-icons";
+import { Filter } from "lucide-react";
 import { Column } from "@tanstack/react-table";
 
 import { cn } from "@/lib/utils";
@@ -27,10 +28,11 @@ interface DataTableFacetedFilterProps<TData, TValue> {
   options: {
     label: string;
     value: string;
+    icon?: React.ComponentType<{ className?: string }>;
   }[];
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
+export function DataTableFacetedFilterLocal<TData, TValue>({
   column,
   title,
   options,
@@ -42,7 +44,7 @@ export function DataTableFacetedFilter<TData, TValue>({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed">
-          <PlusCircledIcon className="mr-2 h-4 w-4" />
+          <Filter className="h-4 w-4" />
           {title}
           {selectedValues?.size > 0 && (
             <>
@@ -81,9 +83,7 @@ export function DataTableFacetedFilter<TData, TValue>({
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0" align="start">
         <Command>
-          <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value);
@@ -104,9 +104,9 @@ export function DataTableFacetedFilter<TData, TValue>({
                   >
                     <div
                       className={cn(
-                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-black",
+                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
                         isSelected
-                          ? "text-primary-foreground bg-black"
+                          ? "text-primary-foreground bg-primary"
                           : "opacity-50 [&_svg]:invisible",
                       )}
                     >
@@ -122,19 +122,6 @@ export function DataTableFacetedFilter<TData, TValue>({
                 );
               })}
             </CommandGroup>
-            {selectedValues.size > 0 && (
-              <>
-                <CommandSeparator />
-                <CommandGroup>
-                  <CommandItem
-                    onSelect={() => column?.setFilterValue(undefined)}
-                    className="justify-center text-center"
-                  >
-                    Clear filters
-                  </CommandItem>
-                </CommandGroup>
-              </>
-            )}
           </CommandList>
         </Command>
       </PopoverContent>

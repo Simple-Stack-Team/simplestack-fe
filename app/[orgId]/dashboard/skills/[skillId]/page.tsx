@@ -15,15 +15,48 @@ const SkillDetailPage = ({ params: { orgId, skillId } }: Props) => {
   const frameworkId = searchParams.get("frameworkid");
   const fname = searchParams.get("fname");
 
+  const data = [
+    {
+      label: "Organization ID",
+      value: orgId,
+    },
+    {
+      label: "Skill name",
+      value: skillName,
+    },
+    {
+      label: "Skill ID",
+      value: skillId,
+    },
+    {
+      label: "Skill description",
+      value: description,
+    },
+    {
+      label: "Author ID",
+      value: authorId,
+    },
+    {
+      label: "Category name",
+      value: fname,
+    },
+    {
+      label: "Category ID",
+      value: frameworkId,
+    },
+  ];
+
   return (
     <div>
-      <div>Organization ID: {orgId}</div>
-      <div>Skill name: {skillName}</div>
-      <div>Skill ID: {skillId}</div>
-      <div>Skill description: {description}</div>
-      <div>Autor ID: {authorId}</div>
-      <div>Category name: {fname}</div>
-      <div>Category ID: {frameworkId}</div>
+      {data.map((item) => (
+        <div
+          key={item.label}
+          className="mb-2 flex flex-col rounded-xl bg-gray-100 p-4 lg:flex-row lg:justify-between"
+        >
+          <span>{item.label}: </span>
+          {item.value}
+        </div>
+      ))}
     </div>
   );
 };

@@ -5,7 +5,7 @@ export interface Skills {
   description: string,
   categoryId: string,
   authorId: string,
-  departments: string[],
+  departmentIds: string[],
   category: {
     id: string;
     name: string;
