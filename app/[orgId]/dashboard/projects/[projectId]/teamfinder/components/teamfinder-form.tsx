@@ -94,7 +94,7 @@ export function TeamFinderForm({onSubmit}: Props) {
                 </FormControl>
                 <div className="space-y-1 leading-none">
                   <FormLabel>
-                    Include from projects clost to finish
+                    Include from projects close to finish
                   </FormLabel>
                   {
                     field.value ? 
