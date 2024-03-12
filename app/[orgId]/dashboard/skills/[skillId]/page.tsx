@@ -15,7 +15,7 @@ const SkillDetailPage = ({ params: { orgId, skillId } }: Props) => {
   const frameworkId = searchParams.get("frameworkid");
   const fname = searchParams.get("fname");
 
-  const data = [
+  const skillDetails = [
     {
       label: "Organization ID",
       value: orgId,
@@ -48,7 +48,7 @@ const SkillDetailPage = ({ params: { orgId, skillId } }: Props) => {
 
   return (
     <div>
-      {data.map((item) => (
+      {skillDetails.map((item) => (
         <div
           key={item.label}
           className="mb-2 flex flex-col rounded-xl bg-gray-100 p-4 lg:flex-row lg:justify-between"

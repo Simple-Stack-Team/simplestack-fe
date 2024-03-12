@@ -1,16 +1,16 @@
 export interface SessionTypes {
-  expires: string;
-  user?: {
+  user: {
     access_token: string;
+    user: {
+      sub: string;
+      email: string;
+      name: string;
+      roles: string[];
+      orgId: string;
+    };
     exp: number;
     iat: number;
     jti: string;
-    user: {
-      email: string;
-      name: string;
-      orgId: string;
-      roles: string[];
-      sub: string;
-    };
   };
+  expires: string;
 }

@@ -20,9 +20,8 @@ const DeleteModal = ({ handleDelete }: Props) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger className="w-full">
-        <div className="flex w-full items-center gap-2 px-2 py-1 text-red-500 hover:bg-slate-100">
+        <div className="w-fit px-2 py-1 text-red-500 hover:bg-slate-100">
           <Trash2 size={16} />
-          <span className="text-sm">Delete</span>
         </div>
       </AlertDialogTrigger>
       <AlertDialogContent>
