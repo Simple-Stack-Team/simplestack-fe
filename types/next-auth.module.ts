@@ -1,4 +1,4 @@
-declare module "next-auth" {
+declare module "next-auth/jwt" {
   export interface User {
     sub: string;
     email: string;
