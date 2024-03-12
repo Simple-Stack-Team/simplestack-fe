@@ -59,7 +59,7 @@ export const sidebarLinks: Sidebar[] = [
     ],
   },
   {
-    href: "/dashboard/skill",
+    href: "/dashboard/skills",
     label: "Skill Assignment",
     icon: (
       <MdOutlineAssignmentTurnedIn
@@ -86,7 +86,7 @@ export const sidebarLinks: Sidebar[] = [
     roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
   },
   {
-    href: "/dashboard/project",
+    href: "/dashboard/projects",
     label: "Project ",
     icon: <GoProject className={style} style={{ fontSize: "19px" }} />,
     roles: [
