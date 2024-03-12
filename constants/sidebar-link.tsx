@@ -59,7 +59,7 @@ export const sidebarLinks: Sidebar[] = [
     ],
   },
   {
-    href: "/dashboard/skills",
+    href: "/dashboard/skillassignment",
     label: "Skill Assignment",
     icon: (
       <LuFileCheck

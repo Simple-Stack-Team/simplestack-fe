@@ -5,6 +5,7 @@ import { columns } from "./columns";
 import { DataTable } from "@/components/data-table";
 import useFetch from "@/hooks/useFetch";
 import { useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 interface Props {
   params: { orgId: string };
