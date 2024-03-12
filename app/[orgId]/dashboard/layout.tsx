@@ -47,7 +47,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Sidebar
           isOpen={isSidebarOpen}
           toggleSidebar={toggleSidebar}
-          handleClick={handleClick}
         />
         <div className={`m-2 ${sidebarStyle}`}>
           {/* Navbar */}
