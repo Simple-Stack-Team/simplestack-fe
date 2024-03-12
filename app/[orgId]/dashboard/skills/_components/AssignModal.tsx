@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { CopyPlus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -79,7 +80,10 @@ export function AssignModal({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div>Assign skill</div>
+        <div className="flex cursor-pointer items-center gap-2">
+          <CopyPlus size={16} />
+          <div>Assign skill</div>
+        </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

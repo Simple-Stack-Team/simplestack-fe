@@ -19,6 +19,24 @@ export const columns: ColumnDef<Skills>[] = [
     },
   },
   {
+    accessorKey: "departmentIds",
+    header: "",
+    cell: () => {
+      return <></>;
+    },
+    filterFn: "arrIncludesSome",
+  },
+  {
+    accessorKey: "authorId",
+    header: "",
+    cell: () => {
+      return <></>;
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.original.authorId);
+    },
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
       const skill = row.original;

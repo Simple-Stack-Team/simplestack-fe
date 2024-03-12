@@ -2,14 +2,13 @@
 
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { Table } from "@tanstack/react-table";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-import { statuses } from "./data";
 import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { DataTableFacetedFilterLocal } from "./data-table-filter-local";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -29,6 +28,8 @@ export function DataTableToolbar<TData>({
 
   //@ts-ignore
   const orgId = session?.user?.user.orgId;
+  //@ts-ignore
+  const empId = session?.user?.user.sub;
 
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
   const url = `${apiKey}/organizations/${orgId}/skills/skill-categories`;
@@ -48,6 +49,7 @@ export function DataTableToolbar<TData>({
       });
 
       if (!res.ok) return null;
+
       const data = await res.json();
       setCategories(data);
     }
@@ -67,10 +69,10 @@ export function DataTableToolbar<TData>({
   }
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="mb-4 flex items-center justify-between overflow-auto">
       <div className="flex flex-1 items-center space-x-2">
         <Input
-          placeholder="Filter tasks..."
+          placeholder="Filter names..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
@@ -84,13 +86,25 @@ export function DataTableToolbar<TData>({
             options={categoriesList}
           />
         )}
-        {/* {table.getColumn("priority") && (
-          <DataTableFacetedFilter
-            column={table.getColumn("priority")}
-            title="Priority"
-            options={priorities}
+        {table.getColumn("departmentIds") && (
+          <DataTableFacetedFilterLocal
+            column={table.getColumn("departmentIds")}
+            title=""
+            options={[
+              {
+                value: "65e8e30cc837b4b060c16549",
+                label: "Skills in your department",
+              },
+            ]}
           />
-        )} */}
+        )}
+        {table.getColumn("authorId") && (
+          <DataTableFacetedFilterLocal
+            column={table.getColumn("authorId")}
+            title=""
+            options={[{ value: empId, label: "Created by you" }]}
+          />
+        )}
         {isFiltered && (
           <Button
             variant="ghost"

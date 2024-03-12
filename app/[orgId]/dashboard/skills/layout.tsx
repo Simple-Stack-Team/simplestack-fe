@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import React, { useEffect } from "react";
+
+import { Button } from "@/components/ui/button";
+import Menubar from "./_components/Menubar";
 
 export default function SkillPageLayout({
   children,
@@ -19,12 +20,7 @@ export default function SkillPageLayout({
           <Link href={`/${orgId}/dashboard/skills/new`}>New skill</Link>
         </Button>
       </div>
-      <div className="mb-8 space-x-4">
-        <Link href={`/${orgId}/dashboard/skills/`}>View</Link>
-        <Link href={`/${orgId}/dashboard/skills/viewskillcategories`}>
-          Categories
-        </Link>
-      </div>
+      <Menubar />
       {children}
     </div>
   );
