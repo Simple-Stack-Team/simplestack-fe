@@ -1,6 +1,5 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
-import ProjectsTable from "./ProjectTable";
 import ActionsTable from "./ActionsTable";
 
 interface Projects {
@@ -21,9 +20,12 @@ export const columns: ColumnDef<Projects>[] = [
     accessorKey: "period",
     header: "Period",
     cell: ({ row }) => {
-      const period = row.original.period;
+      const periodTable = row.original.period;
 
-      return <div>{period}</div>;
+      return <div>{periodTable}</div>;
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
     },
   },
   {
@@ -52,6 +54,9 @@ export const columns: ColumnDef<Projects>[] = [
       const status = row.original.status;
       return <div>{status}</div>;
     },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
   },
   {
     id: "actions",
@@ -59,9 +64,12 @@ export const columns: ColumnDef<Projects>[] = [
       const project = row.original;
 
       return (
-        <div>
-          <ActionsTable name={project.name} projectId={project.id} />
-        </div>
+        <ActionsTable
+          name={project.name}
+          projectId={project.id}
+          period={project.period}
+          status={project.status}
+        />
       );
     },
   },

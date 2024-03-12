@@ -28,7 +28,11 @@ const ProjectsPage = ({ params: { orgId } }: Props) => {
             </div>
           ) : (
             <>
-              <DataTable columns={columns} data={projectsFetch} />
+              <DataTable
+                columns={columns}
+                data={projectsFetch}
+                showToolbar={true}
+              />
               <Toaster />
             </>
           )}

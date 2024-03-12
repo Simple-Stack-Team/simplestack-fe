@@ -22,9 +22,11 @@ import router from "next/router";
 type Props = {
   projectId: string;
   name: string;
+  period: string;
+  status: string;
 };
 
-const ActionsTable = ({ projectId }: Props) => {
+const ActionsTable = ({ projectId, name, period, status }: Props) => {
   const { data: session } = useSession();
   const { orgId, id } = useParams();
   const path = usePathname();
