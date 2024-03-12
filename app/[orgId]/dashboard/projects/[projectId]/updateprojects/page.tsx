@@ -25,6 +25,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useEffect, useState } from "react";
 type TeamRole = {
   teamroleId: string;
   nrOfMembers: number;
@@ -102,28 +103,55 @@ const formSchema = z.object({
 const CreateProject = () => {
   const { data: session } = useSession();
   const router = useRouter();
+  const { projectId } = useParams();
+  const [project, setProject] = useState<ProjectFormValues | null>(null);
+
+  const { orgId } = useParams();
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/projects/${projectId}`;
+
+  //@ts-ignore
+  const token = session?.user?.access_token;
 
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      period: "",
-      startDate: "",
-      deadlineDate: "",
-      status: "",
-      description: "",
-      technologyStack: [],
-      teamRoles: [
-        {
-          teamroleId: "",
-          nrOfMembers: 0,
-        },
-      ],
+      name: project?.name,
+      period: project?.period,
+      startDate: project?.startDate,
+      deadlineDate: project?.deadlineDate,
+      status: project?.status,
+      description: project?.description,
+      technologyStack: project?.technologyStack,
+      teamRoles: project?.teamRoles,
     },
   });
 
-  const { orgId } = useParams();
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/projects`;
+  useEffect(() => {
+    async function getProjectsDetails() {
+      try {
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          console.log("API Response:", data);
+          setProject(data);
+          form.reset(data);
+        } else {
+          console.error(res.status);
+        }
+      } catch (error) {
+        console.error("Error fetching project details:", error);
+      }
+    }
+
+    getProjectsDetails();
+  }, [url, token, form]);
 
   async function onSubmit(values: ProjectFormValues) {
     if (!session) return null;
@@ -140,21 +168,17 @@ const CreateProject = () => {
       body: JSON.stringify(values),
     });
     console.log(values);
-    if (!res.ok) {
-      return null;
-    } else router.refresh();
+
+    if (res.ok) {
+      router.refresh();
+      router.push(`/${orgId}/dashboard/projects`);
+    }
   }
   return (
-    <div className="flex justify-between">
-      <h1 className="mb-4 text-xl font-semibold">Project</h1>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button>New</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle className="">Create a new project</DialogTitle>
-          </DialogHeader>
+    <div className="flex justify-center ">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-xl ">Update Projects:</h1>
+        {project && (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="">
               <div className="flex flex-row gap-4">
@@ -165,7 +189,7 @@ const CreateProject = () => {
                     <FormItem>
                       <FormLabel>Project name</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input placeholder="name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -239,63 +263,13 @@ const CreateProject = () => {
                   </FormItem>
                 )}
               />{" "}
-              <FormField
-                control={form.control}
-                name="technologyStack"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Technology Stack</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        value={field.value.join(",")}
-                        onChange={(e) =>
-                          field.onChange(e.target.value.split(","))
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {""}
-              {form.getValues("teamRoles").map((_, index) => (
-                <div key={index}>
-                  <FormField
-                    control={form.control}
-                    name={`teamRoles.${index}.teamroleId` as const}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{`Team Role ${index + 1} - Roles`}</FormLabel>
-                        <FormControl>
-                          <Input {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name={`teamRoles.${index}.nrOfMembers` as const}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>{`Team Role ${index + 1} - Number of Members`}</FormLabel>
-                        <FormControl>
-                          <Input {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              ))}
-              <DialogTrigger asChild>
-                <Button type="submit">Create</Button>
-              </DialogTrigger>
+              <Button className="mt-3" type="submit">
+                Create
+              </Button>
             </form>
           </Form>
-        </DialogContent>
-      </Dialog>
+        )}
+      </div>
     </div>
   );
 };

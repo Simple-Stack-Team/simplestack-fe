@@ -17,7 +17,6 @@ import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useProjectStore } from "@/lib/store";
 import DeleteProject from "./DeleteProject";
-import router from "next/router";
 
 type Props = {
   projectId: string;
@@ -81,7 +80,11 @@ const ActionsTable = ({ projectId, name, period, status }: Props) => {
           className="space-x-2"
         >
           <Pencil size={16} />
-          <Link href={`/${orgId}/dashboard/projects/${projectId}`}>Update</Link>
+          <Link
+            href={`/${orgId}/dashboard/projects/${projectId}/updateprojects`}
+          >
+            Update
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Link href={`/${orgId}/dashboard/projects/${projectId}`}>
