@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} mx-auto max-w-[1540px]`}>
+      <body className={`${inter.className} mx-auto`}>
         <Toaster />
         <Provider>{children}</Provider>
       </body>
