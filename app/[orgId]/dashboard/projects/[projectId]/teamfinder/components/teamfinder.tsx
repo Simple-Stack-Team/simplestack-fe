@@ -15,9 +15,9 @@ export default function TeamFinder() {
   //@ts-ignore
   const token = session?.user?.access_token;
 
-  
   const onSubmit = async (values: any) => {
-    const url = `${process.env.NEXT_PUBLIC_API_URL!}/organizations/${orgId}/projects/${projectId}/teamfinder?includePartiallyAvailable=${values.includePartiallyAvailable}?includeCloseToFinish=${values.includeCloseToFinish}?includeUnavailable=${values.includeUnavailable}?includePastProjects=${values.includePastProjects}?deadlineWeeks=${values.deadlineWeeks}`;
+    // const url = `${process.env.NEXT_PUBLIC_API_URL!}/organizations/${orgId}/projects/${projectId}/teamfinder?includePartiallyAvailable=${values.includePartiallyAvailable}?includeCloseToFinish=${values.includeCloseToFinish}?includeUnavailable=${values.includeUnavailable}?includePastProjects=${values.includePastProjects}?deadlineWeeks=${values.deadlineWeeks}`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL!}/organizations/${orgId}/projects/${projectId}/teamfinder?includePartiallyAvailable=${values.includePartiallyAvailable}&includeCloseToFinish=${values.includeCloseToFinish}&includeUnavailable=${values.includeUnavailable}&includePastProjects=${values.includePastProjects}&deadlineWeeks=${values.deadlineWeeks}`;
     setLoading(true)
     const res = await fetch(url, {
       headers: {
