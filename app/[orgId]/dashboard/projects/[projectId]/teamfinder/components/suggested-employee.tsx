@@ -1,7 +1,7 @@
-import { SuggestedEmployee, PersonalSkill } from "@/app/[orgId]/dashboard/projects/[projectId]/teamfinder/types/teamfinder-types"
+import { SuggestedEmployee, PersonalSkill } from "@/app/[orgId]/dashboard/projects/[projectId]/types/teamfinder-types"
 import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
+import { ProposeEmployee } from "@/app/[orgId]/dashboard/projects/[projectId]/teamfinder/components/propose"
 
 interface Props {
   employee: SuggestedEmployee
@@ -13,7 +13,7 @@ export const SuggestedEmployeeCard = ({ employee }: Props) => {
       <CardHeader className="p-4">
         <div className="flex justify-between align-middle">
           <h3 className="text-slate-800 font-semibold text-2xl">{employee.name}</h3>
-          <Button variant="outline">Propose</Button>
+          <ProposeEmployee employee={employee}/>
         </div>
       </CardHeader>
       

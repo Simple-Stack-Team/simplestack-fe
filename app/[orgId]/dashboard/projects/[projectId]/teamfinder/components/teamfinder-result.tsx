@@ -1,6 +1,6 @@
 'use client'
 
-import { SuggestedEmployee } from "@/app/[orgId]/dashboard/projects/[projectId]/teamfinder/types/teamfinder-types"
+import { SuggestedEmployee } from "@/app/[orgId]/dashboard/projects/[projectId]/types/teamfinder-types"
 import { SuggestedEmployeeCard } from "@/app/[orgId]/dashboard/projects/[projectId]/teamfinder/components/suggested-employee"
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export default function TeamFinderResult({data}: Props) {
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-4">Results</h1>
+      {data.length > 0 && <h1 className="text-2xl font-bold mb-4">Results</h1>}
       <div className="grid gap-4 grid-cols-3 grid-rows-3">
         {data.map((user: SuggestedEmployee)=> <SuggestedEmployeeCard employee={user} key={user.id} /> )}
       </div>
