@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { TeamFinderForm } from './teamfinder-form'
-import TeamFinderResult from './teamfinder-result'
 import { useParams } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+
+import { TeamFinderForm } from '@/app/[orgId]/dashboard/projects/[projectId]/teamfinder/components/teamfinder-form'
+import TeamFinderResult from '@/app/[orgId]/dashboard/projects/[projectId]/teamfinder/components/teamfinder-result'
 
 export default function TeamFinder() {
   const [data, setData] = useState<any>([])
@@ -16,7 +17,6 @@ export default function TeamFinder() {
   const token = session?.user?.access_token;
 
   const onSubmit = async (values: any) => {
-    // const url = `${process.env.NEXT_PUBLIC_API_URL!}/organizations/${orgId}/projects/${projectId}/teamfinder?includePartiallyAvailable=${values.includePartiallyAvailable}?includeCloseToFinish=${values.includeCloseToFinish}?includeUnavailable=${values.includeUnavailable}?includePastProjects=${values.includePastProjects}?deadlineWeeks=${values.deadlineWeeks}`;
     const url = `${process.env.NEXT_PUBLIC_API_URL!}/organizations/${orgId}/projects/${projectId}/teamfinder?includePartiallyAvailable=${values.includePartiallyAvailable}&includeCloseToFinish=${values.includeCloseToFinish}&includeUnavailable=${values.includeUnavailable}&includePastProjects=${values.includePastProjects}&deadlineWeeks=${values.deadlineWeeks}`;
     setLoading(true)
     const res = await fetch(url, {

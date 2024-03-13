@@ -1,4 +1,5 @@
 "use client";
+
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -43,7 +44,7 @@ const ProjectDetailsView: React.FC = () => {
 
     getProjectsDetails();
   }, [url, token]);
-  console.log(projectsDetails);
+
   if (!projectsDetails) {
     return <div>Loading...</div>;
   }
