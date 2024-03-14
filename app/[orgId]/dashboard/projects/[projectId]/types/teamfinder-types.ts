@@ -41,6 +41,14 @@ export interface Assignment {
   project: Project;
 }
 
+export interface Deallocation {
+  id: string;
+  reason: string;
+  employee: Employee;
+  employeeId: string
+  project: Project;
+}
+
 export interface Project {
   id: string;
   name: string;
