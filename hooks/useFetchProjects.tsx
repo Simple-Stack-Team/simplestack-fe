@@ -17,7 +17,6 @@ const useFetchProjects = (orgId: string): DataResult => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   useEffect(() => {

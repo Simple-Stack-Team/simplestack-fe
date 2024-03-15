@@ -7,7 +7,6 @@ const SigninPage = async () => {
   const session = await getServerSession(authOption);
 
   if (session) {
-    //@ts-ignore
     const orgId = session?.user?.user.orgId;
     redirect(`/${orgId}/dashboard`);
   }

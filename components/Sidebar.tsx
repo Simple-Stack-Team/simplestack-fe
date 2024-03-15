@@ -17,7 +17,6 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   const { data: session } = useSession();
-  //@ts-ignore
   const orgId = session?.user?.user.orgId;
   const [activeLink, setActiveLink] = useState("/dashboard");
 
@@ -43,7 +42,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                       onClick={() => {
                         setActiveLink(link.href);
                         toggleSidebar();
-                        // Close the sidebar when a link is clicked
                       }}
                     >
                       <div

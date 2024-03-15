@@ -26,15 +26,12 @@ export function DataTableToolbar<TData>({
 
   const isFiltered = table.getState().columnFilters.length > 0;
 
-  //@ts-ignore
   const orgId = session?.user?.user.orgId;
-  //@ts-ignore
-  const empId = session?.user?.user.sub;
+  const empId = session?.user?.user.sub!;
 
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
   const url = `${apiKey}/organizations/${orgId}/skills/skill-categories`;
 
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   useEffect(() => {

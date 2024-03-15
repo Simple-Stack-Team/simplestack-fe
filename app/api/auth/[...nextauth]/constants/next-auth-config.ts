@@ -38,15 +38,14 @@ export const authOption: NextAuthOptions = {
   secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/auth/signin",
-    // signOut: "/auth/signout",
-    // error: "/auth/error",
   },
   callbacks: {
     async jwt({ token, user }) {
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.user = token as any;
+      //@ts-ignore
+      session.user = token;
       return session;
     },
   },

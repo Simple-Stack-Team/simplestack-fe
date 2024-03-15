@@ -48,7 +48,6 @@ const UpdateSkillPage = () => {
 
   const { data } = useFetch({ apiKey, url });
 
-  //@ts-ignore
   const authorName = session?.user?.user.name;
   console.log(session);
 
@@ -65,9 +64,7 @@ const UpdateSkillPage = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (status === "loading") return;
 
-    //@ts-ignore
     const token = session?.user?.access_token;
-    //@ts-ignore
     const authorId = session?.user?.user.sub;
 
     try {

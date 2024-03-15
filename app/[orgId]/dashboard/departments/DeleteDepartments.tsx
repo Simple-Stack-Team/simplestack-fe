@@ -22,7 +22,7 @@ const DeleteDepartments = ({ onDelete }: Props) => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <div className="flex items-center gap-2 text-red-500">
+          <div className="flex w-full cursor-pointer items-center gap-2 text-red-500">
             <Trash2 size={16} />
             Delete
           </div>

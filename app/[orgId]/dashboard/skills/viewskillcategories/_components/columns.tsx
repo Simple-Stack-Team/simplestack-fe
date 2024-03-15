@@ -13,16 +13,14 @@ export const columns: ColumnDef<Category>[] = [
     header: "Name",
   },
   {
-    accessorKey: "id",
-    header: "Id",
-  },
-  {
     id: "actions",
     cell: ({ row }) => {
       const categoryName = row.original.name;
       const categoryId = row.original.id;
 
-      return <TableActions categoryName={categoryName} categoryId={categoryId} />;
+      return (
+        <TableActions categoryName={categoryName} categoryId={categoryId} />
+      );
     },
   },
 ];

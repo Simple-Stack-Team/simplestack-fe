@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 interface Employee {
@@ -18,11 +17,8 @@ const AssignMemberToDepartment = ({ empId }: { empId: string }) => {
   const { status, data: session } = useSession();
   const router = useRouter();
 
-  //@ts-ignore
   const employeeId = session?.user?.user.sub;
-  //@ts-ignore
   const orgId = session?.user?.user.orgId;
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   const url = `${process.env.NEXT_PUBLIC_API_URL!}/organizations/${orgId}/employees/${employeeId}/employee`;
@@ -71,9 +67,9 @@ const AssignMemberToDepartment = ({ empId }: { empId: string }) => {
   };
 
   return (
-    <Button variant="ghost" size="icon" onClick={assignMember}>
+    <div onClick={assignMember}>
       <Plus className="h-4 w-4" />
-    </Button>
+    </div>
   );
 };
 

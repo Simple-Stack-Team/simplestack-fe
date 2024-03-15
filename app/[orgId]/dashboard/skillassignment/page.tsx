@@ -17,13 +17,11 @@ export default async function SkillAssignmentPage({
 }: Props) {
   const url = `/organizations/${orgId}/skills`;
   const data = await getData(url);
-  console.log(data)
 
   const session = await getServerSession(authOption);
 
   if (!session) return;
 
-  //@ts-ignore
   const empId = session?.user?.user.sub;
 
   const userSkills = await getData(

@@ -8,7 +8,6 @@ export async function getData(url: string) {
 
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
 
-  // @ts-ignore
   const token = session?.user?.access_token;
 
   const res = await fetch(`${apiKey}${url}`, {

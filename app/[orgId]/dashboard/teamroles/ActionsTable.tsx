@@ -29,8 +29,7 @@ const ActionsTable = ({ teamRoleId, name }: Props) => {
   const { orgId } = useParams();
   const { data: session } = useSession();
 
-  // @ts-ignore
-  const token = session?.user?.access_token;
+  const token = session?.user?.access_token!;
 
   const deleteTeamRoles = useTeamRoleStore((state) => state.deleteTeamRoles);
 
@@ -53,7 +52,7 @@ const ActionsTable = ({ teamRoleId, name }: Props) => {
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end"> 
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <Dialog>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>

@@ -59,7 +59,6 @@ const AssignSkillPage = () => {
   });
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
-    //@ts-ignore
     const token = session?.user?.access_token;
 
     const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/skills/assign-skill`;
