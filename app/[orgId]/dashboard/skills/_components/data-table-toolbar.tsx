@@ -102,7 +102,7 @@ export function DataTableToolbar<TData>({
           <DataTableFacetedFilterLocal
             column={table.getColumn("authorId")}
             title=""
-            options={[{ value: empId, label: "Created by you" }]}
+            options={[{ value: empId!, label: "Created by you" }]}
           />
         )}
         {isFiltered && (

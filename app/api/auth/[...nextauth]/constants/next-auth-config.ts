@@ -1,3 +1,4 @@
+import { SessionTypes } from "@/types/SessionTypes";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -45,7 +46,7 @@ export const authOption: NextAuthOptions = {
       return { ...token, ...user };
     },
     async session({ session, token, user }) {
-      session.user = token;
+      session.user = token as any;
       return session;
     },
   },

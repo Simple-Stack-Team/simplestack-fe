@@ -12,7 +12,7 @@ const DeleteCategory = ({ categoryId }: { categoryId: string }) => {
   const router = useRouter();
 
   // @ts-ignore
-  const token = session?.user?.access_token;
+  const token = session?.user?.access_token!;
 
   const handleDelete = async () => {
     const apiKey = process.env.NEXT_PUBLIC_API_URL;
