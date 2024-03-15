@@ -38,7 +38,7 @@ const ActionsTable = ({ teamRoleId, name }: Props) => {
     const url = `${apiKey}/organizations/${orgId}/teamroles/${teamRoleId}`;
 
     try {
-      const response = await onDelete(url, token, teamRoleId);
+      const response = await onDelete(url, token!, teamRoleId);
       deleteTeamRoles(teamRoleId);
     } catch (error) {
       console.error(error);

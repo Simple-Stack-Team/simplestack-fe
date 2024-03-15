@@ -1,3 +1,4 @@
+import { SessionTypes } from "@/types/SessionTypes";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
