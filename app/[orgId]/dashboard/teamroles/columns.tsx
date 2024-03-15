@@ -13,13 +13,11 @@ export const columns: ColumnDef<TeamRoles>[] = [
     header: "Name",
   },
   {
-    accessorKey: "id",
-    header: "Id",
-  },
-  {
     id: "actions",
     cell: ({ row }) => {
       const teamrole = row.original;
+
+      console.log(teamrole);
 
       return (
         <div>

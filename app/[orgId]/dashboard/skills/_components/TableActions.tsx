@@ -38,7 +38,6 @@ const TableActions = ({
   const { orgId } = useParams();
   const { data: session } = useSession();
 
-  // @ts-ignore
   const id = session?.user?.user.sub;
   console.log(id);
   console.log(authorId);
@@ -52,13 +51,10 @@ const TableActions = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        {authorId === id && (
-          <Dialog>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
-              <DeleteSkill skillId={skillId} authorId={authorId} />
-            </DropdownMenuItem>
-          </Dialog>
-        )}
+
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+          <AssignModal authorId={authorId} skillId={skillId} skill={name} />
+        </DropdownMenuItem>
         {authorId === id && (
           <DropdownMenuItem
             onSelect={(e) => e.preventDefault()}
@@ -72,9 +68,13 @@ const TableActions = ({
             </Link>
           </DropdownMenuItem>
         )}
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <AssignModal authorId={authorId} skillId={skillId} skill={name} />
-        </DropdownMenuItem>
+        {authorId === id && (
+          <Dialog>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
+              <DeleteSkill skillId={skillId} authorId={authorId} />
+            </DropdownMenuItem>
+          </Dialog>
+        )}
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <Link
             href={`/${orgId}/dashboard/skills/${skillId}?des=${description}&authorId=${authorId}&name=${name}&frameworkid=${framework}&fname=${fname}`}

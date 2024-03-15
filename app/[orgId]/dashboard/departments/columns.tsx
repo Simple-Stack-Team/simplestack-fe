@@ -10,23 +10,8 @@ interface Departments {
 
 export const columns: ColumnDef<Departments>[] = [
   {
-    accessorKey: "id",
-    header: "Id",
-  },
-  {
     accessorKey: "name",
     header: "Name",
-  },
-  {
-    accessorKey: "managerId",
-    header: "Manager Id",
-    cell: ({ row }) => {
-      const hasManager = row.original.managerId;
-
-      return (
-        <div>{hasManager ? <div>{hasManager}</div> : <p>No Manager</p>}</div>
-      );
-    },
   },
   {
     accessorKey: "createdAt",
@@ -42,6 +27,7 @@ export const columns: ColumnDef<Departments>[] = [
     id: "actions",
     cell: ({ row }) => {
       const department = row.original;
+      console.log(department);
 
       return (
         <div>

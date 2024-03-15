@@ -23,17 +23,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      const newIsMobile = window.innerWidth <= 780; // Adjust the width as needed
+      const newIsMobile = window.innerWidth <= 780;
       setIsMobile(newIsMobile);
     };
 
-    // Initial check on mount
     handleResize();
 
-    // Add event listener for window resize
     window.addEventListener("resize", handleResize);
 
-    // Cleanup the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -55,7 +52,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               />
             )}
           </div>
-          {/* Content */}
           <div
             className={`relative z-10 min-h-screen rounded-xl border-2 border-[#eee] bg-white p-4 ${
               isSidebarOpen ? "ml-0" : "m-2"
@@ -65,8 +61,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               left: isSidebarOpen && isMobile ? "100%" : "0",
             }}
           >
-            {/* Pass the handleClick function to Sidebar */}
-
             {children}
           </div>
         </div>

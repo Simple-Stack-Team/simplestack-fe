@@ -23,7 +23,6 @@ interface PageProps {
 const TableRowActions: FC<PageProps> = ({ skillId, skillname }) => {
   const { data: session } = useSession();
 
-  //@ts-ignore
   const empId = session?.user.user.sub;
   const { orgId } = useParams();
 
@@ -31,20 +30,23 @@ const TableRowActions: FC<PageProps> = ({ skillId, skillname }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-8 w-8 p-0">
-          <span className="sr-only">Open menu</span>
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Link href={`/${orgId}/dashboard/skillassignment/${skillId}`}>
-            View more
+          <Link
+            href={`/${orgId}/dashboard/skillassignment/${skillId}`}
+            className="w-full"
+          >
+            View details
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <Link
             href={`/${orgId}/dashboard/skillassignment/${skillId}/assignskill?empId=${empId}&skillname=${skillname}`}
+            className="w-full"
           >
             Assign skill
           </Link>

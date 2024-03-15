@@ -63,11 +63,11 @@ const AssignMember = () => {
   let url = `/organizations/${orgId}/employees`;
   const { data } = useFetch({ apiKey, url });
 
-  //@ts-ignore
   const token = session?.user?.access_token;
 
+  console.log(department);
+
   useEffect(() => {
-    //@ts-ignore
     if (!session) return;
 
     const url = `${apiKey}/organizations/${orgId}/departments/${departmentId}`;
@@ -93,8 +93,7 @@ const AssignMember = () => {
       user.roles.includes("DEPARTMENT_MANAGER") && user.managerAt === null,
   );
 
-  //@ts-ignore
-  const createAt = new Date(department?.createdAt);
+  const createAt = new Date(department?.createdAt!);
 
   const handleSumbit = async () => {
     if (!value) return null;

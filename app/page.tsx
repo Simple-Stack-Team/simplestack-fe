@@ -10,7 +10,6 @@ import SponsorsSection from "@/components/SponsorSection";
 export default async function HelloWorld() {
   const session = await getServerSession(authOption);
 
-  //@ts-ignore
   const orgId = session?.user.user.orgId;
   if (session) redirect(`/${orgId}/dashboard`);
 

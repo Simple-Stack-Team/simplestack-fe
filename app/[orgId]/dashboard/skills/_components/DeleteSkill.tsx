@@ -34,7 +34,6 @@ const DeleteSkill = ({ skillId, authorId }: Props) => {
 
     if (status === "loading") return;
 
-    //@ts-ignore
     const token = session?.user?.access_token;
 
     const res = await fetch(url, {

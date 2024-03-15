@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Employee } from "@/types/Employee";
 import DropdownMenuEmployee from "./DropdownMenuEmployee";
 import { DataTableColumnHeader } from "./ColumnHeader";
+import { Dice1 } from "lucide-react";
 
 const roleStyles = {
   ORGANIZATION_ADMIN: {
@@ -45,25 +46,34 @@ export const columns: ColumnDef<Employee>[] = [
 
       return (
         <div className="flex gap-1">
-          {employeeRoles.map((role, index) => {
-            const { className, label } = roleStyles[role] || roleStyles.DEFAULT;
-            return (
-              <div
-                key={index}
-                className={`
-                  text-nowrap
-                  rounded-full
-                  border-[1.5px]
-                  px-2
-                  py-[1px]
-                  text-xs
-                  font-medium
-                  ${className}`}
-              >
-                {label}
-              </div>
-            );
-          })}
+          {employeeRoles.map((role, index) => (
+            <div
+              key={index}
+              className="rounded-full border border-slate-300 px-2"
+            >
+              {role === "ORGANIZATION_ADMIN" ? (
+                <div className="flex items-center gap-[6px]">
+                  <div className="aspect-square h-2 rounded-full bg-green-400"></div>
+                  <span>Admin</span>
+                </div>
+              ) : role === "DEPARTMENT_MANAGER" ? (
+                <div className="flex items-center gap-[6px]">
+                  <div className="aspect-square h-2 rounded-full bg-blue-400"></div>
+                  <span>Department manager</span>
+                </div>
+              ) : role === "PROJECT_MANAGER" ? (
+                <div className="flex items-center gap-[6px]">
+                  <div className="aspect-square h-2 rounded-full bg-red-400"></div>
+                  <span>Project manager</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-[6px]">
+                  <div className="aspect-square h-2 rounded-full bg-gray-400"></div>
+                  <span>Employee</span>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       );
     },

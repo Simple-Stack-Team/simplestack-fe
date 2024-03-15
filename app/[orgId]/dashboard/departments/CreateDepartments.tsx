@@ -50,7 +50,6 @@ const CreateDepartments = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!session) return null;
 
-    // @ts-ignore
     const token = session.user?.access_token;
 
     const res = await fetch(url, {

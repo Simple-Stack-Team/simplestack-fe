@@ -12,11 +12,8 @@ const DeleteSkill = ({ id }: { id: string }) => {
 
   if (!session) return;
 
-  // @ts-ignore
   const orgId = session?.user.user.orgId;
-  //@ts-ignore
   const empId = session?.user.user.sub;
-  // @ts-ignore
   const token = session?.user?.access_token;
 
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;

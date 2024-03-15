@@ -42,7 +42,6 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
     (state) => state.updateEmployeeRoles,
   );
 
-  // @ts-ignore
   const currentUser = session?.user?.user.sub;
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
@@ -51,7 +50,6 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
         return;
       }
 
-      // @ts-ignore
       const token = session.user?.access_token;
       const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/employees/assign-roles/${employeeId}`;
 

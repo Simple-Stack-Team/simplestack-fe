@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, UserPlus } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { usePathname } from "next/navigation";
@@ -29,7 +29,6 @@ const ActionsTable = ({ departmentId, name }: Props) => {
   const { orgId } = useParams();
   const path = usePathname();
 
-  // @ts-ignore
   const token = session?.user?.access_token;
 
   const deleteDepartment = useDepartmentStore(
@@ -66,16 +65,20 @@ const ActionsTable = ({ departmentId, name }: Props) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+          <Link
+            href={`${path}/assignmanager?depId=${departmentId}`}
+            className="flex w-full items-center gap-2"
+          >
+            <UserPlus size={16} />
+            Assign manager
+          </Link>
+        </DropdownMenuItem>
         <Dialog>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
             <UpdateDepartment name={name} departmentId={departmentId} />
           </DropdownMenuItem>
         </Dialog>
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Link href={`${path}/assignmanager?depId=${departmentId}`}>
-            Assign
-          </Link>
-        </DropdownMenuItem>
         <DeleteDepartments onDelete={onDelete} />
       </DropdownMenuContent>
     </DropdownMenu>

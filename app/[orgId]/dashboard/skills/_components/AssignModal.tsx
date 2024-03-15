@@ -37,7 +37,6 @@ export function AssignModal({
   const { orgId } = useParams();
   const base_url = process.env.NEXT_PUBLIC_API_URL;
 
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   useEffect(() => {

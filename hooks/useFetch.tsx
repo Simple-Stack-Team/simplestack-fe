@@ -25,7 +25,6 @@ const useFetch = ({ apiKey, url }: Props): DataResult => {
 
   const { status, data: session } = useSession();
 
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   useEffect(() => {

@@ -18,13 +18,10 @@ const DeleteMemberFromDepartment = ({
   const { status, data: session } = useSession();
   const router = useRouter();
 
-  //@ts-ignore
   const orgId = session?.user?.user.orgId;
-  //@ts-ignore
   const currentEmployee = session?.user?.user.sub;
 
   if (status === "loading") return;
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   const assignMember = async () => {
