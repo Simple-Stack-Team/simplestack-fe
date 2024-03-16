@@ -21,9 +21,14 @@ const ProjectsPage = ({ params: { orgId } }: Props) => {
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h1 className="text-xl font-semibold">Projects</h1>
-        <Button asChild>
-          <Link href={`/${orgId}/dashboard/projects/new`}>New project</Link>
-        </Button>
+        <div className="flex justify-between gap-2">
+          <Button asChild>
+            <Link href={`/${orgId}/dashboard/projects/new`}>New project</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href={`/${orgId}/dashboard/projects/myprojects`}>My Projects</Link>
+          </Button>
+        </div>
       </div>
       {error ? (
         <div>{error}</div>
