@@ -13,7 +13,7 @@ import InputField from "@/components/InputField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { formSchema } from "@/app/signup/constants/signup-admin-constants";
-import page from "@/public/page.png";
+import global from "@/public/signup.png";
 
 const Register = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
@@ -46,7 +46,7 @@ const Register = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-1 px-8 lg:px-16 "
+            className="w-full space-y-1 px-8 lg:px-16"
           >
             <h1 className="mx-auto mb-4 max-w-[400px] text-2xl font-semibold">
               Create your account 👏
@@ -57,35 +57,35 @@ const Register = () => {
             )}
             <InputField
               name="name"
-              label="Name"
+              label="Name*"
               placeholder="Name"
               type="text"
               control={form.control}
             />
             <InputField
               name="email"
-              label="Email"
+              label="Email*"
               placeholder="Email"
               type="email"
               control={form.control}
             />
             <InputField
               name="password"
-              label="Password"
+              label="Password*"
               placeholder="Password"
               type="password"
               control={form.control}
             />
             <InputField
               name="organizationName"
-              label="Organization"
+              label="Organization*"
               placeholder="Organization"
               type="text"
               control={form.control}
             />
             <InputField
               name="headquarterAddress"
-              label="Address"
+              label="Address*"
               placeholder="Address"
               type="text"
               control={form.control}

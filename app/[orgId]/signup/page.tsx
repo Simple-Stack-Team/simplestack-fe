@@ -3,6 +3,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { z } from "zod";
 
 import SignUpEmployee from "@/components/SignUpEmployee";
@@ -12,6 +14,9 @@ import AlertMessage from "@/components/AlertMessage";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { formSchemaSignUp } from "@/app/[orgId]/signup/constants/signup-constants";
+import logo from "@/public/logoWhiteTheme.svg";
+// import global from "@/public/signup.png";
+import global from "@/public/gradient.svg";
 
 const SignupEmployee = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
@@ -42,45 +47,80 @@ const SignupEmployee = () => {
   }
 
   return (
-    <div className="flex items-center">
-      <div className="h-screen flex-1 bg-slate-300"></div>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="flex-1 space-y-2 p-8"
-        >
-          {error.status === 409 && (
-            <AlertMessage>The name already exist</AlertMessage>
-          )}
-          <SignUpEmployee
-            name="name"
-            label="Name"
-            placeholder="Name"
-            type="text"
-            control={form.control}
+    <div className="flex h-screen items-center justify-center">
+      <div>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-2 pb-4 lg:px-16"
+          >
+            <div className="mb-8 mt-4 flex items-center gap-2">
+              <Image src={logo} alt="Logo" width={32} />
+              <p className="font-bold">Simple Stack</p>
+            </div>
+            <h1 className="mb-4 text-3xl font-semibold">
+              Keep your online <br />
+              business organized
+            </h1>
+            <p className="text-xs font-medium text-gray-500">
+              Sign up to start right now for free
+            </p>
+            {error.status === 409 && (
+              <AlertMessage>The name already exist</AlertMessage>
+            )}
+            <div className="space-y-2 pt-4">
+              <SignUpEmployee
+                name="name"
+                label="Name*"
+                placeholder="Name"
+                type="text"
+                control={form.control}
+              />
+              <SignUpEmployee
+                name="email"
+                label="Email*"
+                placeholder="Email"
+                type="email"
+                control={form.control}
+              />
+              <SignUpEmployee
+                name="password"
+                label="Password*"
+                placeholder="Password"
+                type="password"
+                control={form.control}
+              />
+            </div>
+            <div className="flex justify-center">
+              <Button
+                type="submit"
+                className="mb-4 mt-4 w-full max-w-[400px] text-xs"
+              >
+                Create Account
+              </Button>
+            </div>
+            <p className="text-xs font-medium text-gray-500">
+              Already have an account?{" "}
+              <Link
+                href={`/auth/signin`}
+                className="font-semibold text-slate-900"
+              >
+                Login Here
+              </Link>
+            </p>
+          </form>
+        </Form>
+      </div>
+      <div className="hidden h-screen flex-1 p-2 md:block">
+        <div className="h-full w-full overflow-hidden rounded-lg bg-violet-600">
+          <Image
+            src={global}
+            alt="Global connection"
+            quality={100}
+            style={{ width: "100%", height: "100vh", objectFit: "cover" }}
           />
-          <SignUpEmployee
-            name="email"
-            label="Email"
-            placeholder="Email"
-            type="email"
-            control={form.control}
-          />
-          <SignUpEmployee
-            name="password"
-            label="Password"
-            placeholder="Password"
-            type="password"
-            control={form.control}
-          />
-
-          <div className="flex justify-center">
-            <Button type="submit" className="mt-4 w-full max-w-[400px]">
-              Register
-            </Button>
-          </div>
-        </form>
-      </Form>
+        </div>
+      </div>
     </div>
   );
 };
