@@ -1,35 +1,6 @@
 "use client";
 import { ColumnDef } from "@tanstack/react-table";
 import ActionsTable from "./ActionsTable";
-import {
-  CheckCircledIcon,
-  CircleIcon,
-  QuestionMarkCircledIcon,
-  StopwatchIcon,
-} from "@radix-ui/react-icons";
-
-export const statuss = [
-  {
-    value: "Libraries",
-    label: "Libraries",
-    icon: QuestionMarkCircledIcon,
-  },
-  {
-    value: "PROJECT_MANAGER",
-    label: "Project Manager",
-    icon: CircleIcon,
-  },
-  {
-    value: "DEPARTMENT_MANAGER",
-    label: "Department Manager",
-    icon: StopwatchIcon,
-  },
-  {
-    value: "EMPLOYEE",
-    label: "Employee",
-    icon: CheckCircledIcon,
-  },
-];
 
 interface Projects {
   id: string;
@@ -71,8 +42,11 @@ export const columns: ColumnDef<Projects>[] = [
     header: "Deadline Date",
     cell: ({ row }) => {
       const deadlineDate = new Date(row.original.deadlineDate);
+      const year = deadlineDate.getFullYear();
+      if (year < 2022) {
+        return null; // Nu afișa nimic dacă anul este mai mic decât 2000
+      }
       const formatedDate = deadlineDate.toLocaleDateString();
-
       return <div>{formatedDate}</div>;
     },
   },
