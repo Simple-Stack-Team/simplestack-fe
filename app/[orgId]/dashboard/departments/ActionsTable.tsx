@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreHorizontal, UserPlus } from "lucide-react";
+import { MoreHorizontal, UserPlus, FilesIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { usePathname } from "next/navigation";
@@ -65,6 +65,15 @@ const ActionsTable = ({ departmentId, name }: Props) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+          <Link
+            href={`${path}/${departmentId}/projects`}
+            className="flex w-full items-center gap-2"
+          >
+            <FilesIcon size={16} />
+            View projects
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <Link
             href={`${path}/assignmanager?depId=${departmentId}`}
