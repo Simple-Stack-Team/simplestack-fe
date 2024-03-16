@@ -331,6 +331,7 @@ const CreateProject = ({ params: { orgId } }: Props) => {
                   <FormField
                     control={form.control}
                     name={`teamRoles.${index}.teamroleId`}
+                    key={item.id}
                     render={({ field }) => (
                       <div key={item.id} className="flex items-center gap-2">
                         <Select

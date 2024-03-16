@@ -396,6 +396,7 @@ const CreateProject = ({ params: { orgId, projectId } }: Props) => {
               {teamRolesFields.map((item, index) => {
                 return (
                   <FormField
+                    key={item.id}
                     control={form.control}
                     name={`teamRoles.${index}.teamroleId`}
                     render={({ field }) => (
