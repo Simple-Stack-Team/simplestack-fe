@@ -1,3 +1,5 @@
+import { EmployeeProject } from "@/app/[orgId]/dashboard/projects/[projectId]/team-view/types/team-view-types";
+
 export interface Projects {
   id: string,
   name: string,
@@ -13,4 +15,5 @@ export interface Projects {
       nrOfMembers: 0,
     },
   ],
+  members: EmployeeProject[]
 }
