@@ -77,7 +77,7 @@ export const columns: ColumnDef<DepartmentMembers>[] = [
       const empId = row.original.id;
 
       return (
-        <TooltipProvider>
+        <TooltipProvider delayDuration={200}>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost">

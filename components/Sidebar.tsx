@@ -1,6 +1,6 @@
 "use client";
 
-import {useState} from "react";
+import { useState } from "react";
 import Link from "next/link";
 import classNames from "classnames";
 import { useSession } from "next-auth/react";
@@ -74,13 +74,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           className={`top-24  hidden md:fixed md:inset-0 md:flex md:w-[250px] md:flex-col md:p-4 ${isOpen ? "md:hidden" : ""} `}
         >
           <div className="m-2 flex w-full items-center gap-2">
-            <LuSearchCode className="mr-2 text-white bg-black p-1.5 rounded-md" size={35} />
-            <span className="text-2xl font-extrabold font-mono">Team Finder</span>
+            <LuSearchCode
+              className="mr-2 rounded-md bg-black p-1.5 text-white"
+              size={35}
+            />
+            <span className="font-mono text-2xl font-extrabold">
+              Team Finder
+            </span>
           </div>
           <div className="mt-10">
             {sidebarLinks.map((link) => (
               <RoleCheck roles={link.roles} key={link.label}>
-                <div className="w-full mb-1" key={link.label}>
+                <div className="mb-1 w-full" key={link.label}>
                   <Link href={`/${orgId}${link.href}`}>
                     <div
                       className={classNames({
@@ -94,8 +99,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                     >
                       <div
                         className={classNames({
-                          "relative flex cursor-pointer items-center gap-2 rounded-lg p-2 pl-2.5 text-[#686869] text-sm font-semibold": true,
-                          "!text-[#121212] !font-bold": activeLink === link.href,
+                          "relative flex cursor-pointer items-center gap-2 rounded-lg p-2 pl-2.5 text-sm font-semibold text-[#686869]":
+                            true,
+                          "!font-bold !text-[#121212]":
+                            activeLink === link.href,
                         })}
                       >
                         <div>{link.icon}</div>

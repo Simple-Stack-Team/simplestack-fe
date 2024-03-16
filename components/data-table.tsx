@@ -56,7 +56,7 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       {showToolbar && <DataTableToolbar table={table} />}
-      <div className="scroll-bar">
+      <div className="rounded-lg border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

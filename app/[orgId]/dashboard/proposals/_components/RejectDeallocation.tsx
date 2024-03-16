@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 interface Props {
-  assignmentId: string;
+  deallocationId: string;
 }
 
-const RejectProposal = ({ assignmentId }: Props) => {
+const RejectDeallocation = ({ deallocationId }: Props) => {
   const { data: session } = useSession();
   const { orgId } = useParams();
   const router = useRouter();
@@ -19,7 +19,7 @@ const RejectProposal = ({ assignmentId }: Props) => {
   if (!session) return;
   const token = session?.user.access_token;
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/projects/assignment-proposal/${assignmentId}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/projects/deallocation-proposal/${deallocationId}`;
 
   const rejectProposal = async () => {
     const res = await fetchRejectProposal(url, token);
@@ -44,4 +44,4 @@ const RejectProposal = ({ assignmentId }: Props) => {
   );
 };
 
-export default RejectProposal;
+export default RejectDeallocation;
