@@ -150,19 +150,10 @@ const CreateProject = ({ params: { orgId, projectId } }: Props) => {
     control,
   });
 
-  useEffect(() => {
-    if (data) {
-      setDataLoaded(true);
-    }
-  }, [data]);
-
-  const [dataLoaded, setDataLoaded] = useState(false);
-
   async function onSubmit(data: z.infer<typeof formSchema>) {
     const technologyStack = data.technologyStack
       .filter((el) => el.technology.length > 0)
       .map((el) => el.technology);
-    const latestTechnology = technologyStack[technologyStack.length - 1];
     data = {
       ...data,
       technologyStack: technologyStack as any,
@@ -190,13 +181,6 @@ const CreateProject = ({ params: { orgId, projectId } }: Props) => {
     }
     console.log(data);
   }
-  const [lastPeriod, setLastPeriod] = useState<string>("");
-
-  useEffect(() => {
-    if (project) {
-      setLastPeriod(project.period);
-    }
-  }, [project]);
   return (
     <Form {...form}>
       <form

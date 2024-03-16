@@ -86,14 +86,6 @@ const CreateProject = ({ params: { orgId } }: Props) => {
     control,
   });
 
-  useEffect(() => {
-    if (data) {
-      setDataLoaded(true);
-    }
-  }, [data]);
-
-  const [dataLoaded, setDataLoaded] = useState(false);
-
   const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/projects`;
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
