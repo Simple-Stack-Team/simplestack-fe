@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import React, { useEffect } from "react";
+import React from "react";
 
 export default function ProjectsPageLayout({
   children,
@@ -9,8 +7,6 @@ export default function ProjectsPageLayout({
   children: React.ReactNode;
   params: { orgId: string };
 }>) {
-  const { orgId } = params;
-
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">

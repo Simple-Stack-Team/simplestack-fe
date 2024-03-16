@@ -51,7 +51,6 @@ const CreateTeamRoles = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!session) return null;
 
-    // @ts-ignore
     const token = session.user?.access_token;
 
     const res = await fetch(url, {
@@ -70,10 +69,10 @@ const CreateTeamRoles = () => {
 
   return (
     <div className="flex justify-between">
-      <h1 className="mb-4 text-xl font-semibold">Your Team Roles</h1>
+      <h1 className="text-xl font-semibold">Team roles</h1>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>New</Button>
+          <Button>New team</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

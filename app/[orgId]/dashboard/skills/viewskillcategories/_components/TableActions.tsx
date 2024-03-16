@@ -15,14 +15,19 @@ import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import DeleteCategory from "./DeleteCategory";
 
-const TableActions = ({ categoryName, categoryId }: { categoryName: string, categoryId: string }) => {
+const TableActions = ({
+  categoryName,
+  categoryId,
+}: {
+  categoryName: string;
+  categoryId: string;
+}) => {
   const currentPath = usePathname();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-8 w-8 p-0">
-          <span className="sr-only">Open menu</span>
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
@@ -34,12 +39,13 @@ const TableActions = ({ categoryName, categoryId }: { categoryName: string, cate
           </DropdownMenuItem>
         </Dialog>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <div className="flex items-center gap-2">
+          <Link
+            href={`${currentPath}/udpatecategory?name=${categoryName}&id=${categoryId}`}
+            className="flex w-full items-center gap-2"
+          >
             <Pencil size={16} />
-            <Link href={`${currentPath}/udpatecategory?name=${categoryName}&id=${categoryId}`}>
-              Update
-            </Link>
-          </div>
+            Update
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

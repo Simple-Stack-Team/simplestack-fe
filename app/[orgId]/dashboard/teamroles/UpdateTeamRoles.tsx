@@ -50,8 +50,7 @@ const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (!session) return null;
 
-    // @ts-ignore
-    const token = await session?.user?.access_token;
+    const token = session?.user?.access_token;
 
     const res = await fetch(url, {
       method: "PUT",

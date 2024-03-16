@@ -19,7 +19,6 @@ const ViewSkillCategories = () => {
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
   const url = `${apiKey}/organizations/${orgId}/skills/skill-categories`;
 
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   useEffect(() => {

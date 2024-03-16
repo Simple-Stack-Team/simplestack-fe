@@ -36,7 +36,6 @@ const CreateSkillPage = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (status === "loading") return;
 
-    //@ts-ignore
     const token = session?.user?.access_token;
 
     try {

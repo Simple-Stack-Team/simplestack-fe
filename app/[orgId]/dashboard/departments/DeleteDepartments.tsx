@@ -11,6 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 type Props = {
   onDelete: () => void;
@@ -19,11 +20,13 @@ type Props = {
 const DeleteDepartments = ({ onDelete }: Props) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <div className="flex items-center gap-2 text-red-500">
-          <Trash2 size={16} />
-          Delete
-        </div>
+      <AlertDialogTrigger asChild>
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+          <div className="flex w-full cursor-pointer items-center gap-2 text-red-500">
+            <Trash2 size={16} />
+            Delete
+          </div>
+        </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

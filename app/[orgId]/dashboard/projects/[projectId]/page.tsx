@@ -1,4 +1,5 @@
 "use client";
+
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
@@ -68,7 +69,7 @@ const ProjectDetailsView: React.FC = () => {
 
     getProjectsDetails();
   }, [url, token]);
-  console.log(projectsDetails);
+
   if (!projectsDetails) {
     return <div>Loading...</div>;
   }

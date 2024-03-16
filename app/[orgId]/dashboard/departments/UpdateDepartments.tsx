@@ -47,13 +47,12 @@ const UpdateDepartment = ({ name, departmentId }: Props) => {
     },
   });
 
-  // @ts-ignore
   const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/departments/${departmentId}`;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (!session) return null;
 
-    // @ts-ignore
+
     const token = await session?.user?.access_token;
 
     const res = await fetch(url, {

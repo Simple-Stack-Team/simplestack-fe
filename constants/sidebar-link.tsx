@@ -1,9 +1,17 @@
 import classNames from "classnames";
 import { HiOutlineUserGroup } from "react-icons/hi";
-import { LuLayoutGrid, LuFileCheck, LuHome, LuFileBarChart2, LuSquareCode, LuUserPlus  } from "react-icons/lu";
+import {
+  LuLayoutGrid,
+  LuFileCheck,
+  LuHome,
+  LuFileBarChart2,
+  LuSquareCode,
+  LuUserPlus,
+} from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineAssignmentTurnedIn } from "react-icons/md";
 import { GoProject } from "react-icons/go";
+import { FileSpreadsheet } from "lucide-react";
 
 import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
@@ -19,12 +27,7 @@ export const sidebarLinks: Sidebar[] = [
   {
     href: "/dashboard",
     label: "Dashboard",
-    icon: (
-      <LuHome
-        className={style}
-        style={{ fontSize: "20px" }}
-      />
-    ),
+    icon: <LuHome className={style} style={{ fontSize: "20px" }} />,
     roles: [EMPLOYEE_ROLES.ORGANIZATION_ADMIN],
   },
   {
@@ -59,14 +62,9 @@ export const sidebarLinks: Sidebar[] = [
     ],
   },
   {
-    href: "/dashboard/skills",
+    href: "/dashboard/skillassignment",
     label: "Skill Assignment",
-    icon: (
-      <LuFileCheck
-        className={style}
-        style={{ fontSize: "20px" }}
-      />
-    ),
+    icon: <LuFileCheck className={style} style={{ fontSize: "20px" }} />,
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
@@ -77,12 +75,7 @@ export const sidebarLinks: Sidebar[] = [
   {
     href: "/dashboard/skills",
     label: "Skills",
-    icon: (
-      <LuFileBarChart2
-        className={style}
-        style={{ fontSize: "20px" }}
-      />
-    ),
+    icon: <LuFileBarChart2 className={style} style={{ fontSize: "20px" }} />,
     roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
   },
   {
@@ -100,6 +93,17 @@ export const sidebarLinks: Sidebar[] = [
     href: "/dashboard/departmentassign",
     label: "Assign members",
     icon: <LuUserPlus className={style} style={{ fontSize: "20px" }} />,
+    roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
+  },
+  {
+    href: "/dashboard/proposals",
+    label: "Proposals",
+    icon: (
+      <FileSpreadsheet
+        className={style}
+        style={{ fontSize: "20px", marginRight: "-2px", marginLeft: "-2px" }}
+      />
+    ),
     roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
   },
 ];

@@ -1,6 +1,6 @@
 "use client";
 
-import { MoreHorizontal, Pencil } from "lucide-react";
+import { MoreHorizontal, Pencil, SearchCode, LayoutListIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { usePathname } from "next/navigation";
@@ -86,10 +86,18 @@ const ActionsTable = ({ projectId, name, period, status }: Props) => {
             Update
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        <DropdownMenuItem className="space-x-1.5">
+          <LayoutListIcon size={19} />
           <Link href={`/${orgId}/dashboard/projects/${projectId}`}>
             View details
           </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={(e) => e.preventDefault()}
+          className="space-x-2"
+        >
+          <SearchCode size={17} />
+          <Link href={`/${orgId}/dashboard/projects/${projectId}/teamfinder`}>Team finder</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

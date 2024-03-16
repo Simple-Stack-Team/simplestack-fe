@@ -46,7 +46,6 @@ const CreateSkillPage = () => {
 
   const { data } = useFetch({ apiKey, url });
 
-  //@ts-ignore
   const authorName = session?.user?.user.name;
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -59,9 +58,7 @@ const CreateSkillPage = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (status === "loading") return;
 
-    //@ts-ignore
     const token = session?.user?.access_token;
-    //@ts-ignore
     const authorId = session?.user?.user.sub;
 
     const res = await fetch(

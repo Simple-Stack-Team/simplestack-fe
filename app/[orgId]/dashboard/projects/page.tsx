@@ -1,5 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 import { DataTable } from "./_components/data-table";
 import { columns } from "./_components/columns";
 import SkeletonTable from "@/components/SkeletonTable";
@@ -16,6 +19,12 @@ const ProjectsPage = ({ params: { orgId } }: Props) => {
 
   return (
     <div>
+      <div className="mb-4 flex items-center justify-between">
+        <h1 className="text-xl font-semibold">Projects</h1>
+        <Button asChild>
+          <Link href={`/${orgId}/dashboard/projects/new`}>New project</Link>
+        </Button>
+      </div>
       {error ? (
         <div>{error}</div>
       ) : (
