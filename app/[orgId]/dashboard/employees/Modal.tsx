@@ -28,6 +28,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "sonner";
 
 interface Props {
   employeeId: string;
@@ -51,7 +52,7 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
       }
 
       const token = session.user?.access_token;
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/employees/assign-roles/${employeeId}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/employees/${employeeId}/assign-roles`;
 
       const response = await fetch(url, {
         method: "PUT",
@@ -65,10 +66,12 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to assign roles to the employee");
+        toast("Failed", {
+          description: "Failed to assign role to user.",
+        });
+      } else {
+        setEmployeeRoles(employeeId, data.roles);
       }
-
-      setEmployeeRoles(employeeId, data.roles);
     } catch (error) {
       console.error("Error assigning roles:", error);
     }
@@ -84,7 +87,7 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex items-center gap-2">
+        <div className="flex cursor-pointer items-center gap-2">
           <UserRoundPlus size={16} />
           Assign a role
         </div>
@@ -117,7 +120,10 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
                             >
                               <FormControl>
                                 <Checkbox
-                                  disabled={currentUser === employeeId && item.id === "admin"}
+                                  disabled={
+                                    currentUser === employeeId &&
+                                    item.id === "admin"
+                                  }
                                   checked={field.value?.includes(item.role)}
                                   onCheckedChange={(checked) => {
                                     return checked

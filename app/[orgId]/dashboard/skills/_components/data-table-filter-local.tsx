@@ -104,9 +104,9 @@ export function DataTableFacetedFilterLocal<TData, TValue>({
                   >
                     <div
                       className={cn(
-                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-black",
                         isSelected
-                          ? "text-primary-foreground bg-primary"
+                          ? "bg-black text-white"
                           : "opacity-50 [&_svg]:invisible",
                       )}
                     >

@@ -49,7 +49,7 @@ export const columns: ColumnDef<Employee>[] = [
           {employeeRoles.map((role, index) => (
             <div
               key={index}
-              className="rounded-full border border-slate-300 px-2"
+              className="text-nowrap rounded-full border border-slate-300 px-2"
             >
               {role === "ORGANIZATION_ADMIN" ? (
                 <div className="flex items-center gap-[6px]">

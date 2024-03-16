@@ -7,7 +7,7 @@ import { fetchAcceptProposal } from "../fetchAcceptProposal";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-const AcceptProposal = ({ assignmentId }: { assignmentId: string }) => {
+const AcceptAssignment = ({ assignmentId }: { assignmentId: string }) => {
   const { data: session } = useSession();
   const { orgId } = useParams();
   const router = useRouter();
@@ -36,4 +36,4 @@ const AcceptProposal = ({ assignmentId }: { assignmentId: string }) => {
   return <Button onClick={acceptProposal}>Accept</Button>;
 };
 
-export default AcceptProposal;
+export default AcceptAssignment;

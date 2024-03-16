@@ -3,10 +3,11 @@ import { FC } from "react";
 
 import { authOption } from "@/app/api/auth/[...nextauth]/constants/next-auth-config";
 import { ProposalTypes } from "./types/proposals-types";
-import Proposal from "./_components/AssignmentProposal";
+import AssignmentProposal from "./_components/AssignmentProposal";
+import DeallocationProposal from "./_components/DeallocationProposal";
 import { getData } from "@/lib/getFetch";
-import { Divide } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface PageProps {
   orgId: string;
@@ -33,35 +34,46 @@ const Assignment: FC<PageProps> = async ({ orgId }) => {
 
   return (
     <div>
-      {proposals.assignments[0].length > 0 && proposals.deallocations[0] > 0 ? (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {proposals.assignments[0].map((proposal: ProposalTypes) => (
-            <Proposal
-              key={proposal.id}
-              proposal={proposal}
-              type="Assignments"
-            />
-          ))}
-          {/* {proposals.deallocations[0].map((proposal: ProposalTypes) => (
-            <Proposal
-              key={proposal.id}
-              proposal={proposal}
-              type="Deallocations"
-            />
-          ))} */}
-        </div>
-      ) : (
-        <div className="mt-8 text-center">
-          <Badge variant="outline">No proposals available</Badge>
-        </div>
-      )}
+      <Tabs defaultValue="assignments">
+        <TabsList>
+          <TabsTrigger value="assignments">Assignments</TabsTrigger>
+          <TabsTrigger value="deallocations">Deallocations</TabsTrigger>
+        </TabsList>
+        <TabsContent value="assignments">
+          {proposals.assignments[0].length > 0 ? (
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              {proposals.assignments[0].map((proposal: ProposalTypes) => (
+                <AssignmentProposal
+                  key={proposal.id}
+                  proposal={proposal}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 text-center">
+              <Badge variant="outline">No assignments available</Badge>
+            </div>
+          )}
+        </TabsContent>
+        <TabsContent value="deallocations">
+          {proposals.deallocations[0].length > 0 ? (
+            <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+              {proposals.deallocations[0].map((proposal: ProposalTypes) => (
+                <DeallocationProposal
+                  key={proposal.id}
+                  proposal={proposal}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="mt-8 text-center">
+              <Badge variant="outline">No deallocations available</Badge>
+            </div>
+          )}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
 
 export default Assignment;
-
-//PUT - Accept
-///organizations/{orgId}/projects/deallocation-proposal/{deallocationId}
-//DELETE - Reject
-///organizations/{orgId}/projects/deallocation-proposal/{deallocationId}

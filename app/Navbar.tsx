@@ -32,8 +32,7 @@ const Navbar = () => {
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
               <SheetDescription className="space-y-2">
-                <div>Home</div>
-                <div>Use Cases</div>
+                <div className="font-semibold">Home</div>
                 <div>Pricing</div>
                 <div>Blog</div>
                 <div>Docs</div>
@@ -50,8 +49,7 @@ const Navbar = () => {
           <div>Simple Team</div>
         </div>
         <div className="flex cursor-pointer gap-4 text-[15px] text-gray-300">
-          <div>Home</div>
-          <div>Use Cases</div>
+          <div className="font-semibold">Home</div>
           <div>Pricing</div>
           <div>Blog</div>
           <div>Docs</div>

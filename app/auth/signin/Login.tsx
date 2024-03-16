@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -17,7 +17,7 @@ import InfoSectionAuth from "@/components/InfoSectionAuth";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { formSchemaLogin } from "@/app/auth/signin/constants/signin-constants";
 
-const LoginPage = () => {
+const LoginPage = () => { 
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -79,13 +79,15 @@ const LoginPage = () => {
             <h1 className="mb-2 text-2xl font-semibold">Login</h1>
             <p>
               <span>Don&apos;t have an account? </span>
-              <Link href="/" className="font-semibold text-primary">
+              <Link href="/signup" className="font-semibold text-primary">
                 Register
               </Link>
             </p>
           </div>
           {error.status === 401 && (
-            <AlertMessage>The name or the passwor are inccorect</AlertMessage>
+            <AlertMessage>
+              The email address or password you entered was not correct.
+            </AlertMessage>
           )}
           {error.status === 404 && (
             <AlertMessage>The account not exist</AlertMessage>

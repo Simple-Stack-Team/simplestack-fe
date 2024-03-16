@@ -22,7 +22,7 @@ const Profile = () => {
   return (
     <div>
       {session?.user ? (
-        <div className="relative flex items-center justify-between rounded-md border border-gray-200 bg-white px-4 py-2">
+        <div className="relative flex items-center justify-between rounded-lg border border-gray-200 bg-white px-4 py-2">
           {/* <LuUserSquare2 className="size-16 mr-2 text-gray-400" /> */}
           <div className="flex flex-col items-start gap-0">
             <p className="text-md font-bold text-[#252525]">

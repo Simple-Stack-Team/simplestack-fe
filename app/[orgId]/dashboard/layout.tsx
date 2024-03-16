@@ -1,7 +1,10 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import { CiMenuBurger } from "react-icons/ci";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface LayoutProps {
   children: React.ReactNode;

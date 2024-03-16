@@ -78,7 +78,7 @@ export const assignMembersColumns: ColumnDef<DepartmentMembers>[] = [
       const depId = row.original.departmentId;
 
       return (
-        <TooltipProvider>
+        <TooltipProvider delayDuration={200}>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost">

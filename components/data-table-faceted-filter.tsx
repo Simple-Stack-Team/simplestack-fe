@@ -106,7 +106,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                       className={cn(
                         "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-black",
                         isSelected
-                          ? "text-primary-foreground bg-black"
+                          ? "bg-black text-white"
                           : "opacity-50 [&_svg]:invisible",
                       )}
                     >

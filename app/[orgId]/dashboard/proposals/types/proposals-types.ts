@@ -2,9 +2,11 @@ export interface ProposalTypes {
   id: string;
   projectId: string;
   employeeId: string;
-  teamRoles: string[];
-  workHours: number;
-  comments: string;
+  reason?: string;
+  teamRoles?: string[];
+  workHours?: number;
+  comments?: string;
+  employeeProjectId: string;
   project: {
     name: string;
     period: string;
@@ -13,6 +15,7 @@ export interface ProposalTypes {
     status: string;
     description: string;
     technologyStack: string[];
+    authorId: string;
   };
   employee: {
     name: string;
