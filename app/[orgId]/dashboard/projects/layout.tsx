@@ -9,6 +9,15 @@ export default function ProjectsPageLayout({
 }>) {
   return (
     <div>
+      <div className="mb-4 flex items-center justify-between">
+        <h1 className="text-xl font-semibold">Projects</h1>
+        <Button asChild>
+          <Link href={`/${orgId}/dashboard/projects/new`}>New project</Link>
+        </Button>
+      </div>
+      <div className="mb-8 space-x-4">
+        <Link href={`/${orgId}/dashboard/projects`}>View</Link>
+      </div>
       {children}
     </div>
   );

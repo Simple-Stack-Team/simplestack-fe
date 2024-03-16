@@ -1,11 +1,16 @@
 "use client";
-
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
-import { useParams, useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { Trash2 } from "lucide-react";
+import { format } from "date-fns";
 import { z } from "zod";
-
+import useFetchTeamRoles from "@/hooks/useFetchTeamRoles";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { Textarea } from "@/components/ui/textarea";
+import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import {
   Form,
   FormControl,
@@ -14,112 +19,89 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-type TeamRole = {
-  teamroleId: string;
-  nrOfMembers: number;
-};
-
-type ProjectFormValues = {
-  name: string;
-  period: string;
-  startDate: string;
-  deadlineDate: string;
-  status: string;
-  description: string;
-  technologyStack: string[];
-  teamRoles: TeamRole[];
-};
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { LuPlus } from "react-icons/lu";
 const formSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Username must be at least 2 characters.",
-    })
-    .max(50),
-  period: z
-    .string()
-    .min(2, {
-      message: "Username must be at least 2 characters.",
-    })
-    .max(50),
-  startDate: z
-    .string()
-    .min(2, {
-      message: "Username must be at least 2 characters.",
-    })
-    .max(50),
+  name: z.string().min(2).max(50),
+  period: z.string().min(1),
+  startDate: z.date({
+    required_error: "Required.",
+  }),
   deadlineDate: z
-    .string()
-    .min(2, {
-      message: "Username must be at least 2 characters.",
+    .date({
+      required_error: "Required.",
     })
-    .max(50),
-  status: z
-    .string()
-    .min(2, {
-      message: "Username must be at least 2 characters.",
-    })
-    .max(50),
-  description: z
-    .string()
-    .min(2, {
-      message: "Bio must be at least 10 characters.",
-    })
-    .max(160, {
-      message: "Bio must not be longer than 30 characters.",
-    }),
-  technologyStack: z.array(
-    z
-      .string()
-      .min(2, {
-        message: "Username must be at least 2 characters.",
-      })
-      .max(50),
-  ),
-
-  teamRoles: z.array(
-    z.object({
-      teamroleId: z.string().min(1),
-      nrOfMembers: z.number().refine((value) => Number.isInteger(value), {
-        message: "Number of Members must be an integer.",
-      }),
-    }),
-  ),
+    .optional(),
+  status: z.string().min(1),
+  description: z.string().min(2).max(200),
+  technologyStack: z.object({ technology: z.string() }).array(),
+  teamRoles: z
+    .object({ teamroleId: z.string(), nrOfMembers: z.coerce.number() })
+    .array(),
 });
 
-const CreateProject = () => {
-  const { data: session } = useSession();
+interface Props {
+  params: { orgId: string };
+}
+const CreateProject = ({ params: { orgId } }: Props) => {
   const router = useRouter();
-
-  const form = useForm<ProjectFormValues>({
+  const { data: session } = useSession();
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      period: "",
-      startDate: "",
-      deadlineDate: "",
-      status: "",
-      description: "",
-      technologyStack: [],
-      teamRoles: [
-        {
-          teamroleId: "",
-          nrOfMembers: 0,
-        },
-      ],
+      technologyStack: [{ technology: "" }],
+      teamRoles: [{ teamroleId: "", nrOfMembers: 0 }],
     },
   });
 
-  const { orgId } = useParams();
+  const { data } = useFetchTeamRoles(orgId);
+
+  const { control, register, watch } = form;
+  const period = watch("period"); // Get the value of the "period" field
+
+  const { fields, append, remove } = useFieldArray({
+    name: "technologyStack",
+    control,
+  });
+  const {
+    fields: teamRolesFields,
+    append: teamRolesAppend,
+    remove: teamRolesRemove,
+  } = useFieldArray({
+    name: "teamRoles",
+    control,
+  });
+
   const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/projects`;
 
-  async function onSubmit(values: ProjectFormValues) {
-    if (!session) return null;
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    const technologyStack = data.technologyStack
+      .filter((el) => el.technology.length > 0)
+      .map((el) => el.technology);
+    data = {
+      ...data,
+      technologyStack: technologyStack as any,
+      teamRoles: data.teamRoles.filter(
+        (el) => el.teamroleId.length > 0 && el.nrOfMembers > 0,
+      ),
+    };
+    if (data.period === "Ongoing") {
+      delete data.deadlineDate;
+    }
 
     // @ts-ignore
     const token = session.user?.access_token;
@@ -130,169 +112,286 @@ const CreateProject = () => {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(data),
     });
-    console.log(values);
-
     if (res.ok) {
-      router.refresh();
       router.push(`/${orgId}/dashboard/projects`);
-      toast("The skill was successfully created", {
-        action: {
-          label: "Cancel",
-          onClick: () => console.log("Undo"),
-        },
-      });
     }
+    console.log(data);
   }
+
   return (
-    <div className="flex justify-center ">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-xl ">Create Projects:</h1>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="flex-row gap-4"
-          >
-            <div className=" flex-row gap-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Project name</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="period"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Project period</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />{" "}
-            </div>
-            <div className="flex flex-row gap-4">
-              <FormField
-                control={form.control}
-                name="startDate"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Start Date</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />{" "}
-              <FormField
-                control={form.control}
-                name="deadlineDate"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Deadline Date</FormLabel>
-                    <FormControl>
-                      <Input {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />{" "}
-            </div>
-            <FormField
-              control={form.control}
-              name="status"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Status</FormLabel>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="max-w-[500px] space-y-3"
+      >
+        <div className="flex items-center justify-between gap-4">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Project name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="period"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Period</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
-                    <Input {...field} />
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select one" />
+                    </SelectTrigger>
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />{" "}
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />{" "}
-            <FormField
-              control={form.control}
-              name="technologyStack"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Technology Stack</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      value={field.value.join(",")}
-                      onChange={(e) =>
-                        field.onChange(e.target.value.split(","))
-                      }
+                  <SelectContent>
+                    <SelectItem value="Fixed">Fixed</SelectItem>
+                    <SelectItem value="Ongoing">Ongoing</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex items-center justify-between">
+          <FormField
+            control={form.control}
+            name="startDate"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Start date</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-[240px] pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground",
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      initialFocus
                     />
-                  </FormControl>
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {period === "Fixed" && (
+            <FormField
+              control={form.control}
+              name="deadlineDate"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel>Deadline date</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          disabled={form.getValues("period") === "ongoing"}
+                          variant={"outline"}
+                          className={cn(
+                            "w-[240px] pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {""}
-            {form.getValues("teamRoles").map((_, index) => (
-              <div key={index}>
-                <FormField
-                  control={form.control}
-                  name={`teamRoles.${index}.teamroleId` as const}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{`Team Role ${index + 1} - Roles`}</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name={`teamRoles.${index}.nrOfMembers` as const}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{`Team Role ${index + 1} - Number of Members`}</FormLabel>
-                      <FormControl>
-                        <Input {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            ))}
-            <Button className="mt-3" type="submit">
-              Create Project
-            </Button>
-          </form>
-        </Form>
-      </div>
-    </div>
+          )}
+        </div>
+        <FormField
+          control={form.control}
+          name="status"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Status</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select one" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="Not Started">Not started</SelectItem>
+                  <SelectItem value="Starting">Starting</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea placeholder="About project" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="technologyStack"
+          render={({ field }) => (
+            <div className="flex items-end gap-4">
+              <FormItem className="flex-1">
+                <FormLabel>Technology Stack</FormLabel>
+                {fields.map((field, index) => {
+                  return (
+                    <div key={index} className="flex items-center gap-2">
+                      <Input
+                        placeholder="Name"
+                        {...register(
+                          `technologyStack.${index}.technology` as const,
+                        )}
+                      />
+                      {index > 0 && (
+                        <Button
+                          onClick={() => remove(index)}
+                          variant="ghost"
+                          size="icon"
+                        >
+                          <Trash2 size={16} />
+                        </Button>
+                      )}
+                    </div>
+                  );
+                })}
+                <FormMessage />
+                <Button
+                  className="bg-gray-500"
+                  type="button"
+                  onClick={() => append({ technology: "" })}
+                >
+                  <LuPlus />
+                </Button>
+              </FormItem>
+            </div>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="teamRoles"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Team roles</FormLabel>
+              {teamRolesFields.map((item, index) => {
+                return (
+                  <FormField
+                    control={form.control}
+                    name={`teamRoles.${index}.teamroleId`}
+                    render={({ field }) => (
+                      <div key={item.id} className="flex items-center gap-2">
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select one" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {data &&
+                              data.map((role) => (
+                                <SelectItem key={role.name} value={role.id}>
+                                  {role.name}
+                                </SelectItem>
+                              ))}
+                          </SelectContent>
+                        </Select>
+                        <FormControl>
+                          <Input
+                            type="number"
+                            {...register(
+                              `teamRoles.${index}.nrOfMembers` as const,
+                            )}
+                          />
+                        </FormControl>
+                        {index > 0 && (
+                          <Button
+                            onClick={() => teamRolesRemove(index)}
+                            variant="ghost"
+                            size="icon"
+                          >
+                            <Trash2 size={16} />
+                          </Button>
+                        )}
+                      </div>
+                    )}
+                  ></FormField>
+                );
+              })}
+              <Button
+                key="a"
+                className="bg-gray-500"
+                type="button"
+                onClick={() =>
+                  teamRolesAppend({ teamroleId: "", nrOfMembers: 0 })
+                }
+              >
+                <LuPlus />
+              </Button>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex justify-center">
+          <Button type="submit">Submit</Button>
+        </div>
+      </form>
+    </Form>
   );
 };
 
