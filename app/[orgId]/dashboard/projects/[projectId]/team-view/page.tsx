@@ -1,5 +1,7 @@
 import { getData } from "@/lib/getFetch";
 import { EmployeeLists } from "./components/employee-lists";
+import RoleCheck from "@/components/RoleCheck";
+import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
 
 export default async function TeamView({params}: {params: {projectId: string, orgId: string}}) {
@@ -9,7 +11,9 @@ export default async function TeamView({params}: {params: {projectId: string, or
   if(!teamView) return <h1>Loading team view...</h1>
   return (
     <div>
-      <EmployeeLists employees={teamView} />
+      <RoleCheck roles={[EMPLOYEE_ROLES.PROJECT_MANAGER]}>
+        <EmployeeLists employees={teamView} />
+      </RoleCheck>
     </div>
   )
 }

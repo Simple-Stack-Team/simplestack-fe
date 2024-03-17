@@ -3,6 +3,9 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { EmployeeProject } from "@/app/[orgId]/dashboard/projects/[projectId]/team-view/types/team-view-types";
+import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 interface Props {
   employeeProject: EmployeeProject
@@ -14,6 +17,9 @@ export const ProjectCard = ({employeeProject}: Props) => {
       <CardHeader className="p-4">
         <div className="flex justify-between align-middle">
           <h3 className="text-slate-800 font-bold text-2xl">{employeeProject.project.name}</h3>
+          <Link href={`./${employeeProject.project.id}`}>
+            <Button variant="outline">See project <ChevronRight size={20} className="ml-2" /></Button>
+          </Link>
         </div>
       </CardHeader>
       

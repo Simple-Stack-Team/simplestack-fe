@@ -67,15 +67,6 @@ const ActionsTable = ({ departmentId, name }: Props) => {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <Link
-            href={`${path}/${departmentId}/projects`}
-            className="flex w-full items-center gap-2"
-          >
-            <FilesIcon size={16} />
-            View projects
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Link
             href={`${path}/assignmanager?depId=${departmentId}`}
             className="flex w-full items-center gap-2"
           >

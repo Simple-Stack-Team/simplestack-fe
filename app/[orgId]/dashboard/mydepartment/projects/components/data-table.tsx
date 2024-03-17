@@ -22,7 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DataTablePagination } from "@/components/data-table-pagination";
-import { DepartmentProjectsTableToolbar } from "@/app/[orgId]/dashboard/departments/[depId]/projects/components/table-toolbar";
+import { DepartmentProjectsTableToolbar } from "@/app/[orgId]/dashboard/mydepartment/projects/components/table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -55,7 +55,10 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      {showToolbar && <DepartmentProjectsTableToolbar table={table} />}
+      <div className="flex gap-2 items-center">
+        <h3 className="text-lg mr-4 font-semibold text-slate-700">Projects</h3>
+        {showToolbar && <DepartmentProjectsTableToolbar table={table} />}
+      </div>
       <div className="scroll-bar mt-6">
         <Table>
           <TableHeader>
