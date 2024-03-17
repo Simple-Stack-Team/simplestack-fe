@@ -4,7 +4,9 @@ import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { z } from "zod";
+import ProjectDetail from "./components/project-detail";
+import { Badge } from "@/components/ui/badge";
+import { EmployeeProject } from "./team-view/types/team-view-types";
 
 type TeamRole = {
   teamroleId: string;
@@ -18,28 +20,10 @@ type View = {
   deadlineDate: string;
   status: string;
   description: string;
-
+  members: EmployeeProject[]
   technologyStack: string[];
   teamRoles: TeamRole[];
 };
-const formSchema = z.object({
-  name: z.string().min(2).max(50),
-  period: z.string().min(1),
-  startDate: z.date({
-    required_error: "Required.",
-  }),
-  deadlineDate: z
-    .date({
-      required_error: "Required.",
-    })
-    .optional(),
-  status: z.string().min(1),
-  description: z.string().min(2).max(200),
-  technologyStack: z.object({ technology: z.string() }).array(),
-  teamRoles: z
-    .object({ teamroleId: z.string(), nrOfMembers: z.coerce.number() })
-    .array(),
-});
 
 const ProjectDetailsView: React.FC = () => {
   const { data: session } = useSession();
@@ -48,7 +32,6 @@ const ProjectDetailsView: React.FC = () => {
   const { orgId, projectId } = useParams();
   const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/projects/${projectId}`;
 
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   useEffect(() => {
@@ -74,39 +57,41 @@ const ProjectDetailsView: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+  console.log(projectsDetails)
+
   return (
-    <div className="mx-auto mt-8 max-w-3xl rounded border p-6 shadow">
-      <h1 className="mb-4 text-2xl font-bold">Name: {projectsDetails.name}</h1>
-      <p className="mb-2">Period: {projectsDetails.period}</p>
-      <p className="mb-2">
-        Start Date:{" "}
-        {projectsDetails.startDate
+    <div>
+
+      <div className="grid grid-cols-3 gap-5">
+        <ProjectDetail label="Period" value={projectsDetails.period} />
+        <ProjectDetail label="Start date" value={projectsDetails.startDate
           ? format(projectsDetails.startDate, "PPP")
-          : "N/A"}
-      </p>
-      <p className="mb-2">
-        Deadline Date:{" "}
-        {projectsDetails.deadlineDate
+          : "N/A"} />
+        <ProjectDetail label="Deadline date" value={projectsDetails.deadlineDate
           ? format(new Date(projectsDetails.deadlineDate), "PPP")
-          : "Project don't have a finish date because is ongoing"}
-      </p>
-      <p className="mb-2">Status: {projectsDetails.status}</p>
-      <p className="mb-2">Description: {projectsDetails.description}</p>
-      <p className="mb-2">Technology Stack:</p>
-      <ul className="mb-2 list-disc pl-6">
-        {projectsDetails.technologyStack.map((tech, index) => (
-          <li key={index}>{tech}</li>
-        ))}
-      </ul>
-      <p className="mb-2">Team Roles:</p>
-      <ul className="mb-2 list-disc pl-6">
-        {projectsDetails.teamRoles.map((role, index) => (
-          <li key={index}>
-            <p>Team Role ID: {role.teamroleId}</p>
-            <p>Number of Members: {role.nrOfMembers}</p>
-          </li>
-        ))}
-      </ul>
+          : "Project doesn't have a finish date because is ongoing"} />
+        <ProjectDetail label="Status" value={projectsDetails.status} />
+        <ProjectDetail label="Description" value={projectsDetails.description} />
+        <div className="p-4 border border-1 rounded-lg">
+          <p className="mb-2 text-lg font-semibold">Technology Stack:</p>
+          <div className="flex gap-1 flex-wrap">
+            {projectsDetails.technologyStack.map((tech, index) => (
+              <Badge variant="outline" key={index}>{tech}</Badge>
+            ))}
+          </div>
+        </div>
+        <h1 className="mt-4 text-xl font-semibold">Members</h1>
+      </div>
+      <div className="flex gap-2 flex-wrap ">
+        {projectsDetails.members.map((member) =>
+          <div className="p-4 border border-1 rounded-lg" key={member.id}>
+            <div className="text-xl font-semibold mb-2">
+              {member.employee.name}
+            </div>
+            <Badge variant={member.endWork ? 'destructive' : 'default'}>{member.endWork ? 'Past member' : 'Active member'}</Badge>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

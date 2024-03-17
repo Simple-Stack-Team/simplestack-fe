@@ -1,5 +1,9 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Projects } from "@/types/projects-types";
 import { ColumnDef } from "@tanstack/react-table";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 export const columns: ColumnDef<Projects>[] = [
   {
@@ -28,7 +32,19 @@ export const columns: ColumnDef<Projects>[] = [
     cell: ({ row }) => {
       const members = row.original.members;
 
-      return <div>{members.map(member => <p key={member.employee.name}>{member.employee.name}</p>)}</div>;
+      return <div className="flex flex-wrap gap-1">{members.map(member => <Badge variant="outline" key={member.employee.name}>{member.employee.name}</Badge>)}</div>;
+    },
+  },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: ({row}) => {
+      return <Link href={`projects/${row.original.id}`}>
+        <Button variant="outline">
+          See project
+          <ChevronRight className="ml-2" size={20} />
+        </Button>
+      </Link>
     },
   },
 ];

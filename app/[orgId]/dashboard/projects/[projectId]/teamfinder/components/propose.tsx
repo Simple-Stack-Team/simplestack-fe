@@ -85,7 +85,6 @@ export const ProposeEmployee = ({ employee }: Props) => {
       (totalHours: number, project: EmployeeProject) => totalHours + project.workHours,
       0,
     );
-
   const [teamRoles, setTeamRoles] = useState<string[]>([])
 
   const form = useForm<z.infer<typeof FormSchema>>({

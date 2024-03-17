@@ -1,11 +1,13 @@
 "use client";
+
 import useHasAccess from "@/hooks/useHasAccess";
+import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
 const RoleCheck = ({
   roles,
   children,
 }: {
-  roles: string[];
+  roles: EMPLOYEE_ROLES[];
   children: React.ReactNode;
 }) => {
   const hasAccess = useHasAccess(roles);

@@ -19,7 +19,7 @@ interface Sidebar {
   href: string;
   label: string;
   icon: React.ReactElement;
-  roles: string[];
+  roles: EMPLOYEE_ROLES[];
 }
 const style = classNames("flex items-center text-[#8b8a8d]");
 
@@ -52,13 +52,19 @@ export const sidebarLinks: Sidebar[] = [
   },
   {
     href: "/dashboard/departments",
-    label: "Department ",
+    label: "Departments",
+    icon: <LuLayoutGrid className={style} style={{ fontSize: "20px" }} />,
+    roles: [
+      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
+    ],
+  },
+  {
+    href: "/dashboard/mydepartment",
+    label: "My department",
     icon: <LuLayoutGrid className={style} style={{ fontSize: "20px" }} />,
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
-      EMPLOYEE_ROLES.PROJECT_MANAGER,
-      EMPLOYEE_ROLES.EMPLOYEE,
     ],
   },
   {

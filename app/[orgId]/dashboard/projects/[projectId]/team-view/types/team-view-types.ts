@@ -6,4 +6,7 @@ export interface EmployeeProject {
   employee: SuggestedEmployee,
   employeeRoles: string[]
   project: Projects
+  workHours: number
+  startWork: Date | string
+  endWork: Date | string | null
 }

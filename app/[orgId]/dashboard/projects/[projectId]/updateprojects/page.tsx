@@ -83,6 +83,7 @@ type ProjectFormValues = {
   description: string;
   technologyStack: string[];
   teamRoles: TeamRole[];
+  authorId: string
 };
 
 const CreateProject = ({ params: { orgId, projectId } }: Props) => {
@@ -98,11 +99,10 @@ const CreateProject = ({ params: { orgId, projectId } }: Props) => {
       status: project?.status,
     },
   });
-  console.log(project?.period);
+
   const url = `${process.env.NEXT_PUBLIC_API_URL}/organizations/${orgId}/projects/${projectId}`;
 
-  // @ts-ignore
-  const token = session.user?.access_token;
+  const token = session?.user?.access_token;
   useEffect(() => {
     async function getProjectsDetails() {
       try {
@@ -133,6 +133,7 @@ const CreateProject = ({ params: { orgId, projectId } }: Props) => {
 
     getProjectsDetails();
   }, [url, token, form]);
+
   const { data } = useFetchTeamRoles(orgId);
 
   const { control, register, watch, setValue } = form;
@@ -181,6 +182,9 @@ const CreateProject = ({ params: { orgId, projectId } }: Props) => {
     }
     console.log(data);
   }
+  
+  if(project?.authorId !== session?.user?.user.sub) return <h1>Forbidden</h1>
+  
   return (
     <Form {...form}>
       <form

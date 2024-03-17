@@ -2,12 +2,16 @@
 
 import { useParams } from "next/navigation";
 
-import { columns } from "@/app/[orgId]/dashboard/departments/[depId]/projects/components/columns";
-import { DataTable } from "@/app/[orgId]/dashboard/departments/[depId]/projects/components/data-table";
+import { columns } from "@/app/[orgId]/dashboard/mydepartment/projects/components/columns";
+import { DataTable } from "@/app/[orgId]/dashboard/mydepartment/projects/components/data-table";
 import useFetch from "@/hooks/useFetch";
 
-const DepartmentProjectsTable = () => {
-  const { orgId, depId } = useParams();
+interface Props {
+  depId: string
+}
+
+const DepartmentProjectsTable = ({depId}: Props) => {
+  const { orgId } = useParams();
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
 
   const url = `/organizations/${orgId}/projects/department/${depId}`;
