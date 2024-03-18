@@ -9,6 +9,8 @@ import { LuSearchCode } from "react-icons/lu";
 import RoleCheck from "@/components/RoleCheck";
 import { sidebarLinks } from "@/constants/sidebar-link";
 import Profile from "@/components/Profile";
+import logo from "@/public/logoWhiteTheme.svg";
+import Image from "next/image";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -24,10 +26,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
     <div className={`fixed flex w-full ${isOpen ? "overflow-hidden" : ""}`}>
       {isOpen && (
         <div className="fixed inset-0 m-auto w-[250px] md:hidden">
-          <div className="mt-20 flex flex-col items-center gap-2 p-4">
-            <div className="flex w-full items-center gap-2 ">
-              <LuSearchCode className="mr-2" size={35} />
-              <span className="text-xl">TeamFinder</span>
+          <div className="mt-10 flex flex-col items-center gap-2 p-4">
+            <div className="mb-2 flex w-full items-center gap-2">
+              <Image priority src={logo} alt="Logo" width={32} />
+              <span className="text-xl font-bold">Simple Stack</span>
             </div>
             {sidebarLinks.map((link) => (
               <RoleCheck roles={link.roles} key={link.label}>
@@ -71,16 +73,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         className={`top-24 hidden sm:fixed sm:inset-0 sm:flex sm:w-[190px] sm:flex-col sm:p-4 ${isOpen ? "sm:hidden" : ""}`}
       >
         <div
-          className={`top-24  hidden md:fixed md:inset-0 md:flex md:w-[250px] md:flex-col md:p-4 ${isOpen ? "md:hidden" : ""} `}
+          className={`top-24 hidden md:fixed md:inset-0 md:flex md:w-[250px] md:flex-col md:p-4 ${isOpen ? "md:hidden" : ""} `}
         >
           <div className="m-2 flex w-full items-center gap-2">
-            <LuSearchCode
-              className="mr-2 rounded-md bg-black p-1.5 text-white"
-              size={35}
-            />
-            <span className="font-mono text-2xl font-extrabold">
-              Team Finder
-            </span>
+            <Image priority src={logo} alt="Logo" width={32} />
+            <span className="text-xl font-bold">Simple Stack</span>
           </div>
           <div className="mt-10">
             {sidebarLinks.map((link) => (
