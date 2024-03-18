@@ -41,7 +41,7 @@ const SponsorsSection = () => {
         </li>
       </ul>
       <div>
-        <p className="mx-auto mt-8 max-w-[800px] text-center">
+        <p className="mx-auto mt-8 max-w-[800px] bg-gradient-to-r from-gray-300 via-white via-50% to-gray-300 to-80% bg-clip-text text-center text-xs text-transparent">
           Discover the perfect team partners for your projects with our
           innovative app! Using advanced matching algorithms, we provide a
           simplified experience in finding team members. Find people with the

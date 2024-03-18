@@ -32,7 +32,7 @@ const InputField: React.FC<Props> = ({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="mx-auto max-w-[400px]">
+        <FormItem className="mx-auto w-full">
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input placeholder={placeholder} type={type} {...field} />

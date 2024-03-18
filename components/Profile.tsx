@@ -28,7 +28,7 @@ const Profile = () => {
             <p className="text-md font-bold text-[#252525]">
               {session?.user!.user.name}
             </p>
-            <p className="text-sm text-[#7b7b7b]">
+            <p className="max-w-[150px] overflow-hidden text-ellipsis text-sm text-[#7b7b7b]">
               {session?.user!.user.email}
             </p>
           </div>

@@ -1,11 +1,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { z } from "zod";
 
 import { ErrorResponse } from "@/types/ErrorResponse";
 import AlertMessage from "@/components/AlertMessage";
@@ -13,7 +14,7 @@ import InputField from "@/components/InputField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { formSchema } from "@/app/signup/constants/signup-admin-constants";
-import global from "@/public/signup.png";
+import global from "@/public/gradient.svg";
 
 const Register = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
@@ -48,7 +49,7 @@ const Register = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full space-y-1 px-8 lg:px-16"
           >
-            <h1 className="mx-auto mb-4 max-w-[400px] text-2xl font-semibold">
+            <h1 className="mb-4 max-w-[420px] text-2xl font-semibold">
               Create your account 👏
             </h1>
 
@@ -76,30 +77,50 @@ const Register = () => {
               type="password"
               control={form.control}
             />
-            <InputField
-              name="organizationName"
-              label="Organization*"
-              placeholder="Organization"
-              type="text"
-              control={form.control}
-            />
-            <InputField
-              name="headquarterAddress"
-              label="Address*"
-              placeholder="Address"
-              type="text"
-              control={form.control}
-            />
+            <div className="flex gap-2">
+              <InputField
+                name="organizationName"
+                label="Organization*"
+                placeholder="Organization"
+                type="text"
+                control={form.control}
+              />
+              <InputField
+                name="headquarterAddress"
+                label="Address*"
+                placeholder="Address"
+                type="text"
+                control={form.control}
+              />
+            </div>
             <div className="flex justify-center">
-              <Button type="submit" className="mt-4 w-full max-w-[400px]">
+              <Button type="submit" className="mt-4 w-full max-w-[420px]">
                 Submit
               </Button>
+            </div>
+            <div className="flex justify-center pt-4">
+              <p>
+                <span className="text-sm">Already have an account? </span>
+                <Link
+                  href="/signup"
+                  className="text-sm font-semibold text-[#5138ee] underline underline-offset-2"
+                >
+                  Sign In
+                </Link>
+              </p>
             </div>
           </form>
         </Form>
       </div>
       <div className="hidden h-screen flex-1 p-2 md:block">
-        <div className="h-full w-full rounded-lg bg-violet-600"></div>
+        <div className="h-full w-full overflow-hidden rounded-lg bg-violet-600">
+          <Image
+            src={global}
+            alt="Global connection"
+            quality={100}
+            style={{ width: "100%", height: "100vh", objectFit: "cover" }}
+          />
+        </div>
       </div>
     </div>
   );

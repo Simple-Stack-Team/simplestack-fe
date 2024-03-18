@@ -15,13 +15,12 @@ interface Props {
 export default async function SkillAssignmentPage({
   params: { orgId },
 }: Props) {
-  const url = `/organizations/${orgId}/skills`;
-  const data = await getData(url);
-
   const session = await getServerSession(authOption);
 
-  if (!session) return;
+  const url = `/organizations/${orgId}/skills`;
+  const skills = await getData(url);
 
+  if (!session) return;
   const empId = session?.user?.user.sub;
 
   const userSkills = await getData(
@@ -39,7 +38,7 @@ export default async function SkillAssignmentPage({
           <TabsTrigger value="userSkills">My skills</TabsTrigger>
         </TabsList>
         <TabsContent value="allSkills">
-          <DataTable columns={skillassignmentcolumns} data={data} />
+          <DataTable columns={skillassignmentcolumns} data={skills} />
         </TabsContent>
         <TabsContent value="userSkills">
           <DataTable

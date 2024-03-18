@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 
 interface User {
+  id: string;
   departmentId: string;
   managerAt: {
     id: string;
@@ -60,11 +61,9 @@ export function AssignModal({
     getUser();
   }, [base_url, token, orgId, authorId]);
 
-  console.log(user);
-
   async function onSubmit() {
     await fetch(
-      `${base_url}/organizations/${orgId}/skills/assign-skill-to-department/${skillId}/department/${user?.departmentId}/manager/${user?.managerAt.id}`,
+      `${base_url}/organizations/${orgId}/skills/assign-skill-to-department/${skillId}/department/${user?.departmentId}/manager/${user?.id}`,
       {
         method: "PUT",
         headers: {
