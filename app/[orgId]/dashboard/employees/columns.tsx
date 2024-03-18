@@ -2,7 +2,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Employee } from "@/types/Employee";
 import DropdownMenuEmployee from "./DropdownMenuEmployee";
 import { DataTableColumnHeader } from "./ColumnHeader";
-import { Dice1 } from "lucide-react";
 
 const roleStyles = {
   ORGANIZATION_ADMIN: {

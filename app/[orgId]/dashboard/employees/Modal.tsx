@@ -29,6 +29,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "sonner";
+import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
 interface Props {
   employeeId: string;
@@ -70,7 +71,7 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
           description: "Failed to assign role to user.",
         });
       } else {
-        setEmployeeRoles(employeeId, data.roles);
+        setEmployeeRoles(employeeId, data.roles as EMPLOYEE_ROLES[]);
       }
     } catch (error) {
       console.error("Error assigning roles:", error);
