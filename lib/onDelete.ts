@@ -1,4 +1,4 @@
-export const onDelete = async (url: string, token: string, data: string): Promise<any> => {
+export const onDelete = async (url: string, token: string, data: string): Promise<void> => {
   const res = await fetch(url, {
     method: "DELETE",
     headers: {

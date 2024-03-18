@@ -4,7 +4,7 @@ import { EmployeeProject } from "../types/team-view-types";
 import { EmployeeCard } from "./employee-card"
 
 interface Props {
-  data: any;
+  data: EmployeeProject[];
 }
 
 export const EmployeeSection = ({data}: Props) => {

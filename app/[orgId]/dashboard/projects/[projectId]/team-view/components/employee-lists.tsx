@@ -5,7 +5,7 @@ import { TeamViewSections, TeamViewSection } from "../constants/team-view-consta
 import { EmployeeSection } from "./employee-section";
 
 interface Props {
-  employees: any
+  employees: { [key: string]: any };
 }
 
 export const EmployeeLists = ({ employees }: Props) => {

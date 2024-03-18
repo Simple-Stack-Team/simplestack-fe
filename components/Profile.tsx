@@ -11,7 +11,7 @@ const Profile = () => {
   const toggleOptions = () => {
     setShowOptions(!showOptions);
   };
-  const logOut = (event: any) => {
+  const logOut = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     signOut({
       redirect: true,

@@ -11,8 +11,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Modal from "./Modal";
 
+import { Employee } from "./types/employee-types";
+
 interface Props {
-  employee: any;
+  employee: Employee;
 }
 
 const DropdownMenuEmployee = ({ employee }: Props) => {

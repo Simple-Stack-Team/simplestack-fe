@@ -13,7 +13,6 @@ export default function TeamFinder() {
   const { orgId, projectId } = useParams()
   const { data: session } = useSession()
   
-  //@ts-ignore
   const token = session?.user?.access_token;
 
   const onSubmit = async (values: any) => {

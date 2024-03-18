@@ -19,7 +19,7 @@ interface DataResult {
 }
 
 const useFetch = ({ apiKey, url }: Props): DataResult => {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<any>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<ErrorData | null>(null);
 
