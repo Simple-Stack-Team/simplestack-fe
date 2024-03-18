@@ -10,3 +10,9 @@ export interface EmployeeProject {
   startWork: Date | string
   endWork: Date | string | null
 }
+
+export interface EmployeeProjectResponse {
+  proposedMembers: EmployeeProject[]
+  activeMembers: EmployeeProject[]
+  pastMembers: EmployeeProject[]
+}
