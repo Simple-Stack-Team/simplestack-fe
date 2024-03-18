@@ -1,16 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import classNames from "classnames";
 import { useSession } from "next-auth/react";
-import { LuSearchCode } from "react-icons/lu";
+import classNames from "classnames";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 import RoleCheck from "@/components/RoleCheck";
 import { sidebarLinks } from "@/constants/sidebar-link";
 import Profile from "@/components/Profile";
 import logo from "@/public/logoWhiteTheme.svg";
-import Image from "next/image";
 
 interface SidebarProps {
   isOpen: boolean;

@@ -2,9 +2,9 @@ import { getServerSession } from "next-auth";
 import { FC } from "react";
 
 import { authOption } from "@/app/api/auth/[...nextauth]/constants/next-auth-config";
-import { ProposalTypes } from "./types/proposals-types";
-import AssignmentProposal from "./_components/AssignmentProposal";
-import DeallocationProposal from "./_components/DeallocationProposal";
+import { ProposalTypes } from "@/app/[orgId]/dashboard/proposals/types/proposals-types";
+import AssignmentProposal from "@/app/[orgId]/dashboard/proposals/_components/AssignmentProposal";
+import DeallocationProposal from "@/app/[orgId]/dashboard/proposals/_components/DeallocationProposal";
 import { getData } from "@/lib/getFetch";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

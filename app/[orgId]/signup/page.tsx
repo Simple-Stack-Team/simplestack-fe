@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter, useParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -8,7 +9,6 @@ import Link from "next/link";
 import { z } from "zod";
 
 import SignUpEmployee from "@/components/SignUpEmployee";
-import { useRouter, useParams } from "next/navigation";
 import { ErrorResponse } from "@/types/ErrorResponse";
 import AlertMessage from "@/components/AlertMessage";
 import { Button } from "@/components/ui/button";

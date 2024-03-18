@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import ActionsTable from "./ActionsTable";
+import ActionsTable from "@/app/[orgId]/dashboard/teamroles/ActionsTable";
 
 interface TeamRoles {
   id: string;

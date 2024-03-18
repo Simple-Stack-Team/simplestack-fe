@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import DeleteSkill from "./DeleteSkill";
+import DeleteSkill from "@/app/[orgId]/dashboard/skillassignment/_components/DeleteSkill";
 
 interface Skills {
   id: string;

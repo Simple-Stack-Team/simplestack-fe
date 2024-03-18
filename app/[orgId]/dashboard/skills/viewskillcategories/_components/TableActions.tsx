@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import DeleteCategory from "./DeleteCategory";
+import DeleteCategory from "@/app/[orgId]/dashboard/skills/viewskillcategories/_components/DeleteCategory";
 
 const TableActions = ({
   categoryName,

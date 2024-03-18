@@ -1,7 +1,6 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import React from "react";
 
 interface Props {
   params: { orgId: string; skillId: string };

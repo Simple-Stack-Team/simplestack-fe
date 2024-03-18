@@ -1,4 +1,4 @@
-import AssignMember from './AssignMember'
+import AssignMember from '@/app/[orgId]/dashboard/departments/assignmanager/AssignMember'
 
 const AssignManager = () => {
   return (

@@ -1,8 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Employee } from "@/types/Employee";
-import DropdownMenuEmployee from "./DropdownMenuEmployee";
+import DropdownMenuEmployee from "@/app/[orgId]/dashboard/employees/DropdownMenuEmployee";
 import { DataTableColumnHeader } from "./ColumnHeader";
-import { Dice1 } from "lucide-react";
 
 const roleStyles = {
   ORGANIZATION_ADMIN: {
@@ -83,6 +82,7 @@ export const columns: ColumnDef<Employee>[] = [
     cell: ({ row }) => {
       const employee = row.original;
 
+      //@ts-ignore
       return <DropdownMenuEmployee employee={employee} />;
     },
   },

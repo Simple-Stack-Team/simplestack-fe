@@ -1,5 +1,7 @@
-import classNames from "classnames";
 import { HiOutlineUserGroup } from "react-icons/hi";
+import { FileSpreadsheet } from "lucide-react";
+import { FaRegUser } from "react-icons/fa";
+import classNames from "classnames";
 import {
   LuLayoutGrid,
   LuFileCheck,
@@ -8,10 +10,6 @@ import {
   LuSquareCode,
   LuUserPlus,
 } from "react-icons/lu";
-import { FaRegUser } from "react-icons/fa";
-import { MdOutlineAssignmentTurnedIn } from "react-icons/md";
-import { GoProject } from "react-icons/go";
-import { FileSpreadsheet } from "lucide-react";
 
 import { EMPLOYEE_ROLES } from "@/types/employee-types";
 

@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import {
@@ -24,10 +25,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { formSchema } from "./_constants/SkillsFormSchema";
+import { formSchema } from "@/app/[orgId]/dashboard/skills/new/_constants/SkillsFormSchema";
 import useFetch from "@/hooks/useFetch";
 import { Checkbox } from "@/components/ui/checkbox";
-import { toast } from "sonner";
 
 type Category = {
   id: string;

@@ -1,5 +1,5 @@
-import TeamRolesTable from "./TeamRolesTable";
-import CreateTeamRoles from "./CreateTeamRoles";
+import TeamRolesTable from "@/app/[orgId]/dashboard/teamroles/TeamRolesTable";
+import CreateTeamRoles from "@/app/[orgId]/dashboard/teamroles/CreateTeamRoles";
 
 const TeamRolesPage = () => {
   return (

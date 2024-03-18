@@ -2,10 +2,10 @@
 
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
-
-import { fetchAcceptProposal } from "../fetchAcceptProposal";
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+
+import { fetchAcceptProposal } from "@/app/[orgId]/dashboard/proposals/fetchAcceptProposal";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   deallocationId: string;

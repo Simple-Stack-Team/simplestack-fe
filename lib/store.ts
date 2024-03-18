@@ -1,4 +1,5 @@
 import { create } from "zustand";
+
 import { Employee } from "@/types/Employee";
 
 type EmployeeStore = {
