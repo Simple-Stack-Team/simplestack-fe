@@ -15,13 +15,13 @@ export default async function Page({ params: { orgId } }: Props) {
     <>
       <h1 className="mb-2 text-lg font-semibold">Dashboard</h1>
       <Separator />
-      {/* <EmployeeProfile /> */}
+      <EmployeeProfile />
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
         <DashboardCard title="Employees" numberOf="2,432" />
         <DashboardCard title="Departments" numberOf="32" />
         <DashboardCard title="Projects" numberOf="123" />
       </div>
-      <div className="relative mt-8 h-[240px] w-full overflow-hidden rounded-xl border p-4 md:h-[320px]">
+      <div className="relative mt-8 h-[230px] w-full overflow-hidden rounded-xl border p-4 md:h-[360px]">
         <Image
           src={group2}
           alt="People connection"

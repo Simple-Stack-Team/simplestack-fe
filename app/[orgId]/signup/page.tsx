@@ -16,12 +16,18 @@ import { Form } from "@/components/ui/form";
 import { formSchemaSignUp } from "@/app/[orgId]/signup/constants/signup-constants";
 import logo from "@/public/logoWhiteTheme.svg";
 import global from "@/public/gradient.svg";
+import useFetch from "@/hooks/useFetch";
 
 const SignupEmployee = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
   const router = useRouter();
   const params = useParams<{ orgId: string }>();
   const orgId = params.orgId;
+
+  const apiKey = process.env.NEXT_PUBLIC_API_URL!;
+  const url = `/organizations/${orgId}`;
+
+  const { data } = useFetch({ apiKey, url });
 
   const form = useForm<z.infer<typeof formSchemaSignUp>>({
     resolver: zodResolver(formSchemaSignUp),
@@ -51,18 +57,19 @@ const SignupEmployee = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-2 pb-4 lg:px-16"
+            className="space-y-2 px-8 pb-4 lg:px-16"
           >
             <div className="mb-8 mt-4 flex items-center gap-2">
               <Image src={logo} alt="Logo" width={32} />
-              <p className="font-bold">Simple Stack</p>
+              <p className="font-bold">Simple Team</p>
             </div>
             <h1 className="mb-4 text-3xl font-semibold">
               Keep your online <br />
               business organized
             </h1>
             <p className="text-xs font-medium text-gray-500">
-              Sign up to start working in organization name
+              Sign up to start working in{" "}
+              <span className="font-semibold text-black">{data.orgName}</span>
             </p>
             {error.status === 409 && (
               <AlertMessage>The name already exist</AlertMessage>
