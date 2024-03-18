@@ -26,7 +26,7 @@ const FormSchema = z.object({
 })
 
 interface Props {
-  onSubmit: (data: z.infer<typeof FormSchema> | any) => void
+  onSubmit: (data: z.infer<typeof FormSchema>) => void
 }
 
 export function TeamFinderForm({onSubmit}: Props) {

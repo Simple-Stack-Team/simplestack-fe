@@ -4,7 +4,7 @@ export interface SuggestedEmployee {
   id: string,
   name: string,
   personalSkills: PersonalSkill[]
-  projects: any
+  projects: EmployeeProject[]
   assignmentProposal: Assignment[]
 }
 
