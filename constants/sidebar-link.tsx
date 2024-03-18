@@ -7,10 +7,9 @@ import {
   LuFileBarChart2,
   LuSquareCode,
   LuUserPlus,
+  LuBellRing,
 } from "react-icons/lu";
 import { FaRegUser } from "react-icons/fa";
-import { MdOutlineAssignmentTurnedIn } from "react-icons/md";
-import { GoProject } from "react-icons/go";
 import { FileSpreadsheet } from "lucide-react";
 
 import { EMPLOYEE_ROLES } from "@/types/employee-types";
@@ -54,9 +53,7 @@ export const sidebarLinks: Sidebar[] = [
     href: "/dashboard/departments",
     label: "Departments",
     icon: <LuLayoutGrid className={style} style={{ fontSize: "20px" }} />,
-    roles: [
-      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
-    ],
+    roles: [EMPLOYEE_ROLES.ORGANIZATION_ADMIN],
   },
   {
     href: "/dashboard/mydepartment",
@@ -110,6 +107,12 @@ export const sidebarLinks: Sidebar[] = [
         style={{ fontSize: "20px", marginRight: "-2px", marginLeft: "-2px" }}
       />
     ),
+    roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
+  },
+  {
+    href: "/dashboard/notifications",
+    label: "Notification",
+    icon: <LuBellRing className={style} style={{ fontSize: "20px" }} />,
     roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
   },
 ];
