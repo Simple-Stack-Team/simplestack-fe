@@ -16,7 +16,7 @@ type View = {
   projectsId: string;
   name: string;
   period: string;
-  startDate: string;
+  startDate: Date;
   deadlineDate: string;
   status: string;
   description: string;

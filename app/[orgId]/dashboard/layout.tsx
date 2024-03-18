@@ -46,7 +46,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="relative flex-1 overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <div className={`${sidebarStyle}`}>
-          {/* Navbar */}
           <div className={`${isMobile ? "flex justify-between" : ""}`}>
             {isMobile && (
               <CiMenuBurger
