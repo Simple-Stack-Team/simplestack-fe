@@ -4,6 +4,7 @@ import group2 from "@/public/Group2.svg";
 import { Separator } from "@/components/ui/separator";
 import InviteUsers from "@/components/InviteUsers";
 import DashboardCard from "@/components/DashboardCard";
+import EmployeeProfile from "./EmployeeProfile";
 
 interface Props {
   params: { orgId: string };
@@ -14,6 +15,7 @@ export default async function Page({ params: { orgId } }: Props) {
     <>
       <h1 className="mb-2 text-lg font-semibold">Dashboard</h1>
       <Separator />
+      {/* <EmployeeProfile /> */}
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
         <DashboardCard title="Employees" numberOf="2,432" />
         <DashboardCard title="Departments" numberOf="32" />

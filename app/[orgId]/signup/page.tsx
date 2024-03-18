@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { formSchemaSignUp } from "@/app/[orgId]/signup/constants/signup-constants";
 import logo from "@/public/logoWhiteTheme.svg";
-// import global from "@/public/signup.png";
 import global from "@/public/gradient.svg";
 
 const SignupEmployee = () => {
@@ -63,7 +62,7 @@ const SignupEmployee = () => {
               business organized
             </h1>
             <p className="text-xs font-medium text-gray-500">
-              Sign up to start right now for free
+              Sign up to start working in organization name
             </p>
             {error.status === 409 && (
               <AlertMessage>The name already exist</AlertMessage>

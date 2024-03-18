@@ -11,7 +11,7 @@ const InviteUsers = () => {
   const { orgId } = useParams();
   const router = useRouter();
 
-  const textToCopy = `https://simplestack.azurewebsites.net/${orgId}/signup`;
+  const textToCopy = `https://simplestack-fe.vercel.app/${orgId}/signup`;
 
   const handleCopy = async (url: string) => {
     try {
