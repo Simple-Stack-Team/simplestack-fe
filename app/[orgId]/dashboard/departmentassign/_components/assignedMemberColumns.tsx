@@ -1,8 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
 import { UserRound } from "lucide-react";
-import Link from "next/link";
 
 import { DepartmentMembers } from "@/types/department-assign-types";
 import {

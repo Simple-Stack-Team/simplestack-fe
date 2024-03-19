@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { FaEllipsis } from "react-icons/fa6";
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
 import { DataTable } from "./_components/data-table";
 import { columns } from "./_components/columns";
 import SkeletonTable from "@/components/SkeletonTable";
