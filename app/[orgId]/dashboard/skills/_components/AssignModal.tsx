@@ -76,8 +76,12 @@ export function AssignModal({
       },
     );
 
-    if (res.status === 409) {
-      toast("", {
+    if (res.ok) {
+      toast("Success", {
+        description: "Skill has been successfuly assigned to department",
+      });
+    } else if (res.status === 409) {
+      toast("Failed", {
         description: "Department already contains this skill",
       });
     }

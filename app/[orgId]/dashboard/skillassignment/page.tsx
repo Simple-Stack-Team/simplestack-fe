@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/sonner"
 
 import { getData } from "@/lib/getFetch";
 import { DataTable } from "@/components/data-table";

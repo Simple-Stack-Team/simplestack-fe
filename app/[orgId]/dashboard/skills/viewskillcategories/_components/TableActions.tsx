@@ -34,7 +34,10 @@ const TableActions = ({
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <Dialog>
-          <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
+          <DropdownMenuItem
+            onSelect={(e) => e.preventDefault()}
+            className="w-full"
+          >
             <DeleteCategory categoryId={categoryId} />
           </DropdownMenuItem>
         </Dialog>

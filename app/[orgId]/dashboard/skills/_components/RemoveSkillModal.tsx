@@ -78,7 +78,7 @@ export function RemoveSkillModal({
 
     if (res.status === 409) {
       toast("", {
-        description: "Department already contains this skill",
+        description: "Department do not contain this skill",
       });
     }
   }

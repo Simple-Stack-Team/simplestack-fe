@@ -1,5 +1,6 @@
 import DepartmentsTable from "@/app/[orgId]/dashboard/departments/DepartmentsTable";
 import CreateDepartments from "@/app/[orgId]/dashboard/departments/CreateDepartments";
+import { Toaster } from "@/components/ui/sonner"
 
 const DepartmentPage = () => {
   return (
@@ -13,6 +14,7 @@ const DepartmentPage = () => {
       <div className="mt-8">
         <DepartmentsTable />
       </div>
+      <Toaster />
     </div>
   );
 };

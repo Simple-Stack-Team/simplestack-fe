@@ -63,6 +63,8 @@ const CreateDepartments = () => {
 
     if (!res.ok) {
       return null;
+    } else {
+      location.reload();
     }
   }
 

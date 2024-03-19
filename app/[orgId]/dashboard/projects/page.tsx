@@ -45,7 +45,7 @@ const ProjectsPage = ({ params: { orgId } }: Props) => {
               </Button>
             </SheetTrigger>
             <SheetContent side="top">
-              <div className="mt-6 flex flex-col gap-4 border">
+              <div className="mt-6 flex flex-col gap-2">
                 <RoleCheck roles={[EMPLOYEE_ROLES.PROJECT_MANAGER]}>
                   <Button asChild>
                     <Link href={`/${orgId}/dashboard/projects/new`}>
