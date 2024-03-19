@@ -1,11 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { z } from "zod";
 
 import SignUpEmployee from "@/components/SignUpEmployee";
@@ -22,11 +22,11 @@ const SignupEmployee = () => {
   const router = useRouter();
   const params = useParams<{ orgId: string }>();
   const orgId = params.orgId;
-  const [orgName, setOrgName] = useState<string>('')
+  const [orgName, setOrgName] = useState<string>("");
 
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
   const url = `/organizations/${orgId}`;
-  
+
   useEffect(() => {
     async function getOrgName() {
       const response = await fetch(`${apiKey}${url}`);
@@ -35,10 +35,9 @@ const SignupEmployee = () => {
         setOrgName(responseData.orgName);
       }
     }
-    
-    getOrgName()
-  }, [])
 
+    getOrgName();
+  }, []);
 
   const form = useForm<z.infer<typeof formSchemaSignUp>>({
     resolver: zodResolver(formSchemaSignUp),

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Skills } from "@/types/skills-types";
+import { useState, useEffect } from "react";
 
 interface DataResult {
   skillsFetch: Skills[];

@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import React from "react";
 
 export default function ProjectsPageLayout({
@@ -9,9 +7,5 @@ export default function ProjectsPageLayout({
   children: React.ReactNode;
   params: { orgId: string };
 }>) {
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }

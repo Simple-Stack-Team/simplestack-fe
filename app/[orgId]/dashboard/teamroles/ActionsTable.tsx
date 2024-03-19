@@ -1,7 +1,6 @@
 "use client";
 
 import { MoreHorizontal } from "lucide-react";
-
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 
@@ -52,7 +51,7 @@ const ActionsTable = ({ teamRoleId, name }: Props) => {
           <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end"> 
+      <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <Dialog>
           <DropdownMenuItem onSelect={(e) => e.preventDefault()} asChild>
@@ -60,7 +59,7 @@ const ActionsTable = ({ teamRoleId, name }: Props) => {
           </DropdownMenuItem>
         </Dialog>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <DeleteModal handleDelete={handleDelete}/>
+          <DeleteModal handleDelete={handleDelete} />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

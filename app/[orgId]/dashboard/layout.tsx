@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 
 import Sidebar from "@/components/Sidebar";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface LayoutProps {
   children: React.ReactNode;

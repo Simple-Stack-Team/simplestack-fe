@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Projects } from "@/types/projects-types";
+import { useState, useEffect } from "react";
 
 interface DataResult {
   projectsFetch: Projects[];

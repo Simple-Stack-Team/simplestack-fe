@@ -4,7 +4,6 @@ import { Cross2Icon } from "@radix-ui/react-icons";
 import { Table } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
-
 import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter";
 
 export const statuss = [

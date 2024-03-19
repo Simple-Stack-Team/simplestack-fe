@@ -1,8 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import { Card, CardContent } from "@/components/ui/card";
+
 import { useParams, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 interface Notification {

@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { CheckIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
-import { Textarea } from "@/components/ui/textarea"
+import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import {
   Command,
@@ -18,7 +18,6 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from "@/components/ui/command";
 import {
   Popover,
@@ -37,7 +36,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -48,8 +46,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Assignment, EmployeeProject, SuggestedEmployee, TeamRole } from "@/app/[orgId]/dashboard/projects/[projectId]/types/teamfinder-types";
+} from "@/components/ui/select";
+import {
+  Assignment,
+  EmployeeProject,
+  SuggestedEmployee,
+  TeamRole,
+} from "@/app/[orgId]/dashboard/projects/[projectId]/types/teamfinder-types";
 import { toast } from "@/components/ui/use-toast";
 import useFetch from "@/hooks/useFetch";
 
@@ -58,11 +61,11 @@ const FormSchema = z.object({
     required_error: "Please select work hours.",
   }),
   comments: z.string().min(1),
-  teamRoles: z.string().array().min(1)
+  teamRoles: z.string().array().min(1),
 });
 
 interface Props {
-  employee: SuggestedEmployee
+  employee: SuggestedEmployee;
 }
 
 export const ProposeEmployee = ({ employee }: Props) => {
@@ -77,15 +80,20 @@ export const ProposeEmployee = ({ employee }: Props) => {
   const createAssignmentUrl = `/organizations/${orgId}/projects/${projectId}/employee/${employee.id}/assignment`;
 
   const { data, loading, error } = useFetch({ apiKey, url });
-  const { data: projects, loading: loadingProjects, error: errorProjects } = useFetch({ apiKey, url: projectsUrl });
-  
-  let totalHours = 0
-  if(!!projects.currentProjects)
+  const {
+    data: projects,
+    loading: loadingProjects,
+    error: errorProjects,
+  } = useFetch({ apiKey, url: projectsUrl });
+
+  let totalHours = 0;
+  if (!!projects.currentProjects)
     totalHours = projects.currentProjects.reduce(
-      (totalHours: number, project: EmployeeProject) => totalHours + project.workHours,
+      (totalHours: number, project: EmployeeProject) =>
+        totalHours + project.workHours,
       0,
     );
-  const [teamRoles, setTeamRoles] = useState<string[]>([])
+  const [teamRoles, setTeamRoles] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -93,55 +101,65 @@ export const ProposeEmployee = ({ employee }: Props) => {
       teamRoles,
     },
   });
-  
+
   const handleSelectOption = (option: string) => {
-    setTeamRoles(prevRoles => {
+    setTeamRoles((prevRoles) => {
       if (prevRoles.includes(option)) {
-        form.setValue('teamRoles', prevRoles.filter(role => role !== option))
-        return prevRoles.filter(role => role !== option);
+        form.setValue(
+          "teamRoles",
+          prevRoles.filter((role) => role !== option),
+        );
+        return prevRoles.filter((role) => role !== option);
       } else {
-        form.setValue('teamRoles', [...prevRoles, option])
+        form.setValue("teamRoles", [...prevRoles, option]);
         return [...prevRoles, option];
       }
     });
-    
   };
 
   const onSubmit = async (values: z.infer<typeof FormSchema> | any) => {
     values = {
       ...values,
-      workHours: parseInt(values.workHours!)
-    }
-    
-    await fetch(process.env.NEXT_PUBLIC_API_URL!+createAssignmentUrl, {
+      workHours: parseInt(values.workHours!),
+    };
+
+    await fetch(process.env.NEXT_PUBLIC_API_URL! + createAssignmentUrl, {
       method: "POST",
       body: JSON.stringify(values),
       headers: {
-        'Content-Type': 'application/json',
-        "Authorization": "Bearer " + token
-      }
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     }).then(() =>
-    toast({
-      title: "Successfully proposed member",
-      duration: 1500
-    }))
-    form.clearErrors()
-    
-    
-  }
+      toast({
+        title: "Successfully proposed member",
+        duration: 1500,
+      }),
+    );
+    form.clearErrors();
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" disabled={employee.assignmentProposal.some((assignment: Assignment)=> assignment.employeeId === employee.id)}>
-          {
-            employee.assignmentProposal.some((assignment: Assignment)=> assignment.employeeId === employee.id) ? "Proposed" : "Propose"
-          }
+        <Button
+          variant="outline"
+          disabled={employee.assignmentProposal.some(
+            (assignment: Assignment) => assignment.employeeId === employee.id,
+          )}
+        >
+          {employee.assignmentProposal.some(
+            (assignment: Assignment) => assignment.employeeId === employee.id,
+          )
+            ? "Proposed"
+            : "Propose"}
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="mb-4 font-bold">Propose {employee.name}</DialogTitle>
+          <DialogTitle className="mb-4 font-bold">
+            Propose {employee.name}
+          </DialogTitle>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -161,9 +179,14 @@ export const ProposeEmployee = ({ employee }: Props) => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {Array.from({length: 8-totalHours}, (_, index) => index).map((index) =>
-                        <SelectItem value={`${index+1}`} key={index}>{index+1}</SelectItem>
-                      )}
+                      {Array.from(
+                        { length: 8 - totalHours },
+                        (_, index) => index,
+                      ).map((index) => (
+                        <SelectItem value={`${index + 1}`} key={index}>
+                          {index + 1}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -183,14 +206,14 @@ export const ProposeEmployee = ({ employee }: Props) => {
                           <>
                             <div className="hidden space-x-1 lg:flex">
                               {teamRoles.length > 4 ? (
-                                <Badge
-                                  className="rounded-lg px-1 font-normal"
-                                >
+                                <Badge className="rounded-lg px-1 font-normal">
                                   {teamRoles.length} selected
                                 </Badge>
                               ) : (
                                 data.teamRoles
-                                  .filter((option: TeamRole) => teamRoles.includes(option.name))
+                                  .filter((option: TeamRole) =>
+                                    teamRoles.includes(option.name),
+                                  )
                                   .map((option: TeamRole) => (
                                     <Badge
                                       key={option.id}
@@ -202,7 +225,11 @@ export const ProposeEmployee = ({ employee }: Props) => {
                               )}
                             </div>
                           </>
-                        ) : <p className="text-slate-500 text-sm font-normal">Select team roles from the list</p> }
+                        ) : (
+                          <p className="text-sm font-normal text-slate-500">
+                            Select team roles from the list
+                          </p>
+                        )}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-[200px] p-0" align="start">
@@ -212,11 +239,14 @@ export const ProposeEmployee = ({ employee }: Props) => {
                           <CommandEmpty>No results found.</CommandEmpty>
                           <CommandGroup>
                             {data.teamRoles.map((option: TeamRole) => {
-                              const isSelected = teamRoles.includes(option.name);
+                              const isSelected = teamRoles.includes(
+                                option.name,
+                              );
                               return (
                                 <CommandItem
                                   key={option.id}
-                                  onSelect={() => handleSelectOption(option.name)
+                                  onSelect={() =>
+                                    handleSelectOption(option.name)
                                   }
                                   className="cursor-pointer"
                                 >
@@ -231,7 +261,6 @@ export const ProposeEmployee = ({ employee }: Props) => {
                                     <CheckIcon className="h-4 w-4 text-white" />
                                   </div>
                                   <span>{option.name}</span>
-
                                 </CommandItem>
                               );
                             })}
@@ -262,11 +291,11 @@ export const ProposeEmployee = ({ employee }: Props) => {
               )}
             />
             {/* <DialogTrigger asChild> */}
-              <Button type="submit">Propose</Button>
+            <Button type="submit">Propose</Button>
             {/* </DialogTrigger> */}
           </form>
         </Form>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

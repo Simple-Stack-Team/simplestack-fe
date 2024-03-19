@@ -8,8 +8,6 @@ import React, { useEffect, useState } from "react";
 import ProjectDetail from "./components/project-detail";
 import { Badge } from "@/components/ui/badge";
 import { EmployeeProject } from "./team-view/types/team-view-types";
-import { EMPLOYEE_ROLES } from "@/types/employee-types";
-import RoleCheck from "@/components/RoleCheck";
 
 type TeamRole = {
   teamroleId: string;

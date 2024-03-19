@@ -3,12 +3,11 @@ import { SkillC } from "@/types/skills-types";
 import { Separator } from "./ui/separator";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "./ui/badge";
 
 const SkillDetails = async ({ url }: { url: string }) => {
   const skill = (await getData(url)) as SkillC;
-  
-  if(!skill) return <h1>Loading...</h1>
+
+  if (!skill) return <h1>Loading...</h1>;
 
   return (
     <div>

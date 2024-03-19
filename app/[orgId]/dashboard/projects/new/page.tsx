@@ -1,9 +1,14 @@
 "use client";
+
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { LuPlus } from "react-icons/lu";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Trash2 } from "lucide-react";
 import { format } from "date-fns";
 import { z } from "zod";
+
 import useFetchTeamRoles from "@/hooks/useFetchTeamRoles";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Textarea } from "@/components/ui/textarea";
@@ -31,9 +36,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { LuPlus } from "react-icons/lu";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
