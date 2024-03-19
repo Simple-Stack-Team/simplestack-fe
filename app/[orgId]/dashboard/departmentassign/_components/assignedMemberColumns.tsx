@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import DeleteMemberFromDepartment from "./DeleteMemberFromDepartment";
+import DeleteMemberFromDepartment from "@/app/[orgId]/dashboard/departmentassign/_components/DeleteMemberFromDepartment";
 import { Button } from "@/components/ui/button";
 
 export const assignMembersColumns: ColumnDef<DepartmentMembers>[] = [

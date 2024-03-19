@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "./ui/alert-dialog";
+} from "@/components/ui/alert-dialog";
 import { Trash2 } from "lucide-react";
 
 interface Props {

@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Skills } from "@/types/skills-types";
-import TableRowActions from "./TableRowActions";
+import TableRowActions from "@/app/[orgId]/dashboard/skillassignment/_components/TableRowActions";
 
 export const skillassignmentcolumns: ColumnDef<Skills>[] = [
   {

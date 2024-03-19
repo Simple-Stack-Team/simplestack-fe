@@ -8,9 +8,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 
-import { ProposalTypes } from "../types/proposals-types";
-import AcceptDeallocation from "./AcceptDeallocation";
-import RejectDeallocation from "./RejectDeallocation";
+import { ProposalTypes } from "@/app/[orgId]/dashboard/proposals/types/proposals-types";
+import AcceptDeallocation from "@/app/[orgId]/dashboard/proposals/_components/AcceptDeallocation";
+import RejectDeallocation from "@/app/[orgId]/dashboard/proposals/_components/RejectDeallocation";
 
 const DeallocationProposal = ({ proposal }: { proposal: ProposalTypes }) => {
   const startDate = new Date(proposal.project.startDate).toLocaleDateString();

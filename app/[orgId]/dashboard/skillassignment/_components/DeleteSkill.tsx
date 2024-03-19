@@ -1,10 +1,10 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-
-import { toast } from "sonner";
-import DeleteModal from "@/components/DeleteModal";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+import DeleteModal from "@/components/DeleteModal";
 
 const DeleteSkill = ({ id }: { id: string }) => {
   const { data: session } = useSession();

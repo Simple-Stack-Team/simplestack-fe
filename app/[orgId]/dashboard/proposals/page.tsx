@@ -1,5 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
-import Assignment from "./Assignment";
+import Assignment from "@/app/[orgId]/dashboard/proposals/Assignment";
 import { Separator } from "@/components/ui/separator";
 
 interface Props {

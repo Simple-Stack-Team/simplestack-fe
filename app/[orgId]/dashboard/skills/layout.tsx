@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import Menubar from "./_components/Menubar";
+import Menubar from "@/app/[orgId]/dashboard/skills/_components/Menubar";
 
 export default function SkillPageLayout({
   children,

@@ -8,10 +8,9 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
-
-import { ProposalTypes } from "../types/proposals-types";
-import AcceptAssignment from "./AcceptAssignment";
-import RejectAssignment from "./RejectAssignment";
+import { ProposalTypes } from "@/app/[orgId]/dashboard/proposals/types/proposals-types";
+import AcceptAssignment from "@/app/[orgId]/dashboard/proposals/_components/AcceptAssignment";
+import RejectAssignment from "@/app/[orgId]/dashboard/proposals/_components/RejectAssignment";
 
 const AssignmentProposal = ({ proposal }: { proposal: ProposalTypes }) => {
   const startDate = new Date(proposal.project.startDate).toLocaleDateString();
