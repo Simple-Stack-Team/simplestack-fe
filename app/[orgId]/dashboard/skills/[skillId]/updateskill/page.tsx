@@ -49,7 +49,6 @@ const UpdateSkillPage = () => {
   const { data } = useFetch({ apiKey, url });
 
   const authorName = session?.user?.user.name;
-  console.log(session);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -66,6 +65,18 @@ const UpdateSkillPage = () => {
 
     const token = session?.user?.access_token;
     const authorId = session?.user?.user.sub;
+    
+    const res = await fetch(
+      `${apiKey}/organizations/${orgId}/employees/${authorId}/employee`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      },
+    );
+
+    const user = await res.json();
 
     try {
       const res = await fetch(
@@ -81,6 +92,22 @@ const UpdateSkillPage = () => {
       );
 
       if (res.ok) {
+        const data = await res.json();
+
+        if (values.isChecked) {
+          await fetch(
+            `${apiKey}/organizations/${orgId}/skills/assign-skill-to-department/${data?.id}/department/${user?.departmentId}/manager/${authorId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+              body: JSON.stringify(values),
+            },
+          );
+        }
+        
         router.refresh();
         router.push(`/${orgId}/dashboard/skills`);
       }

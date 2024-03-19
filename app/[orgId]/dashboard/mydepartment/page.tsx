@@ -15,7 +15,7 @@ interface Props {
   params: { orgId: string };
 }
 
-export default async function ProjectsPage({ params: { orgId } }: Props) {
+export default async function MyDepartmentPage({ params: { orgId } }: Props) {
   const { departmentId } = await getEmployee();
 
   if (!departmentId)
@@ -24,6 +24,11 @@ export default async function ProjectsPage({ params: { orgId } }: Props) {
   const data = await getData(
     `/organizations/${orgId}/departments/${departmentId}`,
   );
+  
+  if (!data)
+    return <h1 className="mb-8 text-2xl font-semibold">Loading...</h1>;
+    
+
 
   const { skills } = data;
 

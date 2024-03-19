@@ -14,10 +14,16 @@ export default async function Page({ params: { orgId } }: Props) {
   const urlUE = `/organizations/${orgId}/employees/unassigned-employees`;
 
   const { departmentId } = await getEmployee();
+  
+  if(!departmentId) return <h1>No assigned department manager yet...</h1>
+  
   const urlAE = `/organizations/${orgId}/departments/${departmentId}/members`;
 
   const unassignedEmployees = await getData(urlUE);
   const assignedEmployees = await getData(urlAE);
+  
+  if(!unassignedEmployees || !assignedEmployees) return <h1>Loading...</h1>
+  
   const { members } = assignedEmployees;
 
   return (

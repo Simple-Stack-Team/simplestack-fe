@@ -26,6 +26,8 @@ export default async function SkillAssignmentPage({
   const userSkills = await getData(
     `/organizations/${orgId}/employees/${empId}/employee`,
   );
+  
+  if(!userSkills || !skills) return  <h1>Loading...</h1>
 
   const { personalSkills } = userSkills;
 

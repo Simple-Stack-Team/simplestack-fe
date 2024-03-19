@@ -7,6 +7,8 @@ import { Badge } from "./ui/badge";
 
 const SkillDetails = async ({ url }: { url: string }) => {
   const skill = (await getData(url)) as SkillC;
+  
+  if(!skill) return <h1>Loading...</h1>
 
   return (
     <div>
@@ -34,12 +36,6 @@ const SkillDetails = async ({ url }: { url: string }) => {
             <p>Author email</p>
             <span className="font-semibold">{skill.author.email}</span>
           </div>
-        </div>
-        <div className="mt-4 flex items-center gap-4">
-          <p>Departments</p>
-          {skill.departmentNames.map((department, index) => (
-            <Badge key={index}>{department}</Badge>
-          ))}
         </div>
       </div>
     </div>
