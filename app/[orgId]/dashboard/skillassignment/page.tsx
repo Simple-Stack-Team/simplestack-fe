@@ -31,7 +31,7 @@ export default async function SkillAssignmentPage({
 
   return (
     <>
-      <h1 className="mb-4 text-2xl font-semibold">Skill Assignment</h1>
+      <h1 className="mb-6 text-xl font-semibold">Skill Assignment</h1>
       <Tabs defaultValue="allSkills" className="w-full">
         <TabsList>
           <TabsTrigger value="allSkills">All skills</TabsTrigger>

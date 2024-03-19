@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { CopyPlus } from "lucide-react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -62,7 +63,7 @@ export function AssignModal({
   }, [base_url, token, orgId, authorId]);
 
   async function onSubmit() {
-    await fetch(
+    const res = await fetch(
       `${base_url}/organizations/${orgId}/skills/assign-skill-to-department/${skillId}/department/${user?.departmentId}/manager/${user?.id}`,
       {
         method: "PUT",
@@ -73,6 +74,12 @@ export function AssignModal({
         body: JSON.stringify([skillId]),
       },
     );
+
+    if (res.status === 409) {
+      toast("", {
+        description: "Department already contains this skill",
+      });
+    }
   }
 
   return (
@@ -80,7 +87,7 @@ export function AssignModal({
       <DialogTrigger asChild>
         <div className="flex cursor-pointer items-center gap-2">
           <CopyPlus size={16} />
-          <div>Assign skill</div>
+          <div>Assign to department</div>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

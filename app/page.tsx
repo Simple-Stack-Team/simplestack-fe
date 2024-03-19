@@ -49,10 +49,7 @@ export default async function HelloWorld() {
           </div>
         </div>
       </div>
-      <div className="my-8">
-        <SponsorsSection />
-      </div>
-      <div className="min-h-screen rounded-t-[1.25rem] bg-white"></div>
+      <SponsorsSection />
     </div>
   );
 }

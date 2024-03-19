@@ -70,9 +70,8 @@ export function DataTableToolbar<TData>({
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="mb-4 flex items-center justify-between overflow-auto">
       <div className="flex flex-1 items-center space-x-2">
-        {/* Filter for the 'name' column */}
         <Input
           placeholder="Filter tasks..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}

@@ -67,7 +67,7 @@ const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
   return (
     <div className="cursor-pointer px-2 py-1 text-sm hover:bg-slate-100">
       <DialogTrigger asChild>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 font-medium">
           <Pencil size={16} />
           Update
         </div>

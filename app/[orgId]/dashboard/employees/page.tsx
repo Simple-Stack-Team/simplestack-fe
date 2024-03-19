@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/sonner";
 const Employees = () => {
   return (
     <div>
-      <h1 className="mb-4 text-xl font-semibold">Employees</h1>
+      <h1 className="mb-6 text-xl font-semibold">Employees</h1>
       <EmployeesList />
       <Toaster />
     </div>

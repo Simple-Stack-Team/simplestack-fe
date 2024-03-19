@@ -7,37 +7,37 @@ import { BiLogoMongodb } from "react-icons/bi";
 import { FaGithub } from "react-icons/fa";
 
 const SponsorsSection = () => {
-  const size = 40;
+  const size = 32;
   return (
     <div className="bg-black p-8 text-white">
       <ul className="flex flex-wrap justify-center gap-8">
         <li className="flex items-center gap-2">
           <SiTailwindcss size={size} />
-          <p>Tailwind CSS</p>
+          <p className="text-sm font-normal">Tailwind CSS</p>
         </li>
         <li className="flex items-center gap-2">
           <FaReact size={size} />
-          <p>React</p>
+          <p className="text-sm font-normal">React</p>
         </li>
         <li className="flex items-center gap-2">
           <SiTypescript size={size} />
-          <p>TypeScript</p>
+          <p className="text-sm font-normal">TypeScript</p>
         </li>
         <li className="flex items-center gap-2">
           <TbBrandNextjs size={size} />
-          <p>Next JS</p>
+          <p className="text-sm font-normal">Next JS</p>
         </li>
         <li className="flex items-center gap-2">
           <SiNestjs size={size} />
-          <p>Nest JS</p>
+          <p className="text-sm font-normal">Nest JS</p>
         </li>
         <li className="flex items-center gap-2">
           <BiLogoMongodb size={size} />
-          <p>MongoDB</p>
+          <p className="text-sm font-normal">MongoDB</p>
         </li>
         <li className="flex items-center gap-2">
           <FaGithub size={size} />
-          <p>GitHub</p>
+          <p className="text-sm font-normal">GitHub</p>
         </li>
       </ul>
       <div>

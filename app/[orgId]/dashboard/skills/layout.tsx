@@ -15,7 +15,7 @@ export default function SkillPageLayout({
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Skills</h1>
+        <h1 className="mb-4 text-xl font-semibold">Skills</h1>
         <Button asChild>
           <Link href={`/${orgId}/dashboard/skills/new`}>New skill</Link>
         </Button>

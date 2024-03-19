@@ -11,6 +11,7 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 import { Trash2 } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface Props {
   handleDelete: () => void;
@@ -19,10 +20,10 @@ interface Props {
 const DeleteModal = ({ handleDelete }: Props) => {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-full">
-        <div className="flex w-full items-center gap-2 px-2 py-1 text-sm text-red-500 hover:bg-slate-100">
-          <Trash2 size={16} /> Delete
-        </div>
+      <AlertDialogTrigger>
+        <Button variant="ghost" size="icon">
+          <Trash2 size={16} color="red" />
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
