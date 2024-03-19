@@ -2,9 +2,9 @@
 
 import { signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
-import { LuLogOut } from "react-icons/lu";
-
 import { Button } from "@/components/ui/button";
+
+import { LuLogOut } from "react-icons/lu";
 
 const Profile = () => {
   const [showOptions, setShowOptions] = useState(false);

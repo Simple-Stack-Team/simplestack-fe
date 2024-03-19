@@ -1,7 +1,8 @@
+import classNames from "classnames";
+import { EMPLOYEE_ROLES } from "@/types/employee-types";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { FileSpreadsheet } from "lucide-react";
 import { FaRegUser } from "react-icons/fa";
-import classNames from "classnames";
 import {
   LuLayoutGrid,
   LuFileCheck,
@@ -11,8 +12,6 @@ import {
   LuUserPlus,
   LuBellRing,
 } from "react-icons/lu";
-
-import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
 interface Sidebar {
   href: string;
@@ -33,17 +32,13 @@ export const sidebarLinks: Sidebar[] = [
     href: "/dashboard/employees",
     label: "Employee",
     icon: <FaRegUser className={style} style={{ fontSize: "19px" }} />,
-    roles: [
-      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
-    ],
+    roles: [EMPLOYEE_ROLES.ORGANIZATION_ADMIN],
   },
   {
     href: "/dashboard/teamroles",
     label: "Team Roles ",
     icon: <HiOutlineUserGroup className={style} style={{ fontSize: "20px" }} />,
-    roles: [
-      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
-    ],
+    roles: [EMPLOYEE_ROLES.ORGANIZATION_ADMIN],
   },
   {
     href: "/dashboard/departments",
@@ -55,9 +50,7 @@ export const sidebarLinks: Sidebar[] = [
     href: "/dashboard/mydepartment",
     label: "My department",
     icon: <LuLayoutGrid className={style} style={{ fontSize: "20px" }} />,
-    roles: [
-      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
-    ],
+    roles: [EMPLOYEE_ROLES.DEPARTMENT_MANAGER],
   },
   {
     href: "/dashboard/skillassignment",
@@ -80,10 +73,7 @@ export const sidebarLinks: Sidebar[] = [
     href: "/dashboard/projects",
     label: "Projects",
     icon: <LuSquareCode className={style} style={{ fontSize: "21px" }} />,
-    roles: [
-      EMPLOYEE_ROLES.PROJECT_MANAGER,
-      EMPLOYEE_ROLES.EMPLOYEE,
-    ],
+    roles: [EMPLOYEE_ROLES.PROJECT_MANAGER, EMPLOYEE_ROLES.EMPLOYEE],
   },
   {
     href: "/dashboard/departmentassign",
