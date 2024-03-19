@@ -48,10 +48,10 @@ const DeleteSkill = ({ skillId, authorId }: Props) => {
     });
 
     if (res.ok) {
-      router.refresh();
       toast("The skill was successfully deleted", {
         description: now.toTimeString(),
       });
+      location.reload();
     }
   };
 

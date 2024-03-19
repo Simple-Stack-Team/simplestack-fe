@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams, usePathname } from "next/navigation";
+import { Toaster } from "@/components/ui/sonner"
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -48,6 +49,7 @@ const ViewSkillCategories = () => {
         <Link href={`${currentPath}/newcategory`}>New category</Link>
       </Button>
       <DataTable columns={columns} data={categories} />
+      <Toaster />
     </div>
   );
 };

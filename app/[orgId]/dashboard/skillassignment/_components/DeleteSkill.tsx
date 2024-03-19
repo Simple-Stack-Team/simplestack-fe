@@ -34,6 +34,11 @@ const DeleteSkill = ({ id }: { id: string }) => {
         description: `Oops! Something went wrong while trying to delete the skill. Please try again later.`,
         duration: 2000,
       });
+    } else {
+      toast("Success", {
+        description: `The skill has been successfuly deleted`,
+        duration: 2000,
+      });
     }
 
     router.refresh();

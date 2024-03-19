@@ -1,6 +1,11 @@
 "use client";
 
-import { MoreHorizontal, Pencil, SearchCode, LayoutListIcon } from "lucide-react";
+import {
+  MoreHorizontal,
+  Pencil,
+  SearchCode,
+  LayoutListIcon,
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { usePathname } from "next/navigation";
@@ -13,10 +18,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useProjectStore } from "@/lib/store";
 import DeleteProject from "./DeleteProject";
+import { useRouter } from "next/navigation";
 
 type Props = {
   projectId: string;
@@ -28,9 +33,8 @@ type Props = {
 const ActionsTable = ({ projectId, name, period, status }: Props) => {
   const { data: session } = useSession();
   const { orgId, id } = useParams();
-  const path = usePathname();
+  const router = useRouter();
 
-  // @ts-ignore
   const token = session?.user?.access_token;
 
   const deleteProjects = useProjectStore((state) => state.deleteProjects);
@@ -52,6 +56,7 @@ const ActionsTable = ({ projectId, name, period, status }: Props) => {
 
     if (res.ok) {
       deleteProjects(projectId);
+      location.reload();
     }
   };
 
@@ -65,13 +70,6 @@ const ActionsTable = ({ projectId, name, period, status }: Props) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-        <Dialog>
-          <DropdownMenuItem
-            onSelect={(e) => e.preventDefault()}
-            asChild
-          ></DropdownMenuItem>
-        </Dialog>
-        <DropdownMenuItem></DropdownMenuItem>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <DeleteProject onDelete={onDelete} />
         </DropdownMenuItem>
@@ -97,7 +95,9 @@ const ActionsTable = ({ projectId, name, period, status }: Props) => {
           className="space-x-2"
         >
           <SearchCode size={17} />
-          <Link href={`/${orgId}/dashboard/projects/${projectId}/teamfinder`}>Team finder</Link>
+          <Link href={`/${orgId}/dashboard/projects/${projectId}/teamfinder`}>
+            Team finder
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -14,5 +14,5 @@ export const onDelete = async (url: string, token: string, data: string): Promis
     throw new Error(`Request failed with status: ${res.status}`);
   }
 
-  return res.json();
+  return res;
 };

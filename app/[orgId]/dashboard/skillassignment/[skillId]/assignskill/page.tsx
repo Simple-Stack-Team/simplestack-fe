@@ -77,8 +77,12 @@ const AssignSkillPage = () => {
     });
 
     if (res.ok) {
+      toast("Success", {
+        description: `The skill has been successfuly assigned`,
+        duration: 2000,
+      });
+
       router.push(`/${orgId}/dashboard/skillassignment`);
-      router.refresh();
     } else {
       toast("Failed", {
         description: `Failed to assign the skill. Please try again.`,

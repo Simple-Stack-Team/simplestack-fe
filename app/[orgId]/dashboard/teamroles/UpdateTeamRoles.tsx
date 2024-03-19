@@ -4,6 +4,7 @@ import { Pencil } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
@@ -35,6 +36,7 @@ interface Props {
 }
 
 const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
+  const router = useRouter();
   const { data: session } = useSession();
   const { orgId } = useParams();
 
@@ -62,6 +64,9 @@ const UpdateTeamRoles = ({ name, teamRoleId }: Props) => {
     });
 
     if (!res.ok) return null;
+    else {
+      location.reload();
+    }
   };
 
   return (

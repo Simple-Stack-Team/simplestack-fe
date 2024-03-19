@@ -1,15 +1,15 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 import DeleteModal from "@/components/DeleteModal";
 import { onDelete } from "@/lib/onDelete";
+import { toast } from "sonner";
 
 const DeleteCategory = ({ categoryId }: { categoryId: string }) => {
   const { data: session } = useSession();
   const { orgId } = useParams();
-  const router = useRouter();
 
   const token = session?.user.access_token!;
 
@@ -17,12 +17,14 @@ const DeleteCategory = ({ categoryId }: { categoryId: string }) => {
     const apiKey = process.env.NEXT_PUBLIC_API_URL;
     const url = `${apiKey}/organizations/${orgId}/skills/skill-category/delete/${categoryId}`;
 
-    try {
-      const res = await onDelete(url, token, categoryId);
+    const res = await onDelete(url, token, categoryId);
 
-      if (res.ok) router.refresh();
-    } catch (error) {
-      console.error(error);
+    if (res.ok) {
+      toast("Success", {
+        description: "Category has been successfuly deleted",
+      });
+
+      location.reload();
     }
   };
 

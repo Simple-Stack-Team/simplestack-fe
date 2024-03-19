@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -52,8 +53,7 @@ const UpdateDepartment = ({ name, departmentId }: Props) => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (!session) return null;
 
-
-    const token = await session?.user?.access_token;
+    const token = session?.user?.access_token;
 
     const res = await fetch(url, {
       method: "PUT",
@@ -64,7 +64,13 @@ const UpdateDepartment = ({ name, departmentId }: Props) => {
       body: JSON.stringify(values),
     });
 
-    if (!res.ok) return null;
+    if (res.status === 409) {
+      toast("Failed", {
+        description: "Department with that name already exist",
+      });
+    } else {
+      location.reload();
+    }
   };
 
   return (
@@ -94,9 +100,6 @@ const UpdateDepartment = ({ name, departmentId }: Props) => {
                   <FormControl>
                     <Input placeholder="shadcn" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

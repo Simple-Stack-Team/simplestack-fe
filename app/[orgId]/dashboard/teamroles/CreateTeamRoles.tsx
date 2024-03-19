@@ -64,7 +64,9 @@ const CreateTeamRoles = () => {
 
     if (!res.ok) {
       return null;
-    } else router.refresh();
+    } else {
+      location.reload();
+    };
   }
 
   return (
