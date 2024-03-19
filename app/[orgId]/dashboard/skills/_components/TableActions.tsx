@@ -39,8 +39,6 @@ const TableActions = ({
   const { data: session } = useSession();
 
   const id = session?.user?.user.sub;
-  console.log(id);
-  console.log(authorId);
 
   return (
     <DropdownMenu>

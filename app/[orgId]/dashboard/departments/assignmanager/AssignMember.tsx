@@ -9,8 +9,6 @@ import useFetch from "@/hooks/useFetch";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -44,6 +42,9 @@ type Department = {
   organizationId: string;
   managerId: string;
   skillIds: string[];
+  manager: {
+    name: string;
+  };
 };
 
 const AssignMember = () => {
@@ -63,8 +64,6 @@ const AssignMember = () => {
   const { data } = useFetch({ apiKey, url });
 
   const token = session?.user?.access_token;
-
-  console.log(department);
 
   useEffect(() => {
     if (!session) return;
@@ -86,6 +85,8 @@ const AssignMember = () => {
 
     fetchData();
   }, [departmentId, orgId, apiKey, token, session]);
+
+  console.log(department);
 
   const departmentManagers: Employees[] = data.filter(
     (user: Employees) =>
@@ -121,24 +122,19 @@ const AssignMember = () => {
           <CardTitle className="text-xl">
             Department: {department?.name}
           </CardTitle>
-          <CardDescription>ID: {department?.id}</CardDescription>
         </CardHeader>
         <CardContent>
           <p className="text-sm">Created On: {createAt.toLocaleDateString()}</p>
-          <p className="text-sm">
-            Organization ID: {department?.organizationId}
-          </p>
           <div className="mt-4">
             {department?.managerId === null ? (
               <p className="rounded-lg bg-red-200 px-2 py-1 text-sm">
                 No manager assigned yet
               </p>
             ) : (
-              <p>Manager ID: {department?.managerId}</p>
+              <p>Manager name: {department?.manager.name}</p>
             )}
           </div>
         </CardContent>
-        <CardFooter>Sillks:</CardFooter>
       </Card>
       <div className="">
         <h1 className="mb-4">

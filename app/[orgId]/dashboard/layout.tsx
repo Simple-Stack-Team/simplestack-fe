@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 
 import Sidebar from "@/components/Sidebar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,15 +13,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [showMenuItems, setShowMenuItems] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleClick = () => {
-    if (!isMobile) {
-    }
   };
 
   useEffect(() => {
@@ -62,7 +57,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               left: isSidebarOpen && isMobile ? "100%" : "0",
             }}
           >
-            {children}
+            <div>{children}</div>
           </div>
         </div>
       </div>

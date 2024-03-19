@@ -34,7 +34,6 @@ export const sidebarLinks: Sidebar[] = [
     label: "Employee",
     icon: <FaRegUser className={style} style={{ fontSize: "19px" }} />,
     roles: [
-      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
     ],
   },
@@ -44,9 +43,6 @@ export const sidebarLinks: Sidebar[] = [
     icon: <HiOutlineUserGroup className={style} style={{ fontSize: "20px" }} />,
     roles: [
       EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
-      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
-      EMPLOYEE_ROLES.PROJECT_MANAGER,
-      EMPLOYEE_ROLES.EMPLOYEE,
     ],
   },
   {
@@ -60,7 +56,6 @@ export const sidebarLinks: Sidebar[] = [
     label: "My department",
     icon: <LuLayoutGrid className={style} style={{ fontSize: "20px" }} />,
     roles: [
-      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
       EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
     ],
   },
@@ -86,8 +81,6 @@ export const sidebarLinks: Sidebar[] = [
     label: "Projects",
     icon: <LuSquareCode className={style} style={{ fontSize: "21px" }} />,
     roles: [
-      EMPLOYEE_ROLES.ORGANIZATION_ADMIN,
-      EMPLOYEE_ROLES.DEPARTMENT_MANAGER,
       EMPLOYEE_ROLES.PROJECT_MANAGER,
       EMPLOYEE_ROLES.EMPLOYEE,
     ],

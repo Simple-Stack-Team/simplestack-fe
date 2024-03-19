@@ -73,10 +73,6 @@ const CreateSkillPage = () => {
 
     const user = await res.json();
 
-    if (values.isChecked) {
-      values.departments = user.departmentId;
-    }
-
     try {
       const res = await fetch(
         `${apiKey}/organizations/${orgId}/skills/create-skill/${authorId}`,
@@ -91,6 +87,22 @@ const CreateSkillPage = () => {
       );
 
       if (res.ok) {
+        const data = await res.json();
+
+        if (values.isChecked) {
+          await fetch(
+            `${apiKey}/organizations/${orgId}/skills/assign-skill-to-department/${data?.id}/department/${user?.departmentId}/manager/${authorId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+              body: JSON.stringify(values),
+            },
+          );
+        }
+
         router.refresh();
         router.push(`/${orgId}/dashboard/skills`);
         toast("The skill was successfully created", {
@@ -122,7 +134,7 @@ const CreateSkillPage = () => {
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Framework" />
+                      <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
