@@ -43,7 +43,7 @@ const ProjectTabs = () => {
   ];
 
   return (
-    <div className="mb-4 flex items-center justify-between gap-4 overflow-auto">
+    <div className="mb-4 flex items-center gap-4 overflow-auto">
       {links.map(({ href, label, roles }) => (
         <RoleCheck key={href} roles={roles}>
           <Link

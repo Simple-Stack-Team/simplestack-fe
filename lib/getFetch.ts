@@ -17,7 +17,7 @@ export async function getData(url: string) {
       Authorization: "Bearer " + token,
     },
   });
-  console.log(await res)
+  
   if (!res.ok) {
     throw new Error("Failed to get data");
   }
