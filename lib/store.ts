@@ -1,17 +1,18 @@
 import { create } from "zustand";
 
 import { Employee } from "@/types/Employee";
+import { EMPLOYEE_ROLES } from "@/types/employee-types";
 
 type EmployeeStore = {
   employees: Employee[];
   setEmployees: (employees: Employee[]) => void;
-  updateEmployeeRoles: (employeeId: string, newRoles: string[]) => void;
+  updateEmployeeRoles: (employeeId: string, newRoles: EMPLOYEE_ROLES[]) => void;
 };
 
 export const useEmployeeStore = create<EmployeeStore>((set) => ({
   employees: [],
   setEmployees: (newEmployees) => set({ employees: newEmployees }),
-  updateEmployeeRoles: (employeeId: string, newRoles: string[]) =>
+  updateEmployeeRoles: (employeeId: string, newRoles: EMPLOYEE_ROLES[]) =>
     set((state) => ({
       employees: state.employees.map((employee) => {
         if (employee.id === employeeId) {
