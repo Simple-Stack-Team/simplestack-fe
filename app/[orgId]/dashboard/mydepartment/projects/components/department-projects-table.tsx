@@ -24,7 +24,6 @@ const DepartmentProjectsTable = ({ depId }: Props) => {
         Loading department projects...
       </h1>
     );
-  console.log(data);
 
   return (
     <div>

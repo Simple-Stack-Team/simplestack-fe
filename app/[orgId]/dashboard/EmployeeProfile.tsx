@@ -16,8 +16,6 @@ const EmployeeProfile = () => {
   const url = `/organizations/${orgId}/employees/${session?.user.user.sub}/employee`;
   const { data } = useFetch({ apiKey, url });
 
-  console.log(data);
-
   return (
     <div className="mt-4">
       <Badge variant="outline">{linkToSignupEmp}</Badge>
