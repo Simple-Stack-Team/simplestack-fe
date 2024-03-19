@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 import { DataTable } from "@/components/data-table";
-import { columns } from "./_components/columns";
+import { columns } from "@/app/[orgId]/dashboard/skills/viewskillcategories/_components/columns";
 import { Button } from "@/components/ui/button";
 
 const ViewSkillCategories = () => {

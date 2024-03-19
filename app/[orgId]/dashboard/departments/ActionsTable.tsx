@@ -16,8 +16,8 @@ import {
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useDepartmentStore } from "@/lib/store";
-import UpdateDepartment from "./UpdateDepartments";
-import DeleteDepartments from "./DeleteDepartments";
+import UpdateDepartment from "@/app/[orgId]/dashboard/departments/UpdateDepartments";
+import DeleteDepartments from "@/app/[orgId]/dashboard/departments/DeleteDepartments";
 
 interface Props {
   departmentId: string;

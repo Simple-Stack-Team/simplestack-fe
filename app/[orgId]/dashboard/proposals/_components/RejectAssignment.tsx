@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 
-import { fetchRejectProposal } from "../fetchRejectProposal";
+import { fetchRejectProposal } from "@/app/[orgId]/dashboard/proposals/fetchRejectProposal";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 

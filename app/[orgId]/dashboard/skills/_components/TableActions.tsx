@@ -14,8 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import DeleteSkill from "./DeleteSkill";
-import { AssignModal } from "./AssignModal";
+import DeleteSkill from "@/app/[orgId]/dashboard/skills/_components/DeleteSkill";
+import { AssignModal } from "@/app/[orgId]/dashboard/skills/_components/./AssignModal";
 import { useSession } from "next-auth/react";
 
 type Props = {

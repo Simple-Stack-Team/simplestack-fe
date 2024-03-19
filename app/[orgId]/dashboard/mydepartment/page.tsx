@@ -1,9 +1,9 @@
-import { getEmployee } from "../departmentassign/getEmployee";
-import DepartmentProjectsTable from "./projects/components/department-projects-table";
+import { getEmployee } from "@/app/[orgId]/dashboard/departmentassign/getEmployee";
+import DepartmentProjectsTable from "@/app/[orgId]/dashboard/mydepartment/projects/components/department-projects-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import SkillsStatistics from "./SkillsStatistics";
+import SkillsStatistics from "@/app/[orgId]/dashboard/mydepartment/SkillsStatistics";
 import { getData } from "@/lib/getFetch";
-import SkillsCard from "./SkillsCard";
+import SkillsCard from "@/app/[orgId]/dashboard/mydepartment/SkillsCard";
 
 interface Skill {
   id: string;

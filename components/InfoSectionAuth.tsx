@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
 
 import {
   Carousel,
@@ -6,11 +7,10 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import Autoplay from "embla-carousel-autoplay";
 import global from "@/public/signup.png";
 import folder from "@/public/folder.png";
 import security from "@/public/security.png";
-import { Badge } from "./ui/badge";
+import { Badge } from "@/components/ui/badge";
 
 const InfoSectionAuth = () => {
   return (

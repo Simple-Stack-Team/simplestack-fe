@@ -4,7 +4,7 @@ import group2 from "@/public/Group2.svg";
 import { Separator } from "@/components/ui/separator";
 import InviteUsers from "@/components/InviteUsers";
 import DashboardCard from "@/components/DashboardCard";
-import EmployeeProfile from "./EmployeeProfile";
+import EmployeeProfile from "@/app/[orgId]/dashboard/EmployeeProfile";
 
 interface Props {
   params: { orgId: string };

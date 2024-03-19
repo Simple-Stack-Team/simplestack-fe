@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth";
+import { Toaster } from "sonner";
 
 import { getData } from "@/lib/getFetch";
 import { DataTable } from "@/components/data-table";
-import { skillassignmentcolumns } from "./_components/columns";
+import { skillassignmentcolumns } from "@/app/[orgId]/dashboard/skillassignment/_components/columns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { authOption } from "@/app/api/auth/[...nextauth]/constants/next-auth-config";
-import { ownskillassignmentcolumns } from "./_components/ownskillscolumns";
-import { Toaster } from "sonner";
+import { ownskillassignmentcolumns } from "@/app/[orgId]/dashboard/skillassignment/_components/ownskillscolumns";
 
 interface Props {
   params: { orgId: string };

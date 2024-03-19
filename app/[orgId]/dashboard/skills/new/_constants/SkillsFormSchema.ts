@@ -7,5 +7,4 @@ export const formSchema = z.object({
   author: z.string().optional(),
   isChecked: z.boolean().default(false).optional(),
   departments: z.array(z.string()).optional(),
-
 });

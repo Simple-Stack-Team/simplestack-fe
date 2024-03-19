@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useParams } from "next/navigation";
-import React from "react";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
 
 const ErrorPage = ({ error, reset }: { error: Error; reset: () => void }) => {
   const { orgId } = useParams();

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter";
-import { DataTableFacetedFilterLocal } from "./data-table-filter-local";
+import { DataTableFacetedFilterLocal } from "@/app/[orgId]/dashboard/skills/_components/data-table-filter-local";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;

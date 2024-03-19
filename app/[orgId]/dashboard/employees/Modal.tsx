@@ -7,11 +7,11 @@ import { useParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { FormSchema } from "./constants/FormSchema";
+import { FormSchema } from "@/app/[orgId]/dashboard/employees/constants/FormSchema";
 import { useEmployeeStore } from "@/lib/store";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { roles } from "./constants/roles";
+import { roles } from "@/app/[orgId]/dashboard/employees/constants/roles";
 import {
   Dialog,
   DialogContent,

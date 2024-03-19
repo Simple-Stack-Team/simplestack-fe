@@ -1,9 +1,9 @@
 import { DataTable } from "@/components/data-table";
-import { columns } from "./_components/unassignedMemberColumns";
-import { assignMembersColumns } from "./_components/assignedMemberColumns";
+import { columns } from "@/app/[orgId]/dashboard/departmentassign/_components/unassignedMemberColumns";
+import { assignMembersColumns } from "@/app/[orgId]/dashboard/departmentassign/_components/assignedMemberColumns";
 import { Toaster } from "@/components/ui/sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getEmployee } from "./getEmployee";
+import { getEmployee } from "@/app/[orgId]/dashboard/departmentassign/getEmployee";
 import { getData } from "@/lib/getFetch";
 
 interface Props {
