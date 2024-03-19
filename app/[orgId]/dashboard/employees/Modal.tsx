@@ -153,7 +153,7 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
                 )}
               />
               <DialogTrigger asChild>
-                <Button type="submit">Sumbit</Button>
+                <Button type="submit">Submit</Button>
               </DialogTrigger>
             </form>
           </Form>

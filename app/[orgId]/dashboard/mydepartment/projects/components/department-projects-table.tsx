@@ -7,10 +7,10 @@ import { DataTable } from "@/app/[orgId]/dashboard/mydepartment/projects/compone
 import useFetch from "@/hooks/useFetch";
 
 interface Props {
-  depId: string
+  depId: string;
 }
 
-const DepartmentProjectsTable = ({depId}: Props) => {
+const DepartmentProjectsTable = ({ depId }: Props) => {
   const { orgId } = useParams();
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -18,16 +18,20 @@ const DepartmentProjectsTable = ({depId}: Props) => {
 
   const { data, error, loading } = useFetch({ apiKey, url });
 
-  if(loading) return <h1 className="mb-4 text-xl font-semibold">Loading department projects...</h1> 
-  console.log(data)
-  
+  if (loading)
+    return (
+      <h1 className="mb-4 text-xl font-semibold">
+        Loading department projects...
+      </h1>
+    );
+
   return (
     <div>
       {error ? (
         <div>{error.message}</div>
       ) : (
         <div>
-          <DataTable columns={columns} data={data} showToolbar/>
+          <DataTable columns={columns} data={data} showToolbar />
         </div>
       )}
     </div>

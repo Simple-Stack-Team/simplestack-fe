@@ -83,7 +83,7 @@ type ProjectFormValues = {
   description: string;
   technologyStack: string[];
   teamRoles: TeamRole[];
-  authorId: string
+  authorId: string;
 };
 
 const CreateProject = ({ params: { orgId, projectId } }: Props) => {
@@ -116,7 +116,6 @@ const CreateProject = ({ params: { orgId, projectId } }: Props) => {
 
         if (res.ok) {
           const data = await res.json();
-          console.log("API Response:", data);
           data.startDate = new Date(data.startDate);
           data.deadlineDate = data.deadlineDate
             ? new Date(data.deadlineDate)
@@ -180,11 +179,10 @@ const CreateProject = ({ params: { orgId, projectId } }: Props) => {
     if (res.ok) {
       router.push(`/${orgId}/dashboard/projects`);
     }
-    console.log(data);
   }
-  
-  if(project?.authorId !== session?.user?.user.sub) return <h1>Forbidden</h1>
-  
+
+  if (project?.authorId !== session?.user?.user.sub) return <h1>Forbidden</h1>;
+
   return (
     <Form {...form}>
       <form
