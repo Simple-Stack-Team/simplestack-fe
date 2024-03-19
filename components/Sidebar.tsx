@@ -78,7 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
             <Image priority src={logo} alt="Logo" width={32} />
             <span className="text-xl font-bold">Simple Stack</span>
           </div>
-          <div className="mt-10">
+          <div className="mt-4">
             {sidebarLinks.map((link) => (
               <RoleCheck roles={link.roles} key={link.label}>
                 <div className="mb-1 w-full" key={link.label}>

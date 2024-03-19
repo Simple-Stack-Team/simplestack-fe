@@ -69,7 +69,7 @@ const CreateTeamRoles = () => {
 
   return (
     <div className="flex justify-between">
-      <h1 className="text-xl font-semibold">Team roles</h1>
+      <h1 className="mb-6 text-xl font-semibold">Team roles</h1>
       <Dialog>
         <DialogTrigger asChild>
           <Button>New team</Button>

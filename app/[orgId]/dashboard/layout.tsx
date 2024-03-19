@@ -41,20 +41,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const sidebarStyle = isMobile ? "ml-[0] w-[100%]" : "ml-[250px]";
 
   return (
-    <div className="relative flex bg-[#fafafa]">
+    <div className="relative flex md:bg-[#fafafa]">
       <div className="relative flex-1 overflow-hidden">
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
         <div className={`${sidebarStyle}`}>
-          <div className={`${isMobile ? "flex justify-between" : ""}`}>
+          <div className={`${isMobile ? "flex justify-between p-2" : ""}`}>
             {isMobile && (
               <CiMenuBurger
-                className=":hidden h-6 w-6 cursor-pointer "
+                className=":hidden h-6 w-6 cursor-pointer"
                 onClick={toggleSidebar}
               />
             )}
           </div>
           <div
-            className={`relative z-10 min-h-screen rounded-xl border-2 border-[#eee] bg-white p-4 ${
+            className={`relative z-10 min-h-screen border-[#eee] bg-white md:rounded-xl md:border-2 md:p-4 ${
               isSidebarOpen ? "ml-0" : "m-2"
             } transition-all duration-300 ease-in-out`}
             style={{

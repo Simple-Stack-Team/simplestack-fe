@@ -51,7 +51,6 @@ const TableActions = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <AssignModal authorId={authorId} skillId={skillId} skill={name} />
         </DropdownMenuItem>

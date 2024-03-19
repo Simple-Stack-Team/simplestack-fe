@@ -8,6 +8,16 @@ import { columns } from "./_components/columns";
 import SkeletonTable from "@/components/SkeletonTable";
 import { Toaster } from "@/components/ui/sonner";
 import useFetchProjects from "@/hooks/useFetchProjects";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 type Props = {
   params: { orgId: string };
@@ -20,14 +30,37 @@ const ProjectsPage = ({ params: { orgId } }: Props) => {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Projects</h1>
-        <div className="flex justify-between gap-2">
+        <h1 className="mb-4 text-xl font-semibold">Projects</h1>
+        <div className="hidden justify-between gap-2 md:flex">
           <Button asChild>
             <Link href={`/${orgId}/dashboard/projects/new`}>New project</Link>
           </Button>
           <Button asChild variant="outline">
-            <Link href={`/${orgId}/dashboard/projects/myprojects`}>My Projects</Link>
+            <Link href={`/${orgId}/dashboard/projects/myprojects`}>
+              My Projects
+            </Link>
           </Button>
+        </div>
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">Side</Button>
+            </SheetTrigger>
+            <SheetContent side="top">
+              <div className="mt-6 flex flex-col gap-4 border">
+                <Button asChild>
+                  <Link href={`/${orgId}/dashboard/projects/new`}>
+                    New project
+                  </Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href={`/${orgId}/dashboard/projects/myprojects`}>
+                    My Projects
+                  </Link>
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
       {error ? (
