@@ -3,7 +3,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Skills } from "@/types/skills-types";
-import TableRowActions from "./TableRowActions";
+import { Badge } from "@/components/ui/badge";
+import TableRowActions from "@/app/[orgId]/dashboard/skillassignment/_components/TableRowActions";
+
 
 export const skillassignmentcolumns: ColumnDef<Skills>[] = [
   {
@@ -24,15 +26,23 @@ export const skillassignmentcolumns: ColumnDef<Skills>[] = [
       const departments = row.original.departments;
 
       return (
-        <div className="flex items-center gap-2">
-          {departments.map((department, index) =>
-            index <= 2 ? (
-              <div key={index}>
-                <div>{department.name.toLowerCase()}</div>
-              </div>
-            ) : index === 3 ? (
-              <div>...</div>
-            ) : null,
+        <div>
+          {departments.length === 0 ? (
+            <Badge variant="destructive">No department</Badge>
+          ) : (
+            <div className="flex items-center gap-2">
+              {departments.map((department, index) =>
+                index <= 2 ? (
+                  <div key={index}>
+                    <Badge variant="outline" className="text-nowrap">
+                      {department.name.toLowerCase()}
+                    </Badge>
+                  </div>
+                ) : index === 3 ? (
+                  <div key={index}>...</div>
+                ) : null,
+              )}
+            </div>
           )}
         </div>
       );

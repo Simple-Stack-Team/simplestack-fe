@@ -1,9 +1,9 @@
-import { getEmployee } from "../departmentassign/getEmployee";
-import DepartmentProjectsTable from "./projects/components/department-projects-table";
+import { getEmployee } from "@/app/[orgId]/dashboard/departmentassign/getEmployee";
+import DepartmentProjectsTable from "@/app/[orgId]/dashboard/mydepartment/projects/components/department-projects-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import SkillsStatistics from "./SkillsStatistics";
+import SkillsStatistics from "@/app/[orgId]/dashboard/mydepartment/SkillsStatistics";
 import { getData } from "@/lib/getFetch";
-import SkillsCard from "./SkillsCard";
+import SkillsCard from "@/app/[orgId]/dashboard/mydepartment/SkillsCard";
 
 interface Skill {
   id: string;
@@ -15,7 +15,7 @@ interface Props {
   params: { orgId: string };
 }
 
-export default async function ProjectsPage({ params: { orgId } }: Props) {
+export default async function MyDepartmentPage({ params: { orgId } }: Props) {
   const { departmentId } = await getEmployee();
 
   if (!departmentId)
@@ -24,6 +24,11 @@ export default async function ProjectsPage({ params: { orgId } }: Props) {
   const data = await getData(
     `/organizations/${orgId}/departments/${departmentId}`,
   );
+  
+  if (!data)
+    return <h1 className="mb-8 text-2xl font-semibold">Loading...</h1>;
+    
+
 
   const { skills } = data;
 
@@ -56,40 +61,3 @@ export default async function ProjectsPage({ params: { orgId } }: Props) {
     </Tabs>
   );
 }
-
-`
-[
-  {
-    skillId: '65f027c6f7131e190792a9f5',
-    skillName: 'Jest',
-    nrOfEmployees: 1,
-    percentOfEmployees: 50,
-    level1: { number: 0, percent: 0 },
-    level2: { number: 1, percent: 100 },
-    level3: { number: 0, percent: 0 },
-    level4: { number: 0, percent: 0 },
-    level5: { number: 0, percent: 0 }
-  },
-  {
-    skillId: '65ec964c4504b42876f655aa',
-    skillName: 'Python',
-    nrOfEmployees: 1,
-    percentOfEmployees: 50,
-    level1: { number: 0, percent: 0 },
-    level2: { number: 0, percent: 0 },
-    level3: { number: 1, percent: 100 },
-    level4: { number: 0, percent: 0 },
-    level5: { number: 0, percent: 0 }
-  },
-  {
-    skillId: '65f6ed96584544475983e263',
-    nrOfEmployees: 0,
-    percentOfEmployees: 0,
-    level1: { number: 0, percent: 0 },
-    level2: { number: 0, percent: 0 },
-    level3: { number: 0, percent: 0 },
-    level4: { number: 0, percent: 0 },
-    level5: { number: 0, percent: 0 }
-  }
-]
-`;

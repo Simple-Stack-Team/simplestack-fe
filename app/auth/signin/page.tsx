@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import LoginPage from "./Login";
+import LoginPage from "@/app/auth/signin/Login";
 import { authOption } from "@/app/api/auth/[...nextauth]/constants/next-auth-config";
 import { redirect } from "next/navigation";
 

@@ -17,10 +17,12 @@ export async function getData(url: string) {
       Authorization: "Bearer " + token,
     },
   });
-
+  
   if (!res.ok) {
     throw new Error("Failed to get data");
   }
+  
+  const data = await res.json()
 
-  return res.json();
+  return data;
 }

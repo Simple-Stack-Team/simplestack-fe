@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-import { authOption } from "./api/auth/[...nextauth]/constants/next-auth-config";
-import Navbar from "./Navbar";
+import { authOption } from "@/app/api/auth/[...nextauth]/constants/next-auth-config";
+import Navbar from "@/app/Navbar";
 import Header from "@/components/Header";
 import SponsorsSection from "@/components/SponsorSection";
 import group from "@/public/Group.svg";
@@ -49,10 +49,7 @@ export default async function HelloWorld() {
           </div>
         </div>
       </div>
-      <div className="my-8">
-        <SponsorsSection />
-      </div>
-      <div className="min-h-screen rounded-t-[1.25rem] bg-white"></div>
+      <SponsorsSection />
     </div>
   );
 }

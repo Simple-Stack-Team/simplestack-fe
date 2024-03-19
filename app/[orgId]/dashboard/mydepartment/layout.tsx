@@ -5,7 +5,7 @@ export default function LayoutDepartmentAssign({
 }>) {
   return (
     <main>
-      <h1 className="mb-8 text-2xl font-semibold">My department</h1>
+      <h1 className="mb-6 text-xl font-semibold">My department</h1>
       {children}
     </main>
   );

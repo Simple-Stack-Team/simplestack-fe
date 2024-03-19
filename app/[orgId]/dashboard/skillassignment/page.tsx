@@ -1,12 +1,12 @@
 import { getServerSession } from "next-auth";
+import { Toaster } from "sonner";
 
 import { getData } from "@/lib/getFetch";
 import { DataTable } from "@/components/data-table";
-import { skillassignmentcolumns } from "./_components/columns";
+import { skillassignmentcolumns } from "@/app/[orgId]/dashboard/skillassignment/_components/columns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { authOption } from "@/app/api/auth/[...nextauth]/constants/next-auth-config";
-import { ownskillassignmentcolumns } from "./_components/ownskillscolumns";
-import { Toaster } from "sonner";
+import { ownskillassignmentcolumns } from "@/app/[orgId]/dashboard/skillassignment/_components/ownskillscolumns";
 
 interface Props {
   params: { orgId: string };
@@ -26,12 +26,14 @@ export default async function SkillAssignmentPage({
   const userSkills = await getData(
     `/organizations/${orgId}/employees/${empId}/employee`,
   );
+  
+  if(!userSkills || !skills) return  <h1>Loading...</h1>
 
   const { personalSkills } = userSkills;
 
   return (
     <>
-      <h1 className="mb-4 text-2xl font-semibold">Skill Assignment</h1>
+      <h1 className="mb-6 text-xl font-semibold">Skill Assignment</h1>
       <Tabs defaultValue="allSkills" className="w-full">
         <TabsList>
           <TabsTrigger value="allSkills">All skills</TabsTrigger>

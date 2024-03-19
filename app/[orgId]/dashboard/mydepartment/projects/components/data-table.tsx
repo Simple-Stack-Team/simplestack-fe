@@ -56,7 +56,7 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div className="flex gap-2 items-center">
-        <h3 className="text-lg mr-4 font-semibold text-slate-700">Projects</h3>
+        <h3 className="text-lg mr-4 font-semibold">Projects</h3>
         {showToolbar && <DepartmentProjectsTableToolbar table={table} />}
       </div>
       <div className="scroll-bar mt-6">

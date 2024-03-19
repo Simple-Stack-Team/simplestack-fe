@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import {
@@ -24,10 +25,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { formSchema } from "./_constants/SkillsFormSchema";
+import { formSchema } from "@/app/[orgId]/dashboard/skills/new/_constants/SkillsFormSchema";
 import useFetch from "@/hooks/useFetch";
 import { Checkbox } from "@/components/ui/checkbox";
-import { toast } from "sonner";
 
 type Category = {
   id: string;
@@ -73,10 +73,6 @@ const CreateSkillPage = () => {
 
     const user = await res.json();
 
-    if (values.isChecked) {
-      values.departments = user.departmentId;
-    }
-
     try {
       const res = await fetch(
         `${apiKey}/organizations/${orgId}/skills/create-skill/${authorId}`,
@@ -91,6 +87,22 @@ const CreateSkillPage = () => {
       );
 
       if (res.ok) {
+        const data = await res.json();
+
+        if (values.isChecked) {
+          await fetch(
+            `${apiKey}/organizations/${orgId}/skills/assign-skill-to-department/${data?.id}/department/${user?.departmentId}/manager/${authorId}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+              },
+              body: JSON.stringify(values),
+            },
+          );
+        }
+
         router.refresh();
         router.push(`/${orgId}/dashboard/skills`);
         toast("The skill was successfully created", {
@@ -122,7 +134,7 @@ const CreateSkillPage = () => {
                 >
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Framework" />
+                      <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>

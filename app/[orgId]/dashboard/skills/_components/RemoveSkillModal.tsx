@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { CopyPlus } from "lucide-react";
+import { CopyPlus, Trash } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -25,7 +25,7 @@ interface User {
   };
 }
 
-export function AssignModal({
+export function RemoveSkillModal({
   authorId,
   skillId,
   skill,
@@ -65,7 +65,7 @@ export function AssignModal({
 
   async function onSubmit() {
     const res = await fetch(
-      `${base_url}/organizations/${orgId}/skills/assign-skill-to-department/${skillId}/department/${user?.departmentId}/manager/${userId}`,
+      `${base_url}/organizations/${orgId}/skills/delete-skill-from-department/${skillId}/department/${user?.departmentId}/manager/${userId}`,
       {
         method: "PUT",
         headers: {
@@ -87,13 +87,13 @@ export function AssignModal({
     <Dialog>
       <DialogTrigger asChild>
         <div className="flex cursor-pointer items-center gap-2">
-          <CopyPlus size={16} />
-          <div>Assign to department</div>
+          <Trash size={16} />
+          <div>Remove skill</div>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Assign this skill to your department</DialogTitle>
+          <DialogTitle>Remove skill from your department</DialogTitle>
           <DialogDescription>
             <p className="mt-2 w-fit rounded-md bg-violet-600 px-2 py-1 text-white">
               {skill}
@@ -103,7 +103,7 @@ export function AssignModal({
         <DialogFooter>
           <DialogTrigger asChild>
             <Button type="submit" onClick={onSubmit}>
-              Assign
+            Remove skill
             </Button>
           </DialogTrigger>
         </DialogFooter>

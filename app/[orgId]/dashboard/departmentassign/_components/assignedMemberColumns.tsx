@@ -1,6 +1,8 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { UserRound } from "lucide-react";
+import Link from "next/link";
 
 import { DepartmentMembers } from "@/types/department-assign-types";
 import {
@@ -9,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import DeleteMemberFromDepartment from "./DeleteMemberFromDepartment";
+import DeleteMemberFromDepartment from "@/app/[orgId]/dashboard/departmentassign/_components/DeleteMemberFromDepartment";
 import { Button } from "@/components/ui/button";
 
 export const assignMembersColumns: ColumnDef<DepartmentMembers>[] = [
@@ -78,21 +80,37 @@ export const assignMembersColumns: ColumnDef<DepartmentMembers>[] = [
       const depId = row.original.departmentId;
 
       return (
-        <TooltipProvider delayDuration={200}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="ghost">
-                <DeleteMemberFromDepartment empId={empId} depId={depId} />
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-center">
-                Delete member from
-                <br /> your department
-              </p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <div className="text-nowrap">
+          <TooltipProvider delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" size={"icon"}>
+                  <DeleteMemberFromDepartment empId={empId} depId={depId} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-center">
+                  Delete member from
+                  <br /> your department
+                </p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button variant="ghost" asChild size={"icon"}>
+                  <Link
+                    href={`/${row.original.organizationId}/dashboard/employeeprofile?empId=${empId}`}
+                  >
+                    <UserRound size={16} />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p className="text-center">View profile</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
       );
     },
   },

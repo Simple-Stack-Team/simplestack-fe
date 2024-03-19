@@ -8,7 +8,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableFacetedFilter } from "@/components/data-table-faceted-filter";
-import { DataTableFacetedFilterLocal } from "./data-table-filter-local";
+import { DataTableFacetedFilterLocal } from "@/app/[orgId]/dashboard/skills/_components/data-table-filter-local";
+import useFetch from "@/hooks/useFetch";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -30,7 +31,10 @@ export function DataTableToolbar<TData>({
   const empId = session?.user?.user.sub!;
 
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
-  const url = `${apiKey}/organizations/${orgId}/skills/skill-categories`;
+  const url = `/organizations/${orgId}/employees/${empId}/employee`;
+  const urlSKillCategory = `${apiKey}/organizations/${orgId}/skills/skill-categories`;
+
+  const { data } = useFetch({ apiKey, url });
 
   const token = session?.user?.access_token;
 
@@ -38,7 +42,7 @@ export function DataTableToolbar<TData>({
     async function getCategories() {
       if (status === "loading") return;
 
-      const res = await fetch(url, {
+      const res = await fetch(urlSKillCategory, {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + token,
@@ -52,7 +56,7 @@ export function DataTableToolbar<TData>({
     }
 
     getCategories();
-  }, [orgId, token, status, url]);
+  }, [orgId, token, status, urlSKillCategory]);
 
   const categoriesList = [];
 
@@ -89,7 +93,7 @@ export function DataTableToolbar<TData>({
             title=""
             options={[
               {
-                value: "65e8e30cc837b4b060c16549",
+                value: data?.departmentId,
                 label: "Skills in your department",
               },
             ]}

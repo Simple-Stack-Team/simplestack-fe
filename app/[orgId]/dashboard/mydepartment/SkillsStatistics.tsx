@@ -60,6 +60,9 @@ const SkillsStatistics = ({ departmentId }: { departmentId: string }) => {
     };
   });
 
+  const valueFormatter = (number: number) =>
+    `${Intl.NumberFormat("us").format(number).toString()} employees`;
+
   const valueFormatterPerEmp = (number: number) =>
     `${Intl.NumberFormat("us").format(number).toString()}%`;
 
@@ -67,7 +70,7 @@ const SkillsStatistics = ({ departmentId }: { departmentId: string }) => {
     <div>
       <div className="rounded-lg border p-4">
         <div className="mb-4">
-          <h1 className="font-semibold">Skills Distribution</h1>
+          <h1 className="text-lg font-medium">Skills Distribution</h1>
         </div>
         <div className="flex items-center justify-center space-x-6">
           <DonutChart
@@ -76,12 +79,13 @@ const SkillsStatistics = ({ departmentId }: { departmentId: string }) => {
             category="nrOfEmployees"
             index="skillName"
             className="h-48 w-48"
+            valueFormatter={valueFormatter}
           />
           <Legend categories={legend} className="max-w-xs" />
         </div>
       </div>
       <div className="mt-4 rounded-lg border p-4">
-        <h3 className="text-tremor-content-strong dark:text-dark-tremor-content-strong text-lg font-medium">
+        <h3 className="dark:text-dark-tremor-content-strong text-lg font-medium text-tremor-content-strong">
           The distribution of skills by level
         </h3>
         <BarChart
@@ -90,11 +94,12 @@ const SkillsStatistics = ({ departmentId }: { departmentId: string }) => {
           data={data}
           index="skillName"
           categories={["level1", "level2", "level3", "level4", "level5"]}
+          valueFormatter={valueFormatter}
         />
       </div>
-      <div className="mt-4 w-fit rounded-lg border p-4">
+      <div className="mt-4 w-fit rounded-lg border p-4 md:w-1/2">
         <div className="mb-4">
-          <h1 className="font-semibold">Skill Level Breakdown</h1>
+          <h1 className="text-lg font-medium">Skill Level Breakdown</h1>
         </div>
         <div>
           <DonutChart

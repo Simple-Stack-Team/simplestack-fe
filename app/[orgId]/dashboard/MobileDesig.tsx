@@ -1,9 +1,9 @@
 "use client";
+
 import { AppProps } from "next/app";
-import { useSession } from "next-auth/react";
 
 import "@/styles/globals.css";
-import Layout from "./layout";
+import Layout from "@/app/[orgId]/dashboard/layout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

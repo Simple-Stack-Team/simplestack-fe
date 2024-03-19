@@ -4,6 +4,7 @@ import { MoreHorizontal } from "lucide-react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { Pencil, CircleEllipsis } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 import {
   DropdownMenu,
@@ -14,9 +15,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Dialog } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import DeleteSkill from "./DeleteSkill";
-import { AssignModal } from "./AssignModal";
-import { useSession } from "next-auth/react";
+import DeleteSkill from "@/app/[orgId]/dashboard/skills/_components/DeleteSkill";
+import { AssignModal } from "@/app/[orgId]/dashboard/skills/_components/AssignModal";
+import { RemoveSkillModal } from "@/app/[orgId]/dashboard/skills/_components/RemoveSkillModal";
 
 type Props = {
   skillId: string;
@@ -49,7 +50,9 @@ const TableActions = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
-
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+          <RemoveSkillModal authorId={authorId} skillId={skillId} skill={name} />
+        </DropdownMenuItem>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <AssignModal authorId={authorId} skillId={skillId} skill={name} />
         </DropdownMenuItem>

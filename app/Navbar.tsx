@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { signIn } from "next-auth/react";
+import { TbMenu } from "react-icons/tb";
+import Image from "next/image";
 import Link from "next/link";
 
 import logo from "@/public/logo.svg";
@@ -13,7 +14,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { TbMenu } from "react-icons/tb";
 
 const Navbar = () => {
   return (

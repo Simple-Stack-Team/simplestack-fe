@@ -30,7 +30,7 @@ export const columns: ColumnDef<Projects>[] = [
   },
   {
     accessorKey: "startDate",
-    header: "Start Date",
+    header: "Start date",
     cell: ({ row }) => {
       const startDate = new Date(row.original.startDate);
       const date = startDate.toLocaleDateString();
@@ -39,7 +39,9 @@ export const columns: ColumnDef<Projects>[] = [
   },
   {
     accessorKey: "deadlineDate",
-    header: "Deadline Date",
+    header: () => {
+      return <p className="text-nowrap">Deadline date</p>;
+    },
     cell: ({ row }) => {
       const deadlineDate = new Date(row.original.deadlineDate);
       const year = deadlineDate.getFullYear();

@@ -4,7 +4,7 @@ import { Plus, Link, ThumbsUp } from "lucide-react";
 import { useRouter, useParams } from "next/navigation";
 import { useState } from "react";
 
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 const InviteUsers = () => {
   const [copied, setCopied] = useState(false);

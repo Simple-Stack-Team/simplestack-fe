@@ -1,5 +1,5 @@
-import DepartmentsTable from "./DepartmentsTable";
-import CreateDepartments from "./CreateDepartments";
+import DepartmentsTable from "@/app/[orgId]/dashboard/departments/DepartmentsTable";
+import CreateDepartments from "@/app/[orgId]/dashboard/departments/CreateDepartments";
 
 const DepartmentPage = () => {
   return (

@@ -1,14 +1,14 @@
 "use client";
 
+import { useRouter, useParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { z } from "zod";
 
 import SignUpEmployee from "@/components/SignUpEmployee";
-import { useRouter, useParams } from "next/navigation";
 import { ErrorResponse } from "@/types/ErrorResponse";
 import AlertMessage from "@/components/AlertMessage";
 import { Button } from "@/components/ui/button";
@@ -16,18 +16,29 @@ import { Form } from "@/components/ui/form";
 import { formSchemaSignUp } from "@/app/[orgId]/signup/constants/signup-constants";
 import logo from "@/public/logoWhiteTheme.svg";
 import global from "@/public/gradient.svg";
-import useFetch from "@/hooks/useFetch";
 
 const SignupEmployee = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
   const router = useRouter();
   const params = useParams<{ orgId: string }>();
   const orgId = params.orgId;
+  const [orgName, setOrgName] = useState<string>('')
 
   const apiKey = process.env.NEXT_PUBLIC_API_URL!;
   const url = `/organizations/${orgId}`;
+  
+  useEffect(() => {
+    async function getOrgName() {
+      const response = await fetch(`${apiKey}${url}`);
+      if (response.ok) {
+        const responseData = await response.json();
+        setOrgName(responseData.orgName);
+      }
+    }
+    
+    getOrgName()
+  }, [])
 
-  const { data } = useFetch({ apiKey, url });
 
   const form = useForm<z.infer<typeof formSchemaSignUp>>({
     resolver: zodResolver(formSchemaSignUp),
@@ -69,7 +80,7 @@ const SignupEmployee = () => {
             </h1>
             <p className="text-xs font-medium text-gray-500">
               Sign up to start working in{" "}
-              <span className="font-semibold text-black">{data.orgName}</span>
+              <span className="font-semibold text-black">{orgName}</span>
             </p>
             {error.status === 409 && (
               <AlertMessage>The name already exist</AlertMessage>

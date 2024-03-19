@@ -1,16 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import classNames from "classnames";
 import { useSession } from "next-auth/react";
-import { LuSearchCode } from "react-icons/lu";
+import classNames from "classnames";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 import RoleCheck from "@/components/RoleCheck";
 import { sidebarLinks } from "@/constants/sidebar-link";
 import Profile from "@/components/Profile";
 import logo from "@/public/logoWhiteTheme.svg";
-import Image from "next/image";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -79,7 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
             <Image priority src={logo} alt="Logo" width={32} />
             <span className="text-xl font-bold">Simple Stack</span>
           </div>
-          <div className="mt-10">
+          <div className="mt-4">
             {sidebarLinks.map((link) => (
               <RoleCheck roles={link.roles} key={link.label}>
                 <div className="mb-1 w-full" key={link.label}>

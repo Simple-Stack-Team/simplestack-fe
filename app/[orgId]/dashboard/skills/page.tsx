@@ -2,7 +2,7 @@
 
 import useFetchSkills from "@/hooks/useFetchSkills";
 import { DataTable } from "@/components/data-table";
-import { columns } from "./_components/columns";
+import { columns } from "@/app/[orgId]/dashboard/skills/_components/columns";
 import SkeletonTable from "@/components/SkeletonTable";
 import { Toaster } from "@/components/ui/sonner"
 
