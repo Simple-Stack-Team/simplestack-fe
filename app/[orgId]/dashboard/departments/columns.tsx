@@ -27,7 +27,6 @@ export const columns: ColumnDef<Departments>[] = [
     id: "actions",
     cell: ({ row }) => {
       const department = row.original;
-      console.log(department);
 
       return (
         <div>

@@ -17,8 +17,6 @@ export const columns: ColumnDef<TeamRoles>[] = [
     cell: ({ row }) => {
       const teamrole = row.original;
 
-      console.log(teamrole);
-
       return (
         <div>
           <ActionsTable teamRoleId={teamrole.id} name={teamrole.name} />

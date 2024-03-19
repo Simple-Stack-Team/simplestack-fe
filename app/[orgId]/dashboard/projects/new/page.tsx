@@ -49,10 +49,13 @@ const formSchema = z.object({
     })
     .optional(),
   status: z.string().min(1),
-  description: z.string().min(2).max(200),
-  technologyStack: z.object({ technology: z.string() }).array(),
+  description: z.string().min(2),
+  technologyStack: z.object({ technology: z.string().min(2) }).array(),
   teamRoles: z
-    .object({ teamroleId: z.string(), nrOfMembers: z.coerce.number() })
+    .object({
+      teamroleId: z.string().min(2),
+      nrOfMembers: z.coerce.number(),
+    })
     .array(),
 });
 
@@ -119,7 +122,6 @@ const CreateProject = ({ params: { orgId } }: Props) => {
     if (res.ok) {
       router.push(`/${orgId}/dashboard/projects`);
     }
-    console.log(data);
   }
 
   return (
