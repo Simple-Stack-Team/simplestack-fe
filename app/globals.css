@@ -24,7 +24,7 @@
 @layer base {
   .btn-primary {
     border-radius: 100vw;
-    padding: 0 0.75rem;
+    padding: 0.25rem 0.75rem;
     height: 32px;
     background-color: white;
     color: black;
