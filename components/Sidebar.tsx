@@ -10,6 +10,7 @@ import RoleCheck from "@/components/RoleCheck";
 import { sidebarLinks } from "@/constants/sidebar-link";
 import Profile from "@/components/Profile";
 import logo from "@/public/logoWhiteTheme.svg";
+import NotificationsCount from "@/app/[orgId]/dashboard/notifications/components/notification-count";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -53,8 +54,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                           },
                         )}
                       >
-                        <div>{link.icon}</div>
-                        <div>{link.label}</div>
+                        <div className="flex gap-1">
+                          <div>{link.icon}</div>
+                          <div>{link.label}</div>
+                        </div>
                       </div>
                     </div>
                   </Link>
@@ -95,14 +98,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
                     >
                       <div
                         className={classNames({
-                          "relative flex cursor-pointer items-center gap-2 rounded-lg p-2 pl-2.5 text-sm font-semibold text-[#686869]":
+                          "relative w-full justify-between flex cursor-pointer items-center gap-2 rounded-lg p-2 pl-2.5 text-sm font-semibold text-[#686869]":
                             true,
                           "!font-bold !text-[#121212]":
                             activeLink === link.href,
                         })}
                       >
-                        <div>{link.icon}</div>
-                        <div className="pl-1">{link.label}</div>
+                        <div className="flex gap-1">
+                          <div>{link.icon}</div>
+                          <div className="pl-1">{link.label}</div>
+                        </div>
+                        {link.label ===  "Notification" && <NotificationsCount />}
                       </div>
                     </div>
                   </Link>

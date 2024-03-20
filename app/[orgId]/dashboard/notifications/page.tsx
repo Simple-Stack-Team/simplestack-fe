@@ -106,6 +106,7 @@ function Notifications() {
         }
         return null;
       });
+      location.reload();
       router.push(`/${orgId}/dashboard/proposals`);
     }
   }
