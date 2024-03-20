@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { formSchema } from "@/app/signup/constants/signup-admin-constants";
 import global from "@/public/gradient.svg";
+import logo from "@/public/logoWhiteTheme.svg";
 
 const Register = () => {
   const [error, setError] = useState<ErrorResponse>({ status: 0 });
@@ -49,6 +50,9 @@ const Register = () => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full space-y-1 px-8 lg:px-16"
           >
+            <div className="mb-8">
+              <Image src={logo} alt="logo" width={32} />
+            </div>
             <h1 className="mb-4 max-w-[420px] text-2xl font-semibold">
               Create your account 👏
             </h1>
@@ -102,7 +106,7 @@ const Register = () => {
               <p>
                 <span className="text-sm">Already have an account? </span>
                 <Link
-                  href="/signup"
+                  href="/auth/signin"
                   className="text-sm font-semibold text-[#5138ee] underline underline-offset-2"
                 >
                   Sign In

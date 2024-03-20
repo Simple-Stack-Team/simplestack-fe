@@ -82,7 +82,7 @@ const SignupEmployee = () => {
               <span className="font-semibold text-black">{orgName}</span>
             </p>
             {error.status === 409 && (
-              <AlertMessage>The name already exist</AlertMessage>
+              <AlertMessage>The email already exist</AlertMessage>
             )}
             <div className="space-y-2 pt-4">
               <SignUpEmployee
