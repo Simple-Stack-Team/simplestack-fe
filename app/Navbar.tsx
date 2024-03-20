@@ -32,10 +32,10 @@ const Navbar = () => {
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
               <SheetDescription className="space-y-2">
-                <div className="font-semibold">Home</div>
+                <div>Product</div>
+                <div>Company</div>
                 <div>Pricing</div>
-                <div>Blog</div>
-                <div>Docs</div>
+                <div>Contact</div>
               </SheetDescription>
             </SheetHeader>
           </SheetContent>
@@ -49,10 +49,10 @@ const Navbar = () => {
           <div>Simple Team</div>
         </div>
         <div className="flex cursor-pointer gap-4 text-[15px] text-gray-300">
-          <div className="font-semibold">Home</div>
+          <div>Product</div>
+          <div>Company</div>
           <div>Pricing</div>
-          <div>Blog</div>
-          <div>Docs</div>
+          <div>Contact</div>
         </div>
         <div className="space-x-4">
           <button
