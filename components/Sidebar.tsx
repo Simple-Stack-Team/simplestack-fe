@@ -28,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           <div className="mt-10 flex flex-col items-center gap-2 p-4">
             <div className="mb-2 flex w-full items-center gap-2">
               <Image priority src={logo} alt="Logo" width={32} />
-              <span className="text-xl font-bold">Simple Stack</span>
+              <span className="text-xl font-bold">Simple Team</span>
             </div>
             {sidebarLinks.map((link) => (
               <RoleCheck roles={link.roles} key={link.label}>
@@ -76,7 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         >
           <div className="m-2 flex w-full items-center gap-2">
             <Image priority src={logo} alt="Logo" width={32} />
-            <span className="text-xl font-bold">Simple Stack</span>
+            <span className="text-xl font-bold">Simple Team</span>
           </div>
           <div className="mt-4">
             {sidebarLinks.map((link) => (

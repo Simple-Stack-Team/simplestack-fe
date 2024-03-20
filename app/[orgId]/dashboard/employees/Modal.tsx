@@ -37,7 +37,7 @@ interface Props {
 }
 
 const Modal = ({ employeeId, employeeRoles }: Props) => {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const { orgId } = useParams();
 
   const setEmployeeRoles = useEmployeeStore(
@@ -71,6 +71,19 @@ const Modal = ({ employeeId, employeeRoles }: Props) => {
           description: "Failed to assign role to user.",
         });
       } else {
+        if (currentUser === employeeId) {
+          await update({
+            ...session,
+            user: {
+              ...session?.user,
+              user: {
+                ...session?.user.user,
+                roles: data.roles,
+              },
+            },
+          });
+        }
+
         setEmployeeRoles(employeeId, data.roles as EMPLOYEE_ROLES[]);
       }
     } catch (error) {

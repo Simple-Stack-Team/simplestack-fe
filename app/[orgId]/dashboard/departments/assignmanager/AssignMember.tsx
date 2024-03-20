@@ -6,12 +6,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import useFetch from "@/hooks/useFetch";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -116,7 +111,7 @@ const AssignMember = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 md:flex-row">
+    <div className="flex flex-col gap-8 rounded-xl border p-4 md:flex-row">
       <Card className="max-w-[500px] flex-1">
         <CardHeader>
           <CardTitle className="text-xl">
@@ -127,7 +122,7 @@ const AssignMember = () => {
           <p className="text-sm">Created On: {createAt.toLocaleDateString()}</p>
           <div className="mt-4">
             {department?.managerId === null ? (
-              <p className="rounded-lg bg-red-200 px-2 py-1 text-sm">
+              <p className="rounded-lg bg-red-50 px-2 py-1 text-sm font-semibold">
                 No manager assigned yet
               </p>
             ) : (
